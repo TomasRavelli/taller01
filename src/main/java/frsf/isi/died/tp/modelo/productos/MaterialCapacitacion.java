@@ -13,6 +13,9 @@ import frsf.isi.died.tp.util.Ordenable;
  * Representa de manera abstracta los materiales de capacitación
  * 
  * @author mdominguez
+ * @author Perussini, Martin
+ * @author Ravelli, Tomas
+ * https://github.com/TomasRavelli/taller01.git
  */
 public abstract class MaterialCapacitacion {
 	protected Integer id;
@@ -62,7 +65,31 @@ public abstract class MaterialCapacitacion {
 	// AYUDA: para implementar estos metodos usar un atajo del IDE 
 	// elegir el menu "Source" --> "Generate getters y setters" y elegir alli que metodos generar.
 	
+	public Integer getId() {
+		return id;
+	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public Double getCosto() {
+		return costo;
+	}
+
+	public void setCosto(Double costo) {
+		this.costo = costo;
+	}
+	
+	
 	/**
 	 * El precio de un material se define según el tipo del material y toma como
 	 * base el costo del mismo
@@ -82,12 +109,17 @@ public abstract class MaterialCapacitacion {
 	 * @return
 	 */
 	public abstract Boolean esVideo();
+
 	
 	//TODO 02: sobrescribir el metodo toString de la clase "Object"
 	//	el método toString retorna un string que representa el material actual
 	//  retornando el titulo, y el precio 	 * usando el formato : 
 	// [Titulo: <titulo> ; Precio: <precio> ]
-	
+	public String toString() {
+		String s=new String();
+		s="Titulo: "+this.getTitulo()+"; Precio: "+this.precio();
+		return s;
+	}
 	
 	// TODO 10: implementar Ordenable
 
