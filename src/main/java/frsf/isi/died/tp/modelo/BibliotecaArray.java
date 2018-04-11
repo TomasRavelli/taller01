@@ -4,7 +4,8 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
-
+import frsf.isi.died.tp.util.ListasService;
+import frsf.isi.died.tp.util.*;
 
 /**
  * Esta clase implementa la interface Biblioteca y todas sus operaciones, gestionando todos los
@@ -26,25 +27,30 @@ public class BibliotecaArray implements Biblioteca{
 	private Integer cantidadMaterial;
 	
 	// TODO 12: crear una variable de tipo ListaService que apuntará a una instancia del servicio de operaciones de lista
-
+	private ListasService lista;
+	
 	
 	public BibliotecaArray() {
 		cantidadMaterial=0;
 		this.materialCapacitacion= new MaterialCapacitacion[10];
-		// TODO 13: inicializar la variable de tipo ListaService para que apunte el servicio de operaciones de listas		
+		// TODO 13: inicializar la variable de tipo ListaService para que apunte el servicio de operaciones de listas
+		this.lista=new ListaServiceRadix(this.materialCapacitacion);
 	}
 
 	@Override
 	public void agregar(MaterialCapacitacion material) {
 		// TODO 06: se agrega un material al arreglo de materiales de capacitacion si hay espacio en el arreglo
 		// caso contrario el metodo no agrega ningun elemento y termina su ejecución
-		
+		if(this.cantidadMaterial<this.materialCapacitacion.length) {
+			this.materialCapacitacion[this.cantidadMaterial]=material;
+			this.cantidadMaterial++;
+		}
 	}
 
 	@Override
 	public Integer cantidadMateriales() {
 		// TODO 07: retorna la cantidad de materiales que hay ingresados en el sistema
-		return null;
+		return this.cantidadMaterial;
 	}
 
 
@@ -53,27 +59,44 @@ public class BibliotecaArray implements Biblioteca{
 	public Integer cantidadLibros() {
 		// TODO 08: retorna la cantidad de libros registrados en el sistema.
 		// No se puede usar para este método el operador "instanceOf" ni realizar ningun tipo de casting. 
-		return null;
+		int aux=0;
+		for(int i=0;i<this.cantidadMaterial;i++) {
+			if(this.materialCapacitacion[i].esLibro()) {
+				aux++;
+			}
+		}
+		return aux;
 	}
-
+//	public static void main(String args[]) {
+//		Biblioteca biblioteca = new BibliotecaArray();
+//		System.out.println(biblioteca.cantidadLibros());
+//	}
 
 
 	@Override
 	public Integer cantidadVideos() {
 		// TODO 09: retorna la cantidad de videos registrados en el sistema. 
 		// No se puede usar para este método el operador "instanceOf" ni realizar ningun tipo de casting. 
-		return null;
+		int aux=0;
+		for(int i=0;i<this.cantidadMaterial;i++) {
+			if(this.materialCapacitacion[i].esVideo()) {
+				aux++;
+			}
+		}
+		return aux;
 	}
 
 	@Override
 	public void imprimir() {		
 		//TODO 14: invocar al método imprimir de la variable de tipo ListaService para que imprima el arreglo 
+		this.lista.imprimir();
 	}
 		
 
 	@Override
 	public void ordenarPorPrecio(Boolean b) {
 		// TODO 15: invocar al metodo ordenar de la variable de tipo ListaService para que ordene el arreglo 
+		this.lista.ordenar();
 	}
 
 

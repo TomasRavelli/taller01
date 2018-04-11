@@ -7,6 +7,7 @@ package frsf.isi.died.tp.modelo.productos;
 
 import java.util.ArrayList;
 
+import frsf.isi.died.tp.modelo.Biblioteca;
 import frsf.isi.died.tp.util.Ordenable;
 
 /**
@@ -17,7 +18,7 @@ import frsf.isi.died.tp.util.Ordenable;
  * @author Ravelli, Tomas
  * https://github.com/TomasRavelli/taller01.git
  */
-public abstract class MaterialCapacitacion {
+public abstract class MaterialCapacitacion implements Ordenable{
 	protected Integer id;
 	/**
 	 * Titulo del material
@@ -122,5 +123,9 @@ public abstract class MaterialCapacitacion {
 	}
 	
 	// TODO 10: implementar Ordenable
-
+	public final int valor() {
+		return this.precio().intValue();
+		//funciona porque el metodo es abstracto en esta clase, la cual es abstracta,
+		//pero esta implementado en las clases hijas
+	}
 }
