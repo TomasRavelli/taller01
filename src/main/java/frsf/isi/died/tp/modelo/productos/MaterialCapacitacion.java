@@ -18,7 +18,7 @@ import frsf.isi.died.tp.util.Ordenable;
  * @author Ravelli, Tomas
  * https://github.com/TomasRavelli/taller01.git
  */
-public abstract class MaterialCapacitacion implements Ordenable{
+public abstract class MaterialCapacitacion implements Ordenable, Comparable<MaterialCapacitacion>{
 	protected Integer id;
 	/**
 	 * Titulo del material
@@ -145,7 +145,12 @@ public abstract class MaterialCapacitacion implements Ordenable{
 			return false;
 		return true;
 	}
-	public static void main(String[] args) {
-		
+	@Override
+	public int compareTo(MaterialCapacitacion mat) {
+		if(this.equals(mat)) {
+			return (int) (this.precio()-mat.precio());
+		}else {
+			return titulo.compareTo(mat.titulo);
+		}
 	}
 }
