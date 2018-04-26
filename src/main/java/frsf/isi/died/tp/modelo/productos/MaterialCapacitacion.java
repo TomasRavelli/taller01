@@ -128,4 +128,24 @@ public abstract class MaterialCapacitacion implements Ordenable{
 		//funciona porque el metodo es abstracto en esta clase, la cual es abstracta,
 		//pero esta implementado en las clases hijas
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		//if (this == obj)
+			//return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MaterialCapacitacion other = (MaterialCapacitacion) obj;
+		if (titulo == null) {
+			if (other.titulo != null)
+				return false;
+		} else if (!(titulo.toLowerCase()).equals(other.titulo.toLowerCase()))
+			return false;
+		return true;
+	}
+	public static void main(String[] args) {
+		
+	}
 }

@@ -117,4 +117,5 @@ public class Libro extends MaterialCapacitacion {
 		System.out.println("L1: "+L1.esLibro());
 	}
 
+	
 }

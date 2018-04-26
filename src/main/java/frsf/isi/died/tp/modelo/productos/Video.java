@@ -33,4 +33,5 @@ public class Video extends MaterialCapacitacion{
 	public Double precio(){
 		return(this.costo+this.duracion.doubleValue()*this.COSTOSEG);
 	}
+	
 }
