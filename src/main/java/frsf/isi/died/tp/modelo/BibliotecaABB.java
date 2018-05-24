@@ -47,7 +47,7 @@ public class BibliotecaABB implements Biblioteca {
 	public Collection<MaterialCapacitacion> materiales() {
 		// TODO RETORNAR LA LISTA DEL ARBOL ORDENADA ASCENDENTEMENTE		
 		//TODO Completar
-		return null;		
+		return this.materiales.inOrden();		
 	}
 
 	@Override
@@ -94,7 +94,11 @@ public class BibliotecaABB implements Biblioteca {
 		// BibliotecaABB el m�todo imprimir() o materiales()
 		
 		//TODO Completar
-		
+		ArbolBinarioBusqueda nuevo = new ArbolBinarioBusqueda(this.comparaPrecio);
+		for(int i=0;i<this.materiales.inOrden().size();i++) {
+			nuevo.add(materiales.inOrden().get(i));
+		}
+		this.materiales = nuevo;
 	}
 	
 	private void ordenarPorTitulo() {
@@ -106,6 +110,11 @@ public class BibliotecaABB implements Biblioteca {
 		// BibliotecaABB el m�todo imprimir() o materiales()
 
 		//TODO Completar
+		ArbolBinarioBusqueda nuevo = new ArbolBinarioBusqueda(this.comparaTitulo);
+		for(int i=0;i<this.materiales.inOrden().size();i++) {
+			nuevo.add(materiales.inOrden().get(i));
+		}
+		this.materiales = nuevo;
 	}
 
 }
