@@ -140,7 +140,7 @@ public class Taller03Paso05 {
 				lista3.add(lista2.get(i));
 			}
 		}
-		lista3.add(l1);
+		lista3.add(l1); 
 		assertFalse(lista3.containsAll(lista1) && lista1.size()==lista3.size());
 	}
 }
