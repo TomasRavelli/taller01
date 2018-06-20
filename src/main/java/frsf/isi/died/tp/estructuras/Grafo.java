@@ -155,13 +155,13 @@ public class Grafo<T> {
 	 */
 	public Integer gradoEntrada(T v){
 		Vertice<T> vertice = this.getNodo(v);
-			
-		Integer res = 0;
-		for(int i = 0; i < aristas.size(); i++) {
-			if (aristas.get(i).getFin().equals(vertice))
-				res++;
-		}
+		Integer res =0;
 		//TODO
+		for(int i=0;i<this.aristas.size();i++) {
+			if(this.aristas.get(i).getFin().equals(vertice)) {
+				res++;
+			}
+		}
 		return res;
 	}
 
@@ -173,16 +173,40 @@ public class Grafo<T> {
 		Vertice<T> vertice = this.getNodo(v);
 		Integer res =0;
 		//TODO
-		
-		return res = this.getAdyacentes(v).size();
+		res=this.getAdyacentes(v).size();
+		return res;
 	}
 
     public T primerVerticeGradoK(T v,Integer gradoK) {
     	HashSet<Vertice> visitados= new HashSet<>();
+    	HashSet<Vertice> enTratamiento= new HashSet<>();
     	//TODO
-		return null;
+    	Vertice<T> vertice = this.getNodo(v);
+    	enTratamiento.addAll(this.getAdyacentes(vertice));
+    	visitados.add(vertice);
+    	return primerVerticeGradoK(gradoK, visitados,enTratamiento);
+    	
+    	/*for(int i=0;i<this.getAdyacentes(vertice).size();i++) {
+    		if(!visitados.contains(this.getAdyacentes(v).get(i)) && this.gradoSalida(this.getAdyacentes(v).get(i))==gradoK) {
+    			return this.getAdyacentes(v).get(i);
+    		}else {
+    			visitados.add(this.getNodo(this.getAdyacentes(v).get(i)));
+    		}
+    	}*/
+		
     }
-
+    private T primerVerticeGradoK(Integer gradoK, HashSet<Vertice> visitados, HashSet<Vertice> enTratamiento) {
+    	HashSet<Vertice> aux= new HashSet<>();
+    	for(Vertice<T> vertice : enTratamiento) {
+    		if(!visitados.contains(vertice) && this.gradoSalida(vertice.getValor())==gradoK) {
+    			return vertice.getValor();
+    		}
+    		visitados.add(vertice);
+    		aux.addAll(this.getAdyacentes(vertice));
+    	}
+    	
+    	return primerVerticeGradoK(gradoK, visitados, aux);
+    }
 
     
     public boolean existeCamino(T v) {
@@ -204,7 +228,22 @@ public class Grafo<T> {
     }
     private List<T> buscarCaminoNSaltos(Vertice<T> n1,Vertice<T> n2,Integer saltos,HashSet<Vertice> visitados){
         ArrayList<T> resultado = new ArrayList<>();
+        ArrayList<T> auxiliar = new ArrayList<>();
        //TODO
+        visitados.add(n1);
+        if(saltos!=0) {
+        	for(int i=0;i<this.getAdyacentes(n1.getValor()).size();i++) {
+            	auxiliar.addAll(buscarCaminoNSaltos(this.getNodo(this.getAdyacentes(n1.getValor()).get(i)), n2, saltos-1, visitados));
+            	if(auxiliar.size()!=0) {
+            		auxiliar.add(0, n1.getValor());
+            		return auxiliar;
+            	}
+            }
+        }else {
+        	if(n1.getValor()==n2.getValor()) {
+        		resultado.add(n2.getValor());
+        	}
+        }
         return resultado;
     }
 

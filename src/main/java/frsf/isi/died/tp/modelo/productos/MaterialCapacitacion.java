@@ -129,7 +129,7 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 		//pero esta implementado en las clases hijas
 	}
 
-/*	@Override
+	/*@Override
 	public boolean equals(Object obj) {
 		//if (this == obj)
 			//return true;
@@ -178,6 +178,5 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 			return false;
 		return true;
 	}
-	
 	
 }
