@@ -6,6 +6,7 @@
 package frsf.isi.died.tp.modelo.productos;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import frsf.isi.died.tp.modelo.Biblioteca;
 import frsf.isi.died.tp.util.Ordenable;
@@ -31,7 +32,11 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 	 */
 	protected Double costo;
 	
-
+	protected Double calificacion;
+	
+	protected Date fecha_publicacion;
+	
+	protected Relevancia relevancia; 
 	/**
 	 * Constructor por defecto
 	 */
