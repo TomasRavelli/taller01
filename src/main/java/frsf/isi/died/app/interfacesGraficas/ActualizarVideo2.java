@@ -4,22 +4,27 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import  javax.swing.*;
 
-public class CrearVideo extends JFrame {
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
+public class ActualizarVideo2 {
+	
 	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				CrearVideo v1 = new CrearVideo();
+				ActualizarVideo2 a = new ActualizarVideo2();
 				}
 			});
-
 	}
 	
 	
-	public CrearVideo() {
-		JFrame crearV = new JFrame("Crear Video");
+	public ActualizarVideo2(){
+		JFrame crearV = new JFrame("Actualizar Video");
 		crearV.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		crearV.pack();
 		crearV.setSize(800,600);
@@ -35,7 +40,7 @@ public class CrearVideo extends JFrame {
 		JLabel lblPrecioCompra;
 		JTextField txtCosto;
 		JTextField txtPrecioCompra;
-		JButton btnAgregar;
+		JButton btnGuardarCambios;
 		JButton btnCancelar;
 		JLabel lblRelevancia;
 		JTextField txtRelevancia;
@@ -86,7 +91,7 @@ public class CrearVideo extends JFrame {
 		txtRelevancia.setColumns(5);
 		gridConst.gridx=3;
 		panel.add(txtRelevancia, gridConst);
-		
+				
 		lblID= new JLabel("ID: ");
 		gridConst.gridx=0;
 		gridConst.gridy=5;
@@ -98,11 +103,10 @@ public class CrearVideo extends JFrame {
 		panel.add(txtID, gridConst);
 		
 		
-		
-		btnAgregar = new JButton("Agregar");
+		btnGuardarCambios = new JButton("Guardar Cambios");
 		gridConst.gridx=0;
 		gridConst.gridy=6;
-		panel.add(btnAgregar, gridConst);
+		panel.add(btnGuardarCambios, gridConst);
 		
 		btnCancelar = new JButton("Cancelar");
 		gridConst.gridx=1;
@@ -111,12 +115,9 @@ public class CrearVideo extends JFrame {
 		
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				Menu v1 = new Menu();
+				ActualizarVideo v1 = new ActualizarVideo();
 				crearV.dispose();
 			}
 		});
-		
-		
 	}
-
 }

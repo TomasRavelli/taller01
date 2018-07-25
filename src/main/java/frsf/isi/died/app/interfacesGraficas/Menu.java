@@ -10,13 +10,13 @@ public class Menu extends JFrame{
 	public static void main(String[] args) {
 	javax.swing.SwingUtilities.invokeLater(new Runnable() {
 	public void run() {
-		menuGUI();
+		Menu m = new Menu();
 	}
 	}); 
 	
 	
 	}
-	private static void menuGUI() {
+	public  Menu() {
 		JFrame principal = new JFrame("Menu");
 		principal.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		principal.pack();

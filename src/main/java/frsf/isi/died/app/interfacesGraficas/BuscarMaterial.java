@@ -87,9 +87,14 @@ public class BuscarMaterial extends JFrame{
 	panel.add(xRelevancia);
 	
 	JButton buscar = new JButton("Buscar");
-	buscar.setBounds(650, 500, 100, 30);
+	buscar.setBounds(500, 500, 100, 30);
 	buscar.setVisible(true);
 	panel.add(buscar);
+	
+	JButton cancelar = new JButton("Cancelar");
+	cancelar.setBounds(650, 500, 100, 30);
+	cancelar.setVisible(true);
+	panel.add(cancelar);
 	
 	//Dibujar campo titulo
 	JTextField escribirTitulo = new JTextField();
@@ -126,68 +131,36 @@ public class BuscarMaterial extends JFrame{
 	
 	//Dibujar campo fecha minima
 	JTextField fechaDia = new JTextField();
-	fechaDia.setBounds(40, 400, 30, 20);
+	fechaDia.setBounds(40, 400, 200, 20);
 	fechaDia.setVisible(false);
 	panel.add(fechaDia);
 	
-	JLabel barra = new JLabel("/");
-	barra.setBounds(80,400,10,20);
-	barra.setVisible(false);
-	panel.add(barra);
 	
-	JTextField fechaMes = new JTextField();
-	fechaMes.setBounds(90, 400, 30, 20);
-	fechaMes.setVisible(false);
-	panel.add(fechaMes);
-	
-	JLabel barra2 = new JLabel("/");
-	barra2.setBounds(130,400,10,20);
-	barra2.setVisible(false);
-	panel.add(barra2);
-	
-	JTextField fechaAnio = new JTextField();
-	fechaAnio.setBounds(140, 400, 65, 20);
-	fechaAnio.setVisible(false);
-	panel.add(fechaAnio);
-	
-
 	//Dibujar campo fecha maxima
 		JTextField fechaDia2 = new JTextField();
-		fechaDia2.setBounds(40,450, 30, 20);
+		fechaDia2.setBounds(40,450, 200, 20);
 		fechaDia2.setVisible(false);
 		panel.add(fechaDia2);
 		
-		JLabel barra3 = new JLabel("/");
-		barra3.setBounds(80,450,10,20);
-		barra3.setVisible(false);
-		panel.add(barra3);
-		
-		JTextField fechaMes2 = new JTextField();
-		fechaMes2.setBounds(90, 450, 30, 20);
-		fechaMes2.setVisible(false);
-		panel.add(fechaMes2);
-		
-		JLabel barra4 = new JLabel("/");
-		barra4.setBounds(130,450,10,20);
-		barra4.setVisible(false);
-		panel.add(barra4);
-		
-		JTextField fechaAnio2 = new JTextField();
-		fechaAnio2.setBounds(140, 450, 65, 20);
-		fechaAnio2.setVisible(false);
-		panel.add(fechaAnio2);
-		
-	titulo.addActionListener(e->mostrarTitulo(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia,barra,fechaMes,barra2,fechaAnio,fechaDia2,barra3,fechaMes2,barra4,fechaAnio2));
+			
+	titulo.addActionListener(e->mostrarTitulo(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia,fechaDia2));
 	
-	calificacion.addActionListener(e->mostrarCalificacion(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia,barra,fechaMes,barra2,fechaAnio,fechaDia2,barra3,fechaMes2,barra4,fechaAnio2));
+	calificacion.addActionListener(e->mostrarCalificacion(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia,fechaDia2));
 	
-	tema.addActionListener(e->mostrarTema(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia,barra,fechaMes,barra2,fechaAnio,fechaDia2,barra3,fechaMes2,barra4,fechaAnio2));
+	tema.addActionListener(e->mostrarTema(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia, fechaDia2));
 	
-	rangoFecha.addActionListener(e->mostrarFecha(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia,barra,fechaMes,barra2,fechaAnio,fechaDia2,barra3,fechaMes2,barra4,fechaAnio2));
-	
+	rangoFecha.addActionListener(e->mostrarFecha(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia, fechaDia2));
+
+	cancelar.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e){
+			Menu v1 = new Menu();
+			buscarM.dispose();
+		}
+	});
+
 	}
 	
-	private void mostrarTitulo(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JLabel b,JTextField fM,JLabel b2, JTextField fA, JTextField fD2, JLabel b3,JTextField fM2,JLabel b4, JTextField fA2) {
+	private void mostrarTitulo(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2) {
 		
 		eTit.setVisible(true);
 		min.setVisible(false);
@@ -196,20 +169,23 @@ public class BuscarMaterial extends JFrame{
 		emax.setVisible(false);
 		eTe.setVisible(false);
 		fD.setVisible(false);
-		b.setVisible(false);
-		fM.setVisible(false);
-		b2.setVisible(false);
-		fA.setVisible(false);
 		fD2.setVisible(false);
-		b3.setVisible(false);
-		fM2.setVisible(false);
-		b4.setVisible(false);
-		fA2.setVisible(false);
-		this.validate();
-
 	}
 	
-private void mostrarCalificacion(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JLabel b,JTextField fM,JLabel b2, JTextField fA, JTextField fD2, JLabel b3,JTextField fM2,JLabel b4, JTextField fA2) {
+	private void mostrarCalificacion(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2) {
+		
+		eTit.setVisible(false);
+		min.setVisible(false);
+		emin.setVisible(false);
+		max.setVisible(false);
+		emax.setVisible(false);
+		eTe.setVisible(true);
+		fD.setVisible(false);
+		fD2.setVisible(false);
+	}
+	
+
+	private void mostrarTema(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2) {
 		
 		eTit.setVisible(false);
 		min.setVisible(true);
@@ -218,61 +194,20 @@ private void mostrarCalificacion(JTextField eTit,JLabel min,JTextField emin,JLab
 		emax.setVisible(true);
 		eTe.setVisible(false);
 		fD.setVisible(false);
-		b.setVisible(false);
-		fM.setVisible(false);
-		b2.setVisible(false);
-		fA.setVisible(false);
 		fD2.setVisible(false);
-		b3.setVisible(false);
-		fM2.setVisible(false);
-		b4.setVisible(false);
-		fA2.setVisible(false);
-		this.validate();
-
 	}
-
-private void mostrarTema (JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JLabel b,JTextField fM,JLabel b2, JTextField fA, JTextField fD2, JLabel b3,JTextField fM2,JLabel b4, JTextField fA2) {
 	
-	eTit.setVisible(true);
-	min.setVisible(false);
-	emin.setVisible(false);
-	max.setVisible(false);
-	emax.setVisible(false);
-	eTe.setVisible(true);
-	fD.setVisible(false);
-	b.setVisible(false);
-	fM.setVisible(false);
-	b2.setVisible(false);
-	fA.setVisible(false);
-	fD2.setVisible(false);
-	b3.setVisible(false);
-	fM2.setVisible(false);
-	b4.setVisible(false);
-	fA2.setVisible(false);
-	this.validate();
-
-}
-
-private void mostrarFecha(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JLabel b,JTextField fM,JLabel b2, JTextField fA, JTextField fD2, JLabel b3,JTextField fM2,JLabel b4, JTextField fA2) {
+	private void mostrarFecha(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2) {
+		
+		eTit.setVisible(true);
+		min.setVisible(false);
+		emin.setVisible(false);
+		max.setVisible(false);
+		emax.setVisible(false);
+		eTe.setVisible(false);
+		fD.setVisible(true);
+		fD2.setVisible(true);
+	}
 	
-	eTit.setVisible(false);
-	min.setVisible(false);
-	emin.setVisible(false);
-	max.setVisible(false);
-	emax.setVisible(false);
-	eTe.setVisible(false);
-	fD.setVisible(true);
-	b.setVisible(true);
-	fM.setVisible(true);
-	b2.setVisible(true);
-	fA.setVisible(true);
-	fD2.setVisible(true);
-	b3.setVisible(true);
-	fM2.setVisible(true);
-	b4.setVisible(true);
-	fA2.setVisible(true);
-	this.validate();
-
-}
 
 }

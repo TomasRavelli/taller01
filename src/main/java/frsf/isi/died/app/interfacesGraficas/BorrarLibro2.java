@@ -1,29 +1,21 @@
 package frsf.isi.died.app.interfacesGraficas;
 
 import java.awt.GridBagConstraints;
-
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import  javax.swing.*;
-import frsf.isi.died.tp.modelo.productos.Libro;
-import frsf.isi.died.app.interfacesGraficas.TablaLibro;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
-public class CrearLibro extends JFrame {
-
-	public static void main(String[] args) {
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				CrearLibro l1 = new CrearLibro();
-				}
-			});
-
-	}
+public class BorrarLibro2 {
 	
-	
-	public CrearLibro() {
-		JFrame crearL = new JFrame("Crear Libro");
+	public BorrarLibro2(){
+		JFrame crearL = new JFrame("Actualizar Libro");
 		crearL.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		crearL.pack();
 		crearL.setSize(800,600);
@@ -31,7 +23,6 @@ public class CrearLibro extends JFrame {
 		JPanel panel = new JPanel();
 		crearL.setContentPane(panel);
 		panel.setLayout(new GridBagLayout());
-		
 		
 		JLabel lblTitulo;
 		JTextField txtTitulo;
@@ -41,7 +32,7 @@ public class CrearLibro extends JFrame {
 		JTextField txtCosto;
 		JTextField txtPrecioCompra;
 		JTextField txtPaginas;
-		JButton btnAgregar;
+		JButton btnEliminar;
 		JButton btnCancelar;
 		
 		GridBagConstraints gridConst= new GridBagConstraints();
@@ -52,6 +43,7 @@ public class CrearLibro extends JFrame {
 		panel.add(lblTitulo, gridConst);
 		
 		txtTitulo = new JTextField();
+		txtTitulo.setEditable(false);
 		txtTitulo.setColumns(20);
 		gridConst.gridx=1;
 		gridConst.gridwidth=5;
@@ -64,6 +56,7 @@ public class CrearLibro extends JFrame {
 		panel.add(lblCosto, gridConst);
 		
 		txtCosto = new JTextField();
+		txtCosto.setEditable(false);
 		txtCosto.setColumns(5);
 		gridConst.gridx=1;
 		panel.add(txtCosto, gridConst);
@@ -74,6 +67,7 @@ public class CrearLibro extends JFrame {
 		panel.add(lblPrecioCompra, gridConst);
 		
 		txtPrecioCompra = new JTextField();
+		txtPrecioCompra.setEditable(false);
 		txtPrecioCompra.setColumns(5);
 		gridConst.gridx=3;
 		panel.add(txtPrecioCompra, gridConst);
@@ -84,6 +78,7 @@ public class CrearLibro extends JFrame {
 		panel.add(lblPaginas, gridConst);
 		
 		txtPaginas = new JTextField();
+		txtPaginas.setEditable(false);
 		txtPaginas.setColumns(5);
 		gridConst.gridx=1;
 		panel.add(txtPaginas, gridConst);
@@ -97,6 +92,7 @@ public class CrearLibro extends JFrame {
 		gridConst.gridx=1;
 		relevancia2.setColumns(5);
 		gridConst.gridy=5;
+		relevancia2.setEditable(false);
 		panel.add(relevancia2,gridConst);
 		
 		JLabel id = new JLabel("ID:");
@@ -105,40 +101,31 @@ public class CrearLibro extends JFrame {
 		panel.add(id,gridConst);
 		
 		JTextField ID2 = new JTextField();
+		ID2.setEditable(false);
 		gridConst.gridx=1;
 		ID2.setColumns(5);
 		gridConst.gridy=6;
 		panel.add(ID2,gridConst);
-			
-		btnAgregar = new JButton("Agregar");
+		
+		
+		btnEliminar = new JButton("Eliminar");
 		gridConst.gridx=0;
 		gridConst.gridy=7;
-		panel.add(btnAgregar, gridConst);
+		panel.add(btnEliminar, gridConst);
 		
 		btnCancelar = new JButton("Cancelar");
 		gridConst.gridx=1;
 		gridConst.gridy=7;
 		panel.add(btnCancelar, gridConst);
 		
-		JTable tablaL = new JTable(new TablaLibro());
-		//JTable tablaL = new JTable();
-		tablaL.setFillsViewportHeight(true);
-		JScrollPane scrollTabla = new JScrollPane(tablaL);
-		gridConst.gridx = 0;
-		gridConst.gridy = 8;
-		/*gridConst.gridwidth = 7;
-		gridConst.weightx = 1.0;
-		gridConst.weighty = 1.0;
-		gridConst.fill = GridBagConstraints.BOTH;
-		gridConst.anchor = GridBagConstraints.PAGE_START;*/
-		panel.add(scrollTabla, gridConst);
-		
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				Menu v1 = new Menu();
+				BorrarLibro v1 = new BorrarLibro();
 				crearL.dispose();
 			}
 		});
 		
 	}
+	
+	
 }
