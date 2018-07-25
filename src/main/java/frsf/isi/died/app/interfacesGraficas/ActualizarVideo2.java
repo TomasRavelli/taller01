@@ -42,8 +42,6 @@ public class ActualizarVideo2 {
 		JButton btnCancelar;
 		JLabel lblRelevancia;
 		JTextField txtRelevancia;
-		JLabel lblFecha;
-		JTextField txtFecha;
 		JLabel lblID;
 		JTextField txtID;
 		
@@ -91,17 +89,6 @@ public class ActualizarVideo2 {
 		txtRelevancia.setColumns(5);
 		gridConst.gridx=3;
 		panel.add(txtRelevancia, gridConst);
-		
-		
-		lblFecha= new JLabel("Fecha de publicacion: ");
-		gridConst.gridx=0;
-		gridConst.gridy=4;
-		panel.add(lblFecha, gridConst);
-		
-		txtFecha = new JTextField();
-		txtFecha.setColumns(5);
-		gridConst.gridx=3;
-		panel.add(txtFecha, gridConst);
 				
 		lblID= new JLabel("ID: ");
 		gridConst.gridx=0;
