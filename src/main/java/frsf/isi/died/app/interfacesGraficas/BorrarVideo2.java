@@ -1,54 +1,52 @@
 package frsf.isi.died.app.interfacesGraficas;
 
 import java.awt.GridBagConstraints;
-
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import  javax.swing.*;
 
-//import frsf.isi.died.app.vista.material.LibroTableModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
-
-public class CrearLibro extends JFrame {
+public class BorrarVideo2 {
 
 	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				CrearLibro l1 = new CrearLibro();
+				BorrarVideo2 a = new BorrarVideo2();
 				}
 			});
-
 	}
 	
 	
-	public CrearLibro() {
-		JFrame crearL = new JFrame("Crear Libro");
-		crearL.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		crearL.pack();
-		crearL.setSize(800,600);
-		crearL.setVisible(true);
+	public BorrarVideo2(){
+		JFrame crearV = new JFrame("Borrar Video");
+		crearV.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		crearV.pack();
+		crearV.setSize(800,600);
+		crearV.setVisible(true);
 		JPanel panel = new JPanel();
-		crearL.setContentPane(panel);
+		crearV.setContentPane(panel);
 		panel.setLayout(new GridBagLayout());
 		
 		
 		JLabel lblTitulo;
 		JTextField txtTitulo;
-		JScrollPane scrollPane;
-		JTable tabla;
 		JLabel lblCosto;
 		JLabel lblPrecioCompra;
-		JLabel lblPaginas;
 		JTextField txtCosto;
 		JTextField txtPrecioCompra;
-		JTextField txtPaginas;
-		JButton btnAgregar;
-		JButton btnCancelar;		
-		
-		TablaLibro tableModel;
+		JButton btnGuardarCambios;
+		JButton btnCancelar;
+		JLabel lblRelevancia;
+		JTextField txtRelevancia;
+		JLabel lblID;
+		JTextField txtID;
 		
 		GridBagConstraints gridConst= new GridBagConstraints();
+		
 		
 		lblTitulo = new JLabel("Titulo: ");
 		gridConst.gridx=0;
@@ -56,6 +54,7 @@ public class CrearLibro extends JFrame {
 		panel.add(lblTitulo, gridConst);
 		
 		txtTitulo = new JTextField();
+		txtTitulo.setEditable(false);
 		txtTitulo.setColumns(20);
 		gridConst.gridx=1;
 		gridConst.gridwidth=5;
@@ -68,45 +67,55 @@ public class CrearLibro extends JFrame {
 		panel.add(lblCosto, gridConst);
 		
 		txtCosto = new JTextField();
+		txtCosto.setEditable(false);
 		txtCosto.setColumns(5);
 		gridConst.gridx=1;
 		panel.add(txtCosto, gridConst);
 		
-		lblPrecioCompra= new JLabel("Precio Compra: ");
+		lblPrecioCompra= new JLabel("Duracion: ");
 		gridConst.gridx=0;
 		gridConst.gridy=2;
 		panel.add(lblPrecioCompra, gridConst);
 		
 		txtPrecioCompra = new JTextField();
+		txtPrecioCompra.setEditable(false);
 		txtPrecioCompra.setColumns(5);
 		gridConst.gridx=3;
 		panel.add(txtPrecioCompra, gridConst);
 		
-		lblPaginas= new JLabel("Paginas: ");		
+		lblRelevancia= new JLabel("Relevancia: ");
 		gridConst.gridx=0;
 		gridConst.gridy=3;
-		panel.add(lblPaginas, gridConst);
+		panel.add(lblRelevancia, gridConst);
 		
-		txtPaginas = new JTextField();
-		txtPaginas.setColumns(5);
-		gridConst.gridx=1;
-		panel.add(txtPaginas, gridConst);
+		txtRelevancia = new JTextField();
+		txtRelevancia.setEditable(false);
+		txtRelevancia.setColumns(5);
+		gridConst.gridx=3;
+		panel.add(txtRelevancia, gridConst);
 				
-		
-		
-		btnAgregar = new JButton("Agregar");
+		lblID= new JLabel("ID: ");
 		gridConst.gridx=0;
 		gridConst.gridy=5;
-		panel.add(btnAgregar, gridConst);
+		panel.add(lblID, gridConst);
+		
+		txtID = new JTextField();
+		txtID.setEditable(false);
+		txtID.setColumns(5);
+		gridConst.gridx=3;
+		panel.add(txtID, gridConst);
+		
+		
+		
+		btnGuardarCambios = new JButton("Borrar");
+		gridConst.gridx=0;
+		gridConst.gridy=6;
+		panel.add(btnGuardarCambios, gridConst);
 		
 		btnCancelar = new JButton("Cancelar");
 		gridConst.gridx=1;
-		gridConst.gridy=5;
+		gridConst.gridy=6;
 		panel.add(btnCancelar, gridConst);
-		
-		
-		
-		
-		
+
 	}
 }
