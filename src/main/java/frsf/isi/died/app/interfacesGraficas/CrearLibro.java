@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import  javax.swing.*;
 
+//import frsf.isi.died.app.vista.material.LibroTableModel;
+
 
 public class CrearLibro extends JFrame {
 
@@ -42,9 +44,9 @@ public class CrearLibro extends JFrame {
 		JTextField txtPrecioCompra;
 		JTextField txtPaginas;
 		JButton btnAgregar;
-		JButton btnCancelar;
+		JButton btnCancelar;		
 		
-		
+		TablaLibro tableModel;
 		
 		GridBagConstraints gridConst= new GridBagConstraints();
 		
@@ -91,6 +93,7 @@ public class CrearLibro extends JFrame {
 		panel.add(txtPaginas, gridConst);
 				
 		
+		
 		btnAgregar = new JButton("Agregar");
 		gridConst.gridx=0;
 		gridConst.gridy=5;
@@ -100,6 +103,9 @@ public class CrearLibro extends JFrame {
 		gridConst.gridx=1;
 		gridConst.gridy=5;
 		panel.add(btnCancelar, gridConst);
+		
+		
+		//TablaLibro t = new TablaLibro();
 		
 		
 	}
