@@ -1,6 +1,7 @@
 package frsf.isi.died.app.interfacesGraficas;
 
 import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import  javax.swing.*;
@@ -11,8 +12,7 @@ public class BuscarMaterial extends JFrame{
 	javax.swing.SwingUtilities.invokeLater(new Runnable() {
 	public void run() {
 		BuscarMaterial b1 = new BuscarMaterial();
-		
-	}
+		}
 	}); 
 	}
 	

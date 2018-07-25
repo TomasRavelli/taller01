@@ -57,6 +57,48 @@ public class Menu extends JFrame{
 				principal.dispose();
 			}
 		});
+		
+		crearLibro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				CrearLibro l1 = new CrearLibro();
+				principal.dispose();
+			}
+		});
+		
+		crearVideo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				CrearVideo v1 = new CrearVideo();
+				principal.dispose();
+			}
+		});
+		
+		actualizarLibro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				ActualizarLibro l1 = new ActualizarLibro();
+				principal.dispose();
+			}
+		});
+		
+		actualizarVideo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				ActualizarVideo v1 = new ActualizarVideo();
+				principal.dispose();
+			}
+		});
+		
+		borrarLibro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				BorrarLibro l1 = new BorrarLibro();
+				principal.dispose();
+			}
+		});
+		
+		borrarVideo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				BorrarVideo v1 = new BorrarVideo();
+				principal.dispose();
+			}
+		});
 	}
 	}
 		
