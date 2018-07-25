@@ -109,12 +109,15 @@ public class CrearVideo extends JFrame {
 		gridConst.gridy=6;
 		panel.add(btnCancelar, gridConst);
 		
+<<<<<<< HEAD
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				Menu v1 = new Menu();
 				crearV.dispose();
 			}
 		});
+=======
+>>>>>>> 4a4a416762e2ca5d6bb6ee551059fee37b6eddf9
 		
 		
 	}

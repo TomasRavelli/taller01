@@ -9,6 +9,8 @@ import  javax.swing.*;
 import frsf.isi.died.tp.modelo.productos.Libro;
 import frsf.isi.died.app.interfacesGraficas.TablaLibro;
 
+//import frsf.isi.died.app.vista.material.LibroTableModel;
+
 
 public class CrearLibro extends JFrame {
 
@@ -42,7 +44,13 @@ public class CrearLibro extends JFrame {
 		JTextField txtPrecioCompra;
 		JTextField txtPaginas;
 		JButton btnAgregar;
+<<<<<<< HEAD
 		JButton btnCancelar;
+=======
+		JButton btnCancelar;		
+		
+		TablaLibro tableModel;
+>>>>>>> 4a4a416762e2ca5d6bb6ee551059fee37b6eddf9
 		
 		GridBagConstraints gridConst= new GridBagConstraints();
 		
@@ -88,7 +96,12 @@ public class CrearLibro extends JFrame {
 		gridConst.gridx=1;
 		panel.add(txtPaginas, gridConst);
 		
+<<<<<<< HEAD
 		JLabel relevancia = new JLabel("Relevancia:");
+=======
+		
+		btnAgregar = new JButton("Agregar");
+>>>>>>> 4a4a416762e2ca5d6bb6ee551059fee37b6eddf9
 		gridConst.gridx=0;
 		gridConst.gridy=5;
 		panel.add(relevancia,gridConst);
@@ -139,6 +152,9 @@ public class CrearLibro extends JFrame {
 				crearL.dispose();
 			}
 		});
+		
+		
+		
 		
 	}
 }
