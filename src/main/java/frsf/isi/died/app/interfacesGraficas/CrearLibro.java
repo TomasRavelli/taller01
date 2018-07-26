@@ -47,7 +47,17 @@ public class CrearLibro extends JFrame {
 		JTextField txtPrecioCompra;
 		JTextField txtPaginas;
 		JButton btnAgregar;
+<<<<<<< HEAD
 		JButton btnCancelar;
+=======
+<<<<<<< HEAD
+		JButton btnCancelar;
+=======
+		JButton btnCancelar;		
+		
+		TablaLibro tableModel;
+>>>>>>> 4a4a416762e2ca5d6bb6ee551059fee37b6eddf9
+>>>>>>> e085bbc5f1093b620ad3fcbbe4f53a7e5d9de277
 		
 
 		
@@ -141,6 +151,7 @@ public class CrearLibro extends JFrame {
 		txtPaginas = new JTextField();
 		panel.add(txtPaginas, gridConst);
 		
+<<<<<<< HEAD
 		gridConst.gridx=0;
 		gridConst.gridy=2;
 		gridConst.gridheight = 1 ;
@@ -150,6 +161,16 @@ public class CrearLibro extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		
 		JLabel relevancia = new JLabel("Relevancia:");
+=======
+<<<<<<< HEAD
+		JLabel relevancia = new JLabel("Relevancia:");
+=======
+		
+		btnAgregar = new JButton("Agregar");
+>>>>>>> 4a4a416762e2ca5d6bb6ee551059fee37b6eddf9
+		gridConst.gridx=0;
+		gridConst.gridy=5;
+>>>>>>> e085bbc5f1093b620ad3fcbbe4f53a7e5d9de277
 		panel.add(relevancia,gridConst);
 		
 		gridConst.gridx=1;

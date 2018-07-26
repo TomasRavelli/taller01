@@ -214,6 +214,7 @@ String[] columnas = {"Titulo","Duracion","Costo por Seg","Costo","Relevancia","I
 		btnCancelar = new JButton("Cancelar");
 		panel.add(btnCancelar, gridConst);
 		
+<<<<<<< HEAD
 		gridConst.gridx = 4;
 		gridConst.gridy = 8;
 		gridConst.gridwidth = 1;
@@ -225,13 +226,21 @@ String[] columnas = {"Titulo","Duracion","Costo por Seg","Costo","Relevancia","I
 		panel.add(btnAgregar,gridConst);
 		
 		
+=======
+<<<<<<< HEAD
+>>>>>>> e085bbc5f1093b620ad3fcbbe4f53a7e5d9de277
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				Menu v1 = new Menu();
 				crearV.dispose();
 			}
 		});
+<<<<<<< HEAD
 
+=======
+=======
+>>>>>>> 4a4a416762e2ca5d6bb6ee551059fee37b6eddf9
+>>>>>>> e085bbc5f1093b620ad3fcbbe4f53a7e5d9de277
 		
 		
 	}
