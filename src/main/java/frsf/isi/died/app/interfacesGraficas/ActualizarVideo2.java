@@ -103,6 +103,7 @@ public class ActualizarVideo2 {
 		panel.add(txtID, gridConst);
 		
 		
+
 		btnGuardarCambios = new JButton("Guardar Cambios");
 		gridConst.gridx=0;
 		gridConst.gridy=6;

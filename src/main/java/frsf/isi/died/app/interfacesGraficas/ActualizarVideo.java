@@ -58,11 +58,19 @@ public class ActualizarVideo extends JFrame {
 		gridConst.gridy=6;
 		panel.add(btnCancelar, gridConst);	
 		
+		btnIr.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				ActualizarVideo2 v1 = new ActualizarVideo2();
+				actualizarV.dispose();
+			}
+		});
+
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				Menu v1 = new Menu();
 				actualizarV.dispose();
 			}
 		});
+
 	}
 }

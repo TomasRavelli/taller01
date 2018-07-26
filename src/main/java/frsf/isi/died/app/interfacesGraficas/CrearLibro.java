@@ -3,11 +3,16 @@ package frsf.isi.died.app.interfacesGraficas;
 import java.awt.GridBagConstraints;
 
 import java.awt.GridBagLayout;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import  javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import frsf.isi.died.tp.modelo.productos.Libro;
-import frsf.isi.died.app.interfacesGraficas.TablaLibro;
+
+
+//import frsf.isi.died.app.vista.material.LibroTableModel;
 
 
 public class CrearLibro extends JFrame {
@@ -44,101 +49,188 @@ public class CrearLibro extends JFrame {
 		JButton btnAgregar;
 		JButton btnCancelar;
 		
-		GridBagConstraints gridConst= new GridBagConstraints();
+
 		
-		lblTitulo = new JLabel("Titulo: ");
+		GridBagConstraints gridConst= new GridBagConstraints();
 		gridConst.gridx=0;
 		gridConst.gridy=0;
-		panel.add(lblTitulo, gridConst);
-		
-		txtTitulo = new JTextField();
-		txtTitulo.setColumns(20);
-		gridConst.gridx=1;
-		gridConst.gridwidth=5;
-		panel.add(txtTitulo, gridConst);
-		
-		lblCosto= new JLabel("Costo: ");		
-		gridConst.gridx=0;
-		gridConst.gridy=1;
-		gridConst.weightx=0.0;
-		panel.add(lblCosto, gridConst);
-		
-		txtCosto = new JTextField();
-		txtCosto.setColumns(5);
-		gridConst.gridx=1;
-		panel.add(txtCosto, gridConst);
-		
-		lblPrecioCompra= new JLabel("Precio Compra: ");
-		gridConst.gridx=0;
-		gridConst.gridy=2;
-		panel.add(lblPrecioCompra, gridConst);
-		
-		txtPrecioCompra = new JTextField();
-		txtPrecioCompra.setColumns(5);
-		gridConst.gridx=3;
-		panel.add(txtPrecioCompra, gridConst);
-		
-		lblPaginas= new JLabel("Paginas: ");		
-		gridConst.gridx=0;
-		gridConst.gridy=3;
-		panel.add(lblPaginas, gridConst);
-		
-		txtPaginas = new JTextField();
-		txtPaginas.setColumns(5);
-		gridConst.gridx=1;
-		panel.add(txtPaginas, gridConst);
-		
-		JLabel relevancia = new JLabel("Relevancia:");
-		gridConst.gridx=0;
-		gridConst.gridy=5;
-		panel.add(relevancia,gridConst);
-		
-		JTextField relevancia2 = new JTextField();
-		gridConst.gridx=1;
-		relevancia2.setColumns(5);
-		gridConst.gridy=5;
-		panel.add(relevancia2,gridConst);
-		
-		JLabel id = new JLabel("ID:");
-		gridConst.gridx=0;
-		gridConst.gridy=6;
-		panel.add(id,gridConst);
-		
-		JTextField ID2 = new JTextField();
-		gridConst.gridx=1;
-		ID2.setColumns(5);
-		gridConst.gridy=6;
-		panel.add(ID2,gridConst);
-			
-		btnAgregar = new JButton("Agregar");
-		gridConst.gridx=0;
-		gridConst.gridy=7;
-		panel.add(btnAgregar, gridConst);
-		
-		btnCancelar = new JButton("Cancelar");
-		gridConst.gridx=1;
-		gridConst.gridy=7;
-		panel.add(btnCancelar, gridConst);
-		
-		JTable tablaL = new JTable(new TablaLibro());
-		//JTable tablaL = new JTable();
-		tablaL.setFillsViewportHeight(true);
-		JScrollPane scrollTabla = new JScrollPane(tablaL);
-		gridConst.gridx = 0;
-		gridConst.gridy = 8;
-		/*gridConst.gridwidth = 7;
+		gridConst.gridheight = 1 ;
+		gridConst.gridwidth = 5;
 		gridConst.weightx = 1.0;
 		gridConst.weighty = 1.0;
 		gridConst.fill = GridBagConstraints.BOTH;
-		gridConst.anchor = GridBagConstraints.PAGE_START;*/
-		panel.add(scrollTabla, gridConst);
 		
+		lblTitulo = new JLabel("Titulo: ");
+		panel.add(lblTitulo, gridConst);
+		
+		gridConst.gridx=1;
+		gridConst.gridy=0;
+		gridConst.gridheight = 1 ;
+		gridConst.gridwidth = 5;
+		gridConst.weightx = 1.0;
+		gridConst.weighty = 1.0;
+		gridConst.fill = GridBagConstraints.BOTH;
+		
+		
+		txtTitulo = new JTextField();
+		panel.add(txtTitulo, gridConst);
+		
+		gridConst.gridx=0;
+		gridConst.gridy=1;
+		gridConst.gridheight = 1 ;
+		gridConst.gridwidth = 1;
+		gridConst.weightx = 1.0;
+		gridConst.weighty = 1.0;
+		gridConst.fill = GridBagConstraints.BOTH;
+		
+		lblCosto= new JLabel("Costo: ");		
+		panel.add(lblCosto, gridConst);
+		
+		gridConst.gridx=1;
+		gridConst.gridy=1;
+		gridConst.gridheight = 1 ;
+		gridConst.gridwidth = 1;
+		gridConst.weightx = 1.0;
+		gridConst.weighty = 1.0;
+		gridConst.fill = GridBagConstraints.BOTH;
+		
+		txtCosto = new JTextField();
+		panel.add(txtCosto, gridConst);
+		
+		gridConst.gridx=2;
+		gridConst.gridy=1;
+		gridConst.gridheight = 1 ;
+		gridConst.gridwidth = 1;
+		gridConst.weightx = 1.0;
+		gridConst.weighty = 1.0;
+		gridConst.fill = GridBagConstraints.BOTH;
+		
+		lblPrecioCompra= new JLabel("Precio Compra: ");
+		panel.add(lblPrecioCompra, gridConst);
+		
+		gridConst.gridx=3;
+		gridConst.gridy=1;
+		gridConst.gridheight = 1 ;
+		gridConst.gridwidth = 1;
+		gridConst.weightx = 1.0;
+		gridConst.weighty = 1.0;
+		gridConst.fill = GridBagConstraints.BOTH;
+		
+		txtPrecioCompra = new JTextField();
+		panel.add(txtPrecioCompra, gridConst);
+		
+		gridConst.gridx=4;
+		gridConst.gridy=1;
+		gridConst.gridheight = 1 ;
+		gridConst.gridwidth = 1;
+		gridConst.weightx = 1.0;
+		gridConst.weighty = 1.0;
+		gridConst.fill = GridBagConstraints.BOTH;
+		
+		lblPaginas= new JLabel("Paginas: ");		
+		panel.add(lblPaginas, gridConst);
+		
+		gridConst.gridx=5;
+		gridConst.gridy=1;
+		gridConst.gridheight = 1 ;
+		gridConst.gridwidth = 1;
+		gridConst.weightx = 1.0;
+		gridConst.weighty = 1.0;
+		gridConst.fill = GridBagConstraints.BOTH;
+		
+		txtPaginas = new JTextField();
+		panel.add(txtPaginas, gridConst);
+		
+		gridConst.gridx=0;
+		gridConst.gridy=2;
+		gridConst.gridheight = 1 ;
+		gridConst.gridwidth = 1;
+		gridConst.weightx = 1.0;
+		gridConst.weighty = 1.0;
+		gridConst.fill = GridBagConstraints.BOTH;
+		
+		JLabel relevancia = new JLabel("Relevancia:");
+		panel.add(relevancia,gridConst);
+		
+		gridConst.gridx=1;
+		gridConst.gridy=2;
+		gridConst.gridheight = 1 ;
+		gridConst.gridwidth = 1;
+		gridConst.weightx = 1.0;
+		gridConst.weighty = 1.0;
+		gridConst.fill = GridBagConstraints.BOTH;
+		
+		JTextField relevancia2 = new JTextField();
+		panel.add(relevancia2,gridConst);
+
+		gridConst.gridx=2;
+		gridConst.gridy=2;
+		gridConst.gridheight = 1 ;
+		gridConst.gridwidth = 1;
+		gridConst.weightx = 1.0;
+		gridConst.weighty = 1.0;
+		gridConst.fill = GridBagConstraints.BOTH;
+	
+		JLabel id = new JLabel("ID:");
+		panel.add(id,gridConst);
+		
+		gridConst.gridx=3;
+		gridConst.gridy=2;
+		gridConst.gridheight = 1 ;
+		gridConst.gridwidth = 1;
+		gridConst.weightx = 1.0;
+		gridConst.weighty = 1.0;
+		gridConst.fill = GridBagConstraints.BOTH;
+		
+		JTextField ID2 = new JTextField();
+		panel.add(ID2,gridConst);
+		
+		String[] columnas = {"Titulo","Costo","Precio Compra","Paginas","Relevancia","ID"};
+		
+		DefaultTableModel modeloTabla = new DefaultTableModel(null,columnas);
+		
+		JTable tablaLibro = new JTable(modeloTabla);
+		JScrollPane scrollTabla = new JScrollPane(tablaLibro);
+		gridConst.gridx = 0;
+		gridConst.gridy = 3;
+		gridConst.gridheight = 5 ;
+		gridConst.gridwidth = 6;
+		gridConst.weightx = 1.0;
+		gridConst.weighty = 1.0;
+		gridConst.fill = GridBagConstraints.BOTH;
+		gridConst.anchor = GridBagConstraints.PAGE_START;
+	
+		panel.add(scrollTabla,gridConst);
+		
+		gridConst.gridx = 5;
+		gridConst.gridy = 8;
+		gridConst.gridheight = 1 ;
+		gridConst.gridwidth = 1;
+		gridConst.weightx = 1.0;
+		gridConst.weighty = 1.0;
+		gridConst.fill = GridBagConstraints.BOTH;
+		btnCancelar = new JButton("Cancelar");
+		
+		panel.add(btnCancelar, gridConst);
+		
+		gridConst.gridx = 4;
+		gridConst.gridy = 8;
+		gridConst.gridwidth = 1;
+		gridConst.gridheight = 1 ;
+		gridConst.weightx = 1.0;
+		gridConst.weighty = 1.0;
+		gridConst.fill = GridBagConstraints.BOTH;
+		btnAgregar = new JButton("Agregar");
+		panel.add(btnAgregar,gridConst);
+	
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				Menu v1 = new Menu();
 				crearL.dispose();
 			}
 		});
+		
+		
 		
 	}
 }

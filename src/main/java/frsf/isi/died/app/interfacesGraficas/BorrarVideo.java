@@ -49,7 +49,7 @@ public class BorrarVideo extends JFrame {
 		gridConst.gridwidth=5;
 		panel.add(txtID, gridConst);
 		
-		btnIr = new JButton("Borrar");
+		btnIr = new JButton("Ir");
 		gridConst.gridx=0;
 		gridConst.gridy=6;
 		panel.add(btnIr, gridConst);
@@ -58,6 +58,13 @@ public class BorrarVideo extends JFrame {
 		gridConst.gridx=1;
 		gridConst.gridy=6;
 		panel.add(btnCancelar, gridConst);
+		
+		btnIr.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				BorrarVideo2 v1 = new BorrarVideo2();
+				borrarV.dispose();
+			}
+		});
 		
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
