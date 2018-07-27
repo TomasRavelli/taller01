@@ -4,9 +4,16 @@ import java.awt.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
 import  javax.swing.*;
 
+import frsf.isi.died.tp.modelo.productos.Libro;
+
 public class BuscarMaterial extends JFrame{
+	
+	Integer validacionBoton = -1;
 	
 	public static void main(String[] args) {
 	javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -55,36 +62,50 @@ public class BuscarMaterial extends JFrame{
 	
 	ButtonGroup opciones = new ButtonGroup();
 	
-	
 	JRadioButton tituloAlf = new JRadioButton("Titulo alfabeticamente");
 	tituloAlf.setBounds(430, 150, 200, 20);
 	tituloAlf.setVisible(true);
 	opciones.add(tituloAlf);
 	panel.add(tituloAlf);
+	if(tituloAlf.isSelected()) {
+		validacionBoton = 0;
+	}
 	
 	JRadioButton xCalif = new JRadioButton("Calificacion");
 	xCalif.setBounds(430, 200, 200, 20);
 	xCalif.setVisible(true);
 	opciones.add(xCalif);
 	panel.add(xCalif);
+	if(xCalif.isSelected()) {
+		validacionBoton = 1;
+	}
 	
 	JRadioButton xPrecio = new JRadioButton("Precio");
 	xPrecio.setBounds(430, 250, 200, 20);
 	xPrecio.setVisible(true);
 	opciones.add(xPrecio);
 	panel.add(xPrecio);
+	if(xPrecio.isSelected()) {
+		validacionBoton = 2;
+	}
 	
 	JRadioButton xFechaPub = new JRadioButton("Fecha publicacion");
 	xFechaPub.setBounds(430, 300, 200, 20);
 	xFechaPub.setVisible(true);
 	opciones.add(xFechaPub);
 	panel.add(xFechaPub);
+	if(xFechaPub.isSelected()) {
+		validacionBoton = 3;
+	}
 	
 	JRadioButton xRelevancia = new JRadioButton("Relevancia");
 	xRelevancia.setBounds(430, 350, 200, 20);
 	xRelevancia.setVisible(true);
 	opciones.add(xRelevancia);
 	panel.add(xRelevancia);
+	if(xRelevancia.isSelected()) {
+		validacionBoton = 4;
+	}
 	
 	JButton buscar = new JButton("Buscar");
 	buscar.setBounds(500, 500, 100, 30);
@@ -140,27 +161,61 @@ public class BuscarMaterial extends JFrame{
 		JTextField fechaDia2 = new JTextField();
 		fechaDia2.setBounds(40,450, 200, 20);
 		fechaDia2.setVisible(false);
-		panel.add(fechaDia2);
-		
+		panel.add(fechaDia2);	
 			
-	titulo.addActionListener(e->mostrarTitulo(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia,fechaDia2));
+	titulo.addActionListener(e->mostrarTitulo(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia,fechaDia2,buscar,buscarM));
 	
-	calificacion.addActionListener(e->mostrarCalificacion(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia,fechaDia2));
+	calificacion.addActionListener(e->mostrarCalificacion(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia,fechaDia2,buscar));
 	
-	tema.addActionListener(e->mostrarTema(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia, fechaDia2));
+	tema.addActionListener(e->mostrarTema(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia, fechaDia2,buscar));
 	
-	rangoFecha.addActionListener(e->mostrarFecha(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia, fechaDia2));
+	rangoFecha.addActionListener(e->mostrarFecha(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia, fechaDia2, buscar));
 
+	tituloAlf.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e){
+			validacionBoton=0;
+		}
+	});
+	
+	xCalif.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e){
+			validacionBoton=1;
+		}
+	});
+	
+	xPrecio.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e){
+			validacionBoton=2;
+		}
+	});
+	
+	xFechaPub.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e){
+			validacionBoton=3;
+		}
+	});
+	
+	xRelevancia.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e){
+			validacionBoton=4;
+		}
+	});
+	
+	
 	cancelar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e){
 			Menu v1 = new Menu();
 			buscarM.dispose();
 		}
 	});
+	
+
+
 
 	}
 	
-	private void mostrarTitulo(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2) {
+	private void mostrarTitulo(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,
+			JTextField eTe, JTextField fD, JTextField fD2,JButton buscar,JFrame buscarM) {
 		
 		eTit.setVisible(true);
 		min.setVisible(false);
@@ -170,9 +225,42 @@ public class BuscarMaterial extends JFrame{
 		eTe.setVisible(false);
 		fD.setVisible(false);
 		fD2.setVisible(false);
+		
+		buscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				switch(validacionBoton) {
+				case 0:{
+					buscarPorTitulo(eTit.getText());
+					ordenarPorTitulo();
+					break;
+				}
+				case 1:{
+					//ordenarPorCalificacion();
+					break;
+				}
+				case 2:{
+					//ordenarPorPrecio();
+					break;
+				}
+				case 3:{
+					//ordenarPorFecha();
+					break;
+				}
+				case 4:{
+					//ordenarPorRelevancia();
+				}
+				default:{
+					JOptionPane noEligio = new JOptionPane();
+					noEligio.showConfirmDialog(buscarM, "Debe elegir un criterio de ordenamiento.", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+
+				}
+				}
+			}
+		});
+		
 	}
 	
-	private void mostrarCalificacion(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2) {
+	private void mostrarCalificacion(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2,JButton buscar) {
 		
 		eTit.setVisible(false);
 		min.setVisible(false);
@@ -182,10 +270,11 @@ public class BuscarMaterial extends JFrame{
 		eTe.setVisible(true);
 		fD.setVisible(false);
 		fD2.setVisible(false);
+		
 	}
 	
 
-	private void mostrarTema(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2) {
+	private void mostrarTema(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2, JButton buscar) {
 		
 		eTit.setVisible(false);
 		min.setVisible(true);
@@ -197,9 +286,9 @@ public class BuscarMaterial extends JFrame{
 		fD2.setVisible(false);
 	}
 	
-	private void mostrarFecha(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2) {
+	private void mostrarFecha(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2, JButton buscar) {
 		
-		eTit.setVisible(true);
+		eTit.setVisible(false);
 		min.setVisible(false);
 		emin.setVisible(false);
 		max.setVisible(false);
@@ -209,5 +298,25 @@ public class BuscarMaterial extends JFrame{
 		fD2.setVisible(true);
 	}
 	
+	public void buscarPorTitulo(String titulo) {
+		CsvDatasource archivo1 = new CsvDatasource();
+		CsvDatasource archivo2 = new CsvDatasource();
+		List<List<String>> materiales = new ArrayList<>();
+		List<List<String>> encontrados = new ArrayList<>();
+		if(!titulo.isEmpty()) {
+		materiales.addAll(archivo1.readFile("libros.csv"));
+		materiales.addAll(archivo2.readFile("videos.csv"));
+		for(int i = 0 ; i<materiales.size();i++ ) {
+			if(materiales.get(i).get(1).contains(titulo)){
+				encontrados.add(materiales.get(i));
+			}
+		}
+		}
+		
+		System.out.println(encontrados.isEmpty());
+		}
+	public void ordenarPorTitulo() {
+	
+	}
 
 }

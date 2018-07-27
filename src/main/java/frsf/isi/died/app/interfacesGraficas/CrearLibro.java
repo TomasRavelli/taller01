@@ -279,7 +279,6 @@ public class CrearLibro extends JFrame {
 	
 	public void agregarLibrosATabla(DefaultTableModel modelo, MaterialCapacitacionDaoDefault materiales) {
 		CsvDatasource archivo = new CsvDatasource();
-		
 		for(int i = 0; i<archivo.readFile("libros.csv").size();i++) {
 			Libro l = new Libro();
 			l.loadFromStringRow(archivo.readFile("libros.csv").get(i));
