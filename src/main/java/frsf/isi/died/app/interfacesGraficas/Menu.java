@@ -42,7 +42,8 @@ public class Menu extends JFrame{
 		inicio.add(buscarLibro);
 		JButton buscarVideo = new JButton ("Buscar Video");
 		inicio.add(buscarVideo);
-		
+		MaterialCapacitacionDao materialDAOlibro = new MaterialCapacitacionDaoDefault();
+		MaterialCapacitacionDao materialDAOvideo = new MaterialCapacitacionDaoDefault();
 	
 		buscarLibro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
@@ -60,14 +61,14 @@ public class Menu extends JFrame{
 		
 		crearLibro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				CrearLibro l1 = new CrearLibro();
+				CrearLibro l1 = new CrearLibro((MaterialCapacitacionDaoDefault) materialDAOlibro);
 				principal.dispose();
 			}
 		});
 		
 		crearVideo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				CrearVideo v1 = new CrearVideo();
+				CrearVideo v1 = new CrearVideo((MaterialCapacitacionDaoDefault) materialDAOvideo);
 				principal.dispose();
 			}
 		});

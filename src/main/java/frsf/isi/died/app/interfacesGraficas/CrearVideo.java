@@ -7,19 +7,23 @@ import java.awt.event.ActionListener;
 import  javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import frsf.isi.died.tp.modelo.productos.Libro;
+import frsf.isi.died.tp.modelo.productos.Relevancia;
+import frsf.isi.died.tp.modelo.productos.Video;
+
 public class CrearVideo extends JFrame {
 
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				CrearVideo v1 = new CrearVideo();
 				}
 			});
 
-	}
+	}*/
 	
 	
-	public CrearVideo() {
+	public CrearVideo(MaterialCapacitacionDaoDefault materialDao) {
 		JFrame crearV = new JFrame("Crear Video");
 		crearV.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		crearV.pack();
@@ -158,9 +162,9 @@ public class CrearVideo extends JFrame {
 		gridConst.weighty = 1.0;
 		gridConst.fill = GridBagConstraints.BOTH;
 		
-		txtRelevancia = new JTextField();
-		panel.add(txtRelevancia, gridConst);
-
+		Object[] obj = {"ALTA","MEDIA","BAJA"};
+		JComboBox relevancia2 = new JComboBox(obj);
+		panel.add(relevancia2,gridConst);
 
 		gridConst.gridx=2;
 		gridConst.gridy=2;
@@ -190,8 +194,8 @@ String[] columnas = {"Titulo","Duracion","Costo por Seg","Costo","Relevancia","I
 		
 		DefaultTableModel modeloTabla = new DefaultTableModel(null,columnas);
 		
-		JTable tablaLibro = new JTable(modeloTabla);
-		JScrollPane scrollTabla = new JScrollPane(tablaLibro);
+		JTable tablaVideo = new JTable(modeloTabla);
+		JScrollPane scrollTabla = new JScrollPane(tablaVideo);
 		gridConst.gridx = 0;
 		gridConst.gridy = 3;
 		gridConst.gridheight = 5 ;
@@ -214,7 +218,7 @@ String[] columnas = {"Titulo","Duracion","Costo por Seg","Costo","Relevancia","I
 		btnCancelar = new JButton("Cancelar");
 		panel.add(btnCancelar, gridConst);
 		
-<<<<<<< HEAD
+
 		gridConst.gridx = 4;
 		gridConst.gridy = 8;
 		gridConst.gridwidth = 1;
@@ -226,23 +230,60 @@ String[] columnas = {"Titulo","Duracion","Costo por Seg","Costo","Relevancia","I
 		panel.add(btnAgregar,gridConst);
 		
 		
-=======
-<<<<<<< HEAD
->>>>>>> e085bbc5f1093b620ad3fcbbe4f53a7e5d9de277
+
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				Menu v1 = new Menu();
 				crearV.dispose();
 			}
 		});
-<<<<<<< HEAD
 
-=======
-=======
->>>>>>> 4a4a416762e2ca5d6bb6ee551059fee37b6eddf9
->>>>>>> e085bbc5f1093b620ad3fcbbe4f53a7e5d9de277
-		
-		
+		agregarVideosATabla(modeloTabla);
+
+	btnAgregar.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e){
+			if(!txtTitulo.getText().isEmpty() && !txtCosto.getText().isEmpty() && !txtCostoSeg.getText().isEmpty() &&
+				!txtDuracion.getText().isEmpty()  && !txtID.getText().isEmpty())
+			{Integer id = new Integer(txtID.getText());
+			Double costo = new Double(txtCosto.getText());
+			String titulo = new String(txtTitulo.getText());
+			Integer duracion = new Integer(txtDuracion.getText());
+			Relevancia aux;
+			if(relevancia2.getSelectedIndex()==0){
+				aux=Relevancia.ALTA;
+			}else {
+				if(relevancia2.getSelectedIndex()==1){
+					aux=Relevancia.MEDIA;
+				}else {
+					 aux=Relevancia.BAJA;
+				}
+			}
+			Video video = new Video(id,titulo, costo,duracion,aux);
+			JOptionPane nuevoLibro = new JOptionPane();
+			agregarATabla(modeloTabla, video);
+			nuevoLibro.showConfirmDialog(crearV, "El video se creo exitosamente.", "Agregar Video", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+			materialDao.agregarVideo(video);
+			}
+		}
+	});
+	
+			
+}
+
+public void agregarATabla(DefaultTableModel modelo, Video video) {
+	Object[] obj = {video.getTitulo(),video.getDuracion(),video.getCostoxSeg(),video.getCosto(),video.getRelevancia(),video.getId()};
+	modelo.addRow(obj);
+}
+
+public void agregarVideosATabla(DefaultTableModel modelo) {
+	CsvDatasource archivo = new CsvDatasource();
+	
+	for(int i = 0; i<archivo.readFile("videos.csv").size();i++) {
+		Video video = new Video();
+		video.loadFromStringRow(archivo.readFile("videos.csv").get(i));
+		agregarATabla(modelo, video);
+
 	}
-
+	
+}
 }

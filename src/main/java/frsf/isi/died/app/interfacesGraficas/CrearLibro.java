@@ -6,10 +6,16 @@ import java.awt.GridBagLayout;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
 import  javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import frsf.isi.died.tp.modelo.productos.Libro;
+import frsf.isi.died.tp.modelo.productos.Relevancia;
 
 
 //import frsf.isi.died.app.vista.material.LibroTableModel;
@@ -17,17 +23,17 @@ import frsf.isi.died.tp.modelo.productos.Libro;
 
 public class CrearLibro extends JFrame {
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				CrearLibro l1 = new CrearLibro();
 				}
 			});
 
-	}
+	}*/
 	
 	
-	public CrearLibro() {
+	public CrearLibro(MaterialCapacitacionDaoDefault materialDao) {
 		JFrame crearL = new JFrame("Crear Libro");
 		crearL.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		crearL.pack();
@@ -47,17 +53,9 @@ public class CrearLibro extends JFrame {
 		JTextField txtPrecioCompra;
 		JTextField txtPaginas;
 		JButton btnAgregar;
-<<<<<<< HEAD
+
 		JButton btnCancelar;
-=======
-<<<<<<< HEAD
-		JButton btnCancelar;
-=======
-		JButton btnCancelar;		
-		
-		TablaLibro tableModel;
->>>>>>> 4a4a416762e2ca5d6bb6ee551059fee37b6eddf9
->>>>>>> e085bbc5f1093b620ad3fcbbe4f53a7e5d9de277
+
 		
 
 		
@@ -151,7 +149,6 @@ public class CrearLibro extends JFrame {
 		txtPaginas = new JTextField();
 		panel.add(txtPaginas, gridConst);
 		
-<<<<<<< HEAD
 		gridConst.gridx=0;
 		gridConst.gridy=2;
 		gridConst.gridheight = 1 ;
@@ -161,16 +158,8 @@ public class CrearLibro extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		
 		JLabel relevancia = new JLabel("Relevancia:");
-=======
-<<<<<<< HEAD
-		JLabel relevancia = new JLabel("Relevancia:");
-=======
 		
 		btnAgregar = new JButton("Agregar");
->>>>>>> 4a4a416762e2ca5d6bb6ee551059fee37b6eddf9
-		gridConst.gridx=0;
-		gridConst.gridy=5;
->>>>>>> e085bbc5f1093b620ad3fcbbe4f53a7e5d9de277
 		panel.add(relevancia,gridConst);
 		
 		gridConst.gridx=1;
@@ -181,7 +170,8 @@ public class CrearLibro extends JFrame {
 		gridConst.weighty = 1.0;
 		gridConst.fill = GridBagConstraints.BOTH;
 		
-		JTextField relevancia2 = new JTextField();
+		Object[] obj = {"ALTA","MEDIA","BAJA"};
+		JComboBox relevancia2 = new JComboBox(obj);
 		panel.add(relevancia2,gridConst);
 
 		gridConst.gridx=2;
@@ -206,7 +196,7 @@ public class CrearLibro extends JFrame {
 		JTextField ID2 = new JTextField();
 		panel.add(ID2,gridConst);
 		
-		String[] columnas = {"Titulo","Costo","Precio Compra","Paginas","Relevancia","ID"};
+		String[] columnas = {"Titulo","Costo","Precio Compra","Paginas","Calificacion","Relevancia","ID"};
 		
 		DefaultTableModel modeloTabla = new DefaultTableModel(null,columnas);
 		
@@ -243,7 +233,8 @@ public class CrearLibro extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		btnAgregar = new JButton("Agregar");
 		panel.add(btnAgregar,gridConst);
-	
+		
+		agregarLibrosATabla(modeloTabla,materialDao);	
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				Menu v1 = new Menu();
@@ -251,7 +242,51 @@ public class CrearLibro extends JFrame {
 			}
 		});
 		
+		btnAgregar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				if(!txtTitulo.getText().isEmpty() && !txtCosto.getText().isEmpty() && !txtPrecioCompra.getText().isEmpty() &&
+					!txtPaginas.getText().isEmpty()  && !ID2.getText().isEmpty())
+				{Integer id = new Integer(ID2.getText());
+				Double costo = new Double(txtCosto.getText());
+				Double precioCompra = new Double(txtPrecioCompra.getText());
+				Integer paginas = new Integer(txtPaginas.getText());
+				Relevancia aux;
+				if(relevancia2.getSelectedIndex()==0){
+					aux=Relevancia.ALTA;
+				}else {
+					if(relevancia2.getSelectedIndex()==1){
+						aux=Relevancia.MEDIA;
+					}else {
+						 aux=Relevancia.BAJA;
+					}
+				}
+				Libro libro=new Libro(id,(String) txtTitulo.getText(), costo,precioCompra,paginas,aux);
+				JOptionPane nuevoLibro = new JOptionPane();
+				agregarATabla(modeloTabla,libro);
+				nuevoLibro.showConfirmDialog(crearL, "El libro se creo exitosamente.", "Agregar Libro", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+				materialDao.agregarLibro(libro);			
+				}
+			}
+		});
 		
+				
+	}
+	
+	public void agregarATabla(DefaultTableModel modelo, Libro libro) {
+		Object[] obj = {libro.getTitulo(),libro.getCosto(),libro.getPrecioCompra(),libro.getPaginas(),libro.getCalificacion(),libro.getRelevancia(),libro.getId()};
+		modelo.addRow(obj);
+	}
+	
+	public void agregarLibrosATabla(DefaultTableModel modelo, MaterialCapacitacionDaoDefault materiales) {
+		CsvDatasource archivo = new CsvDatasource();
+		
+		for(int i = 0; i<archivo.readFile("libros.csv").size();i++) {
+			Libro l = new Libro();
+			l.loadFromStringRow(archivo.readFile("libros.csv").get(i));
+			agregarATabla(modelo, l);
+	
+		}
 		
 	}
+	
 }

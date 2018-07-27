@@ -1,11 +1,14 @@
 /*
+
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package frsf.isi.died.tp.modelo.productos;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -42,13 +45,22 @@ public class Libro extends MaterialCapacitacion {
 	 * @param id es el identificador del libro
 	 * @param titulo es el titulo del libro
 	 * @param costo es el costo de ofrecerlo online
-	 * @param precioCompra es el precio al que se adquirió el libro a la editorial
-	 * @param paginas cantidad de paginas del libro
+	 * @param duracion es el precio al que se adquirió el libro a la editorial
+	 * @param aux cantidad de paginas del libro
 	 */
 	public Libro(Integer id, String titulo, Double costo, Double precioCompra, Integer paginas) {
 		super(id, titulo, costo);
 		this.precioCompra = precioCompra;
 		this.paginas = paginas;
+	}
+	
+	public Libro(Integer id, String titulo, Double costo, Double precioCompra, Integer paginas,Relevancia r) {
+		super(id, titulo, costo);
+		this.precioCompra = precioCompra;
+		this.paginas = paginas;
+		this.setRelevancia(r);
+		this.calificacion = 0.0;
+		this.votantes = 0;
 	}
 
 	/**
@@ -58,6 +70,9 @@ public class Libro extends MaterialCapacitacion {
 	public Double getPrecioCompra() {
 		return precioCompra;
 	}
+	
+	
+
 
 	/**
 	 * asigna el precio de compra del libro
@@ -116,6 +131,33 @@ public class Libro extends MaterialCapacitacion {
 		Object L2=new Object();
 		System.out.println("L1: "+L1.esLibro());
 	}
+
+		@Override
+	public List<String> asCsvRow() {
+		List<String> lista = new ArrayList<String>();
+		lista.add(this.id+"");
+		lista.add("\""+this.titulo.toString()+"\"");
+		lista.add(this.costo.toString());
+		lista.add(this.paginas.toString());
+		lista.add(this.precioCompra.toString());
+		lista.add(this.calificacion.toString());
+		lista.add(this.relevancia.toString());
+		return lista;
+	}
+
+	
+		@Override
+		public void loadFromStringRow(List<String> datos) {
+			this.id =Integer.valueOf(datos.get(0));
+			this.titulo = datos.get(1);
+			this.costo =Double.valueOf(datos.get(2));
+			this.paginas =Integer.valueOf(datos.get(3));
+			this.precioCompra =Double.valueOf(datos.get(4));
+			this.calificacion = Double.valueOf(datos.get(5));
+			this.relevancia = Relevancia.valueOf(datos.get(6));
+			
+		}
+	
 
 	
 }

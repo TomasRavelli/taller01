@@ -7,6 +7,7 @@ package frsf.isi.died.tp.modelo.productos;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import frsf.isi.died.tp.modelo.Biblioteca;
 import frsf.isi.died.tp.util.Ordenable;
@@ -30,6 +31,8 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 	 * Costo básico que debe sumarse al precio por el mero hecho de publicarlo en el
 	 * portal
 	 */
+	protected Integer votantes;
+	
 	protected Double costo;
 	
 	protected Double calificacion;
@@ -95,7 +98,23 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 		this.costo = costo;
 	}
 	
+	public void setRelevancia (Relevancia r) {
+		this.relevancia = r;
+	}
 	
+
+	public Relevancia getRelevancia () {
+		return relevancia;
+	}
+	
+	public void setCalificacion (Double c) {
+		this.calificacion = c;
+	}
+	
+
+	public	Double getCalificacion () {
+		return calificacion;
+	}
 	/**
 	 * El precio de un material se define según el tipo del material y toma como
 	 * base el costo del mismo
@@ -116,6 +135,10 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 	 */
 	public abstract Boolean esVideo();
 
+	//public abstract void setRelevancia(Relevancia r);
+	
+	//public abstract Relevancia getRelevancia();
+
 	
 	//TODO 02: sobrescribir el metodo toString de la clase "Object"
 	//	el método toString retorna un string que representa el material actual
@@ -123,7 +146,7 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 	// [Titulo: <titulo> ; Precio: <precio> ]
 	public String toString() {
 		String s=new String();
-		s="Titulo: "+this.getTitulo()+"; Precio: "+this.precio();
+		s="[Titulo: "+this.getTitulo()+"; Precio: "+this.precio()+"]";
 		return s;
 	}
 	
@@ -133,6 +156,8 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 		//funciona porque el metodo es abstracto en esta clase, la cual es abstracta,
 		//pero esta implementado en las clases hijas
 	}
+	
+	
 
 	/*@Override
 	public boolean equals(Object obj) {
@@ -183,5 +208,8 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 			return false;
 		return true;
 	}
+	
+	public abstract List<String> asCsvRow();
+	public abstract void loadFromStringRow(List<String> datos);
 	
 }
