@@ -189,7 +189,7 @@ public class CrearVideo extends JFrame {
 		panel.add(txtID, gridConst);
 		
 
-String[] columnas = {"Titulo","Duracion","Costo por Seg","Costo","Relevancia","ID"};
+		String[] columnas = {"Titulo","Duracion","Costo por Seg","Costo","Relevancia","ID"};
 
 		
 		DefaultTableModel modeloTabla = new DefaultTableModel(null,columnas);

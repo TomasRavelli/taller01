@@ -135,6 +135,7 @@ public class Libro extends MaterialCapacitacion {
 		@Override
 	public List<String> asCsvRow() {
 		List<String> lista = new ArrayList<String>();
+		lista.add("1");
 		lista.add(this.id+"");
 		lista.add("\""+this.titulo.toString()+"\"");
 		lista.add(this.costo.toString());
@@ -148,13 +149,13 @@ public class Libro extends MaterialCapacitacion {
 	
 		@Override
 		public void loadFromStringRow(List<String> datos) {
-			this.id =Integer.valueOf(datos.get(0));
-			this.titulo = datos.get(1);
-			this.costo =Double.valueOf(datos.get(2));
-			this.paginas =Integer.valueOf(datos.get(3));
-			this.precioCompra =Double.valueOf(datos.get(4));
-			this.calificacion = Double.valueOf(datos.get(5));
-			this.relevancia = Relevancia.valueOf(datos.get(6));
+			this.id =Integer.valueOf(datos.get(1));
+			this.titulo = datos.get(2);
+			this.costo =Double.valueOf(datos.get(3));
+			this.paginas =Integer.valueOf(datos.get(4));
+			this.precioCompra =Double.valueOf(datos.get(5));
+			this.calificacion = Double.valueOf(datos.get(6));
+			this.relevancia = Relevancia.valueOf(datos.get(7));
 			
 		}
 	

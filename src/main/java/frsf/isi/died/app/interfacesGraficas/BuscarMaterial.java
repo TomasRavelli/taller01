@@ -230,7 +230,7 @@ public class BuscarMaterial extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				switch(validacionBoton) {
 				case 0:{
-					buscarPorTitulo(eTit.getText());
+					buscarPorTitulo(eTit.getText(),buscarM);
 					ordenarPorTitulo();
 					break;
 				}
@@ -298,7 +298,7 @@ public class BuscarMaterial extends JFrame{
 		fD2.setVisible(true);
 	}
 	
-	public void buscarPorTitulo(String titulo) {
+	public void buscarPorTitulo(String titulo, JFrame buscarM) {
 		CsvDatasource archivo1 = new CsvDatasource();
 		CsvDatasource archivo2 = new CsvDatasource();
 		List<List<String>> materiales = new ArrayList<>();
@@ -307,13 +307,19 @@ public class BuscarMaterial extends JFrame{
 		materiales.addAll(archivo1.readFile("libros.csv"));
 		materiales.addAll(archivo2.readFile("videos.csv"));
 		for(int i = 0 ; i<materiales.size();i++ ) {
-			if(materiales.get(i).get(1).contains(titulo)){
+			if(materiales.get(i).get(2).contains(titulo)){
 				encontrados.add(materiales.get(i));
 			}
 		}
 		}
-		
-		System.out.println(encontrados.isEmpty());
+		if(encontrados.isEmpty()) {
+			JOptionPane noEncontrado = new JOptionPane();
+			noEncontrado.showConfirmDialog(this, "Material no encontrado", "Aviso", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+		}
+		else {
+			MuestraResultados muestra = new MuestraResultados(encontrados);
+			buscarM.dispose();
+		}
 		}
 	public void ordenarPorTitulo() {
 	

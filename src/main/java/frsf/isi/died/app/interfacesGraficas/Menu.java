@@ -38,24 +38,24 @@ public class Menu extends JFrame{
 		inicio.add(borrarLibro);
 		JButton borrarVideo = new JButton ("Borrar Video");
 		inicio.add(borrarVideo);
-		JButton buscarLibro = new JButton ("Buscar Libro");
-		inicio.add(buscarLibro);
-		JButton buscarVideo = new JButton ("Buscar Video");
-		inicio.add(buscarVideo);
+		JButton buscarMaterial = new JButton ("Buscar Material Capacitacion");
+		inicio.add(buscarMaterial);
+		JButton salir = new JButton ("Salir");
+		salir.setForeground(Color.RED);
+		inicio.add(salir);
 		MaterialCapacitacionDao materialDAOlibro = new MaterialCapacitacionDaoDefault();
 		MaterialCapacitacionDao materialDAOvideo = new MaterialCapacitacionDaoDefault();
 	
-		buscarLibro.addActionListener(new ActionListener() {
+		buscarMaterial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				BuscarMaterial b1 = new BuscarMaterial();
 				principal.dispose();
 			}
 		});
 		
-		buscarVideo.addActionListener(new ActionListener() {
+		salir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				BuscarMaterial b1 = new BuscarMaterial();
-				principal.dispose();
+			System.exit(0);
 			}
 		});
 		

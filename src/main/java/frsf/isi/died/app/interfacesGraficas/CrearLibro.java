@@ -235,6 +235,7 @@ public class CrearLibro extends JFrame {
 		panel.add(btnAgregar,gridConst);
 		
 		agregarLibrosATabla(modeloTabla,materialDao);	
+		
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				Menu v1 = new Menu();
