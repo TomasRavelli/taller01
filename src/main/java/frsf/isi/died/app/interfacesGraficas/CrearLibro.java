@@ -1,5 +1,6 @@
 package frsf.isi.died.app.interfacesGraficas;
 
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 
 import java.awt.GridBagLayout;
@@ -7,7 +8,10 @@ import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -149,6 +153,28 @@ public class CrearLibro extends JFrame {
 		txtPaginas = new JTextField();
 		panel.add(txtPaginas, gridConst);
 		
+		gridConst.gridx=4;
+		gridConst.gridy=2;
+		gridConst.gridheight = 1 ;
+		gridConst.gridwidth = 1;
+		gridConst.weightx = 1.0;
+		gridConst.weighty = 1.0;
+		gridConst.fill = GridBagConstraints.BOTH;
+		
+		JLabel lblFechaPublicacion = new JLabel("Fecha publicacion: ");		
+		panel.add(lblFechaPublicacion, gridConst);
+		
+		gridConst.gridx=5;
+		gridConst.gridy=2;
+		gridConst.gridheight = 1 ;
+		gridConst.gridwidth = 1;
+		gridConst.weightx = 1.0;
+		gridConst.weighty = 1.0;
+		gridConst.fill = GridBagConstraints.BOTH;
+		
+		JTextField txtFechaPublicacion = new JTextField();
+		panel.add(txtFechaPublicacion, gridConst);
+		
 		gridConst.gridx=0;
 		gridConst.gridy=2;
 		gridConst.gridheight = 1 ;
@@ -196,7 +222,7 @@ public class CrearLibro extends JFrame {
 		JTextField ID2 = new JTextField();
 		panel.add(ID2,gridConst);
 		
-		String[] columnas = {"Titulo","Costo","Precio Compra","Paginas","Calificacion","Relevancia","ID"};
+		String[] columnas = {"Titulo","Costo","Precio","Paginas","Calificacion","Relevancia","ID","Fecha Publicacion"};
 		
 		DefaultTableModel modeloTabla = new DefaultTableModel(null,columnas);
 		
@@ -246,11 +272,23 @@ public class CrearLibro extends JFrame {
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				if(!txtTitulo.getText().isEmpty() && !txtCosto.getText().isEmpty() && !txtPrecioCompra.getText().isEmpty() &&
-					!txtPaginas.getText().isEmpty()  && !ID2.getText().isEmpty())
+					!txtPaginas.getText().isEmpty()  && !ID2.getText().isEmpty() && !txtFechaPublicacion.getText().isEmpty())
 				{Integer id = new Integer(ID2.getText());
 				Double costo = new Double(txtCosto.getText());
 				Double precioCompra = new Double(txtPrecioCompra.getText());
 				Integer paginas = new Integer(txtPaginas.getText());
+				
+				
+				//Formato fecha de publicacion
+				Date fecha_publicacion = new Date();
+				SimpleDateFormat d = new SimpleDateFormat("dd/MM/yyyy");
+				try {
+					fecha_publicacion = d.parse(txtFechaPublicacion.getText());
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
+				
+				
 				Relevancia aux;
 				if(relevancia2.getSelectedIndex()==0){
 					aux=Relevancia.ALTA;
@@ -261,7 +299,7 @@ public class CrearLibro extends JFrame {
 						 aux=Relevancia.BAJA;
 					}
 				}
-				Libro libro=new Libro(id,(String) txtTitulo.getText(), costo,precioCompra,paginas,aux);
+				Libro libro=new Libro(id,(String) txtTitulo.getText(), costo,precioCompra,paginas,aux,fecha_publicacion);
 				JOptionPane nuevoLibro = new JOptionPane();
 				agregarATabla(modeloTabla,libro);
 				nuevoLibro.showConfirmDialog(crearL, "El libro se creo exitosamente.", "Agregar Libro", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -274,7 +312,7 @@ public class CrearLibro extends JFrame {
 	}
 	
 	public void agregarATabla(DefaultTableModel modelo, Libro libro) {
-		Object[] obj = {libro.getTitulo(),libro.getCosto(),libro.getPrecioCompra(),libro.getPaginas(),libro.getCalificacion(),libro.getRelevancia(),libro.getId()};
+		Object[] obj = {libro.getTitulo(),libro.getCosto(),libro.precio(),libro.getPaginas(),libro.getCalificacion(),libro.getRelevancia(),libro.getId(),libro.getFechaPublicacion()};
 		modelo.addRow(obj);
 	}
 	

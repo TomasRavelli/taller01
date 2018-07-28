@@ -115,6 +115,16 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 	public	Double getCalificacion () {
 		return calificacion;
 	}
+	
+	
+	public void setFechaPublicacion (Date date) {
+		this.fecha_publicacion = date;
+	}
+	
+	
+	public Date getFechaPublicacion () {
+		return fecha_publicacion;
+	}
 	/**
 	 * El precio de un material se define según el tipo del material y toma como
 	 * base el costo del mismo

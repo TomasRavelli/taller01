@@ -17,6 +17,7 @@ import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 import frsf.isi.died.tp.modelo.productos.Libro;
+import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 import frsf.isi.died.tp.modelo.productos.Video;
 
 public class MuestraResultados extends JFrame{
@@ -35,11 +36,8 @@ public class MuestraResultados extends JFrame{
 	public MuestraResultados() {
 		
 	}
-	public MuestraResultados(List<List<String>> materiales){
+	public MuestraResultados(List<MaterialCapacitacion> materiales){
 		
-		libros = new ArrayList<>();
-		videos = new ArrayList<>();
-		clasificarMateriales(libros,videos,materiales);
 		this.setTitle("Resultados de busqueda");
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.pack();
@@ -51,7 +49,7 @@ public class MuestraResultados extends JFrame{
 		
 
 	
-		String[] columnasLibro = {"Titulo","Costo","Precio Compra","Paginas","Calificacion","Relevancia","ID"};
+		String[] columnasLibro = {"Titulo","Costo","Precio","Paginas","Calificacion","Relevancia","ID","Fecha Publicacion"};
 		DefaultTableModel modeloTablaLibro = new DefaultTableModel(null,columnasLibro);
 		JTable tablaLibro = new JTable(modeloTablaLibro);
 		JScrollPane scrollTablaLibro = new JScrollPane(tablaLibro);	
@@ -59,7 +57,7 @@ public class MuestraResultados extends JFrame{
 		panel.add(scrollTablaLibro);
 				
 
-		String[] columnasVideo = {"Titulo","Duracion","Costo por Seg","Costo","Relevancia","ID"};		
+		String[] columnasVideo = {"Titulo","Duracion","Costo","Calificacion","Relevancia","ID","Fecha Publicacion"};		
 		DefaultTableModel modeloTablaVideo = new DefaultTableModel(null,columnasVideo);
 		JTable tablaVideo = new JTable(modeloTablaVideo);
 		JScrollPane scrollTablaVideo = new JScrollPane(tablaVideo);	
@@ -72,55 +70,27 @@ public class MuestraResultados extends JFrame{
 		
 		atras.addActionListener(e->volverAtras());
 		
-		agregarLibrosATabla(modeloTablaLibro,libros);
-		agregarVideosATabla(modeloTablaVideo, videos);
-
-	}
-	
-	public void clasificarMateriales(List<List<String>> libros,List<List<String>> videos,List<List<String>> materiales){
-		
-		for(int i=0; i < materiales.size();i++) {
-			if(materiales.get(i).get(0).equals("0")) {
-				videos.add(materiales.get(i));
+		for(MaterialCapacitacion m: materiales) {
+			
+			if(m.esLibro()) {
+				agregarLibroATabla(modeloTablaLibro,(Libro) m);				
 			}
-			else{
-				libros.add(materiales.get(i));
+			else {
+				agregarVideoATabla(modeloTablaVideo,(Video) m);	
 			}
 		}
-		
+
 	}
-	
 	
 	public void agregarLibroATabla(DefaultTableModel modelo, Libro libro) {
-		Object[] obj = {libro.getTitulo(),libro.getCosto(),libro.getPrecioCompra(),libro.getPaginas(),libro.getCalificacion(),libro.getRelevancia(),libro.getId()};
+		Object[] obj = {libro.getTitulo(),libro.getCosto(),libro.precio(),libro.getPaginas(),libro.getCalificacion(),libro.getRelevancia(),libro.getId(),libro.getFechaPublicacion()};
 		modelo.addRow(obj);
 	}
 	
-	public void agregarLibrosATabla(DefaultTableModel modelo, List<List<String>> libros) {
-		
-		for(int i = 0; i<libros.size();i++) {
-			Libro l = new Libro();
-			l.loadFromStringRow(libros.get(i));
-			agregarLibroATabla(modelo, l);
-	
-		}
-		
-	}
 	
 	public void agregarVideoATabla(DefaultTableModel modelo, Video video) {
-		Object[] obj = {video.getTitulo(),video.getDuracion(),video.getCostoxSeg(),video.getCosto(),video.getRelevancia(),video.getId()};
+		Object[] obj = {video.getTitulo(),video.getDuracion(),video.getCosto(),video.getCalificacion(),video.getRelevancia(),video.getId(),video.getFechaPublicacion()};
 		modelo.addRow(obj);
-	}
-
-	public void agregarVideosATabla(DefaultTableModel modelo, List<List<String>> videos) {
-		
-		for(int i = 0; i<videos.size();i++) {
-			Video video = new Video();
-			video.loadFromStringRow(videos.get(i));
-			agregarVideoATabla(modelo, video);
-
-		}
-		
 	}
 	public void volverAtras() {
 		BuscarMaterial m = new BuscarMaterial();

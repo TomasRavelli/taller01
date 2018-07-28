@@ -4,6 +4,10 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import  javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -104,8 +108,8 @@ public class CrearVideo extends JFrame {
 		gridConst.weighty = 1.0;
 		gridConst.fill = GridBagConstraints.BOTH;
 		
-		lblCostoSeg = new JLabel("Costo por segundo");
-		panel.add(lblCostoSeg,gridConst);
+		lblCosto = new JLabel("Costo");
+		panel.add(lblCosto,gridConst);
 		
 		
 		gridConst.gridx=3;
@@ -116,8 +120,10 @@ public class CrearVideo extends JFrame {
 		gridConst.weighty = 1.0;
 		gridConst.fill = GridBagConstraints.BOTH;
 		
-		txtCostoSeg = new JTextField();
-		panel.add(txtCostoSeg,gridConst);
+		txtCosto = new JTextField();
+		panel.add(txtCosto, gridConst);
+		
+		
 		
 		gridConst.gridx=4;
 		gridConst.gridy=1;
@@ -127,8 +133,10 @@ public class CrearVideo extends JFrame {
 		gridConst.weighty = 1.0;
 		gridConst.fill = GridBagConstraints.BOTH;
 		
-		lblCosto = new JLabel("Costo");
-		panel.add(lblCosto,gridConst);
+		JLabel lblFechaPublicacion = new JLabel("Fecha publicacion: ");		
+		panel.add(lblFechaPublicacion, gridConst);
+		
+		
 		
 		gridConst.gridx=5;
 		gridConst.gridy=1;
@@ -138,8 +146,10 @@ public class CrearVideo extends JFrame {
 		gridConst.weighty = 1.0;
 		gridConst.fill = GridBagConstraints.BOTH;
 		
-		txtCosto = new JTextField();
-		panel.add(txtCosto, gridConst);
+		JTextField txtFechaPublicacion = new JTextField();
+		panel.add(txtFechaPublicacion, gridConst);
+		
+		
 		
 
 		gridConst.gridx=0;
@@ -188,8 +198,9 @@ public class CrearVideo extends JFrame {
 		txtID = new JTextField();
 		panel.add(txtID, gridConst);
 		
+		
 
-		String[] columnas = {"Titulo","Duracion","Costo por Seg","Costo","Relevancia","ID"};
+		String[] columnas = {"Titulo","Duracion","Costo","Calificacion", "Relevancia","ID","Fecha Publicacion"};
 
 		
 		DefaultTableModel modeloTabla = new DefaultTableModel(null,columnas);
@@ -242,12 +253,23 @@ public class CrearVideo extends JFrame {
 
 	btnAgregar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e){
-			if(!txtTitulo.getText().isEmpty() && !txtCosto.getText().isEmpty() && !txtCostoSeg.getText().isEmpty() &&
-				!txtDuracion.getText().isEmpty()  && !txtID.getText().isEmpty())
+			if(!txtTitulo.getText().isEmpty() && !txtCosto.getText().isEmpty() &&
+				!txtDuracion.getText().isEmpty()  && !txtID.getText().isEmpty() && !txtFechaPublicacion.getText().isEmpty())
 			{Integer id = new Integer(txtID.getText());
 			Double costo = new Double(txtCosto.getText());
 			String titulo = new String(txtTitulo.getText());
 			Integer duracion = new Integer(txtDuracion.getText());
+			
+			//Formato fecha de publicacion
+			Date fecha_publicacion = new Date();
+			SimpleDateFormat d = new SimpleDateFormat("dd/MM/yyyy");
+			try {
+				fecha_publicacion = d.parse(txtFechaPublicacion.getText());
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}
+			
+			
 			Relevancia aux;
 			if(relevancia2.getSelectedIndex()==0){
 				aux=Relevancia.ALTA;
@@ -258,7 +280,7 @@ public class CrearVideo extends JFrame {
 					 aux=Relevancia.BAJA;
 				}
 			}
-			Video video = new Video(id,titulo, costo,duracion,aux);
+			Video video = new Video(id,titulo, costo,duracion,aux,fecha_publicacion);
 			JOptionPane nuevoLibro = new JOptionPane();
 			agregarATabla(modeloTabla, video);
 			nuevoLibro.showConfirmDialog(crearV, "El video se creo exitosamente.", "Agregar Video", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -271,7 +293,7 @@ public class CrearVideo extends JFrame {
 }
 
 public void agregarATabla(DefaultTableModel modelo, Video video) {
-	Object[] obj = {video.getTitulo(),video.getDuracion(),video.getCostoxSeg(),video.getCosto(),video.getRelevancia(),video.getId()};
+	Object[] obj = {video.getTitulo(),video.getDuracion(),video.getCosto(),video.getCalificacion(), video.getRelevancia(),video.getId(),video.getFechaPublicacion()};
 	modelo.addRow(obj);
 }
 

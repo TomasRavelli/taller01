@@ -9,7 +9,10 @@ import java.util.List;
 
 import  javax.swing.*;
 
+import frsf.isi.died.tp.modelo.BibliotecaABB;
 import frsf.isi.died.tp.modelo.productos.Libro;
+import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
+import frsf.isi.died.tp.modelo.productos.Video;
 
 public class BuscarMaterial extends JFrame{
 	
@@ -230,9 +233,9 @@ public class BuscarMaterial extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				switch(validacionBoton) {
 				case 0:{
-					buscarPorTitulo(eTit.getText(),buscarM);
-					ordenarPorTitulo();
-					break;
+				
+				ordenarPorTitulo(buscarPorTitulo(eTit.getText()),buscarM);
+				break;
 				}
 				case 1:{
 					//ordenarPorCalificacion();
@@ -298,31 +301,57 @@ public class BuscarMaterial extends JFrame{
 		fD2.setVisible(true);
 	}
 	
-	public void buscarPorTitulo(String titulo, JFrame buscarM) {
+	public List<MaterialCapacitacion> buscarPorTitulo(String titulo) {
 		CsvDatasource archivo1 = new CsvDatasource();
 		CsvDatasource archivo2 = new CsvDatasource();
-		List<List<String>> materiales = new ArrayList<>();
-		List<List<String>> encontrados = new ArrayList<>();
+		BibliotecaABB materiales = new BibliotecaABB();
+		List<MaterialCapacitacion> encontrados = new ArrayList<>();
 		if(!titulo.isEmpty()) {
-		materiales.addAll(archivo1.readFile("libros.csv"));
-		materiales.addAll(archivo2.readFile("videos.csv"));
-		for(int i = 0 ; i<materiales.size();i++ ) {
-			if(materiales.get(i).get(2).contains(titulo)){
-				encontrados.add(materiales.get(i));
+		
+		agregarLibros(materiales,archivo1.readFile("libros.csv"));
+		agregarVideos(materiales,archivo2.readFile("videos.csv"));
+		
+		for(MaterialCapacitacion m: materiales.materiales() ) {
+			if( m.getTitulo().contains(titulo) ){
+				encontrados.add(m);
 			}
 		}
 		}
-		if(encontrados.isEmpty()) {
-			JOptionPane noEncontrado = new JOptionPane();
-			noEncontrado.showConfirmDialog(this, "Material no encontrado", "Aviso", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+		
+		return encontrados;
+		}
+	public void ordenarPorTitulo(List<MaterialCapacitacion> encontrados, JFrame buscarM) {
+		encontrados.sort((e1,e2) -> e1.getTitulo().compareTo(e2.getTitulo()));
+		if(encontrados.isEmpty()){
+		JOptionPane noEncontrado = new JOptionPane();
+		noEncontrado.showConfirmDialog(buscarM, "Material no encontrado", "Aviso", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
 		}
 		else {
 			MuestraResultados muestra = new MuestraResultados(encontrados);
 			buscarM.dispose();
 		}
-		}
-	public void ordenarPorTitulo() {
+
+	}
+	
+	private void agregarLibros(BibliotecaABB materiales, List<List<String>> libros) {
+		
+		for(int i=0; i< libros.size(); i++) {
+			Libro l = new Libro();
+			l.loadFromStringRow(libros.get(i));
+			materiales.agregar(l);
+		}		
 	
 	}
+	
+private void agregarVideos(BibliotecaABB materiales, List<List<String>> videos) {
+		
+		for(int i=0; i< videos.size(); i++) {
+			Video l = new Video();
+			l.loadFromStringRow(videos.get(i));
+			materiales.agregar(l);
+		}		
+	
+	}
+	
 
 }

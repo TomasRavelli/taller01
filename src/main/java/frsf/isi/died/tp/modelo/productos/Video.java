@@ -3,8 +3,12 @@
  */
 package frsf.isi.died.tp.modelo.productos;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @author alumno
@@ -27,7 +31,7 @@ public class Video extends MaterialCapacitacion{
 		this.costo=costo;
 		this.duracion=duracion;
 	}
-	public Video(Integer id,String titulo, Double costo, Integer duracion,Relevancia r) {
+	public Video(Integer id,String titulo, Double costo, Integer duracion,Relevancia r, Date date) {
 		this.id=id;
 		this.titulo=titulo;
 		this.costo=costo;
@@ -35,6 +39,7 @@ public class Video extends MaterialCapacitacion{
 		this.relevancia = r;
 		this.calificacion = 0.0;
 		this.votantes = 0;
+		this.fecha_publicacion = date;
 	}
 	
 	
@@ -64,7 +69,9 @@ public class Video extends MaterialCapacitacion{
 		lista.add(this.costo.toString());
 		lista.add(this.duracion.toString());
 		lista.add(this.COSTOSEG.toString());
+		lista.add(this.calificacion.toString());
 		lista.add(this.relevancia.toString());
+		lista.add(this.fecha_publicacion.toString());
 		return lista;
 	}
 	
@@ -76,7 +83,23 @@ public class Video extends MaterialCapacitacion{
 		this.costo =Double.valueOf(datos.get(3));
 		this.duracion =Integer.valueOf(datos.get(4));
 		this.COSTOSEG =Double.valueOf(datos.get(5));
-		this.relevancia =Relevancia.valueOf(datos.get(6));
+		this.calificacion =Double.valueOf(datos.get(6));
+		this.relevancia =Relevancia.valueOf(datos.get(7));
+		
+		
+		//SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat formato = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+        Date fechaDate = new Date();
+        try {
+            fechaDate = formato.parse(datos.get(8));
+        } 
+        catch (ParseException ex) 
+        {
+            System.out.println(ex);
+        }
+		this.fecha_publicacion = fechaDate;
+		System.out.println(fecha_publicacion);
+		
 	}
 	
 }

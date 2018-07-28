@@ -6,9 +6,12 @@
  */
 package frsf.isi.died.tp.modelo.productos;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -54,13 +57,14 @@ public class Libro extends MaterialCapacitacion {
 		this.paginas = paginas;
 	}
 	
-	public Libro(Integer id, String titulo, Double costo, Double precioCompra, Integer paginas,Relevancia r) {
+	public Libro(Integer id, String titulo, Double costo, Double precioCompra, Integer paginas,Relevancia r, Date date) {
 		super(id, titulo, costo);
 		this.precioCompra = precioCompra;
 		this.paginas = paginas;
 		this.setRelevancia(r);
 		this.calificacion = 0.0;
 		this.votantes = 0;
+		this.fecha_publicacion = date;
 	}
 
 	/**
@@ -143,6 +147,7 @@ public class Libro extends MaterialCapacitacion {
 		lista.add(this.precioCompra.toString());
 		lista.add(this.calificacion.toString());
 		lista.add(this.relevancia.toString());
+		lista.add(this.fecha_publicacion.toString());
 		return lista;
 	}
 
@@ -157,8 +162,18 @@ public class Libro extends MaterialCapacitacion {
 			this.calificacion = Double.valueOf(datos.get(6));
 			this.relevancia = Relevancia.valueOf(datos.get(7));
 			
+			
+			//SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat formato = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+	        Date fechaDate = new Date();
+	        try {
+	            fechaDate = formato.parse(datos.get(7).toString());
+	        } 
+	        catch (ParseException ex) 
+	        {
+	            System.out.println(ex);
+	        }
+			this.fecha_publicacion = fechaDate;
+			
 		}
-	
-
-	
 }
