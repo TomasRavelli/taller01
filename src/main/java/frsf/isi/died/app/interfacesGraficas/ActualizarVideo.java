@@ -6,19 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import  javax.swing.*;
 
+import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
+
 public class ActualizarVideo extends JFrame {
 
-	public static void main(String[] args) {
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				ActualizarVideo v1 = new ActualizarVideo();
-				}
-			});
 
-	}
-	
-	
-	public ActualizarVideo() {
+	public ActualizarVideo(MaterialCapacitacionDaoDefault materiales) {
 		JFrame actualizarV = new JFrame("Actualizar Video");
 		actualizarV.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		actualizarV.pack();
@@ -60,13 +53,23 @@ public class ActualizarVideo extends JFrame {
 		
 		btnIr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				ActualizarVideo2 v1 = new ActualizarVideo2();
+				if(txtID.getText().isEmpty()) {
+					//TODO Poner esto para que salga en una ventanita,ver que vengan solo enteros y que coincida con algun ID existente
+					System.out.println("Campo ID vacio");
+				}
+			}
+		});
+		btnIr.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				if(!txtID.getText().isEmpty()) {
+				new ActualizarVideo2(Integer.valueOf(txtID.getText()),materiales);
 				actualizarV.dispose();
+				}
 			}
 		});
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				Menu v1 = new Menu();
+				new Menu();
 				actualizarV.dispose();
 			}
 		});

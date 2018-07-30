@@ -11,6 +11,7 @@ import java.util.Date;
 import  javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
 import frsf.isi.died.tp.modelo.productos.Libro;
 import frsf.isi.died.tp.modelo.productos.Relevancia;
 import frsf.isi.died.tp.modelo.productos.Video;

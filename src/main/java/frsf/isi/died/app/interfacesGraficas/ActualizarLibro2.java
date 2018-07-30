@@ -6,15 +6,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
+import frsf.isi.died.tp.modelo.productos.Libro;
+import frsf.isi.died.tp.modelo.productos.Relevancia;
+
 public class ActualizarLibro2 {
 
-	public ActualizarLibro2(){
+	public ActualizarLibro2(Integer IDParaEliminar,MaterialCapacitacionDaoDefault materiales){
 		JFrame crearL = new JFrame("Actualizar Libro");
 		crearL.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		crearL.pack();
@@ -84,9 +90,9 @@ public class ActualizarLibro2 {
 		gridConst.gridy=5;
 		panel.add(relevancia,gridConst);
 		
-		JTextField relevancia2 = new JTextField();
+		Object[] obj = {"ALTA","MEDIA","BAJA"};
+		JComboBox relevancia2 = new JComboBox(obj);
 		gridConst.gridx=1;
-		relevancia2.setColumns(5);
 		gridConst.gridy=5;
 		panel.add(relevancia2,gridConst);
 		
@@ -101,7 +107,7 @@ public class ActualizarLibro2 {
 		gridConst.gridy=6;
 		panel.add(ID2,gridConst);
 		
-		
+		//TODO Agregar lo de la fecha
 		
 		
 		btnGuardar = new JButton("Guardar Cambios");
@@ -116,8 +122,20 @@ public class ActualizarLibro2 {
 		
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				ActualizarLibro v1 = new ActualizarLibro();
+				new ActualizarLibro(materiales);
 				crearL.dispose();
+			}
+		});
+		btnGuardar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//if() 
+				{
+					Libro nuevoLibro = new Libro();
+					materiales.agregarLibro(nuevoLibro);
+					//TODO cuando tengamos lo de la fecha, hay que crear el libro con sus atrubitos
+					//y eliminar el del ID que sacamos en la ventana anterior (IDParaEliminar)
+				}
 			}
 		});
 	}

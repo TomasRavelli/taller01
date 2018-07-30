@@ -31,7 +31,7 @@ public class MuestraResultados extends JFrame{
 			}
 		});
 
-}
+	}
 	
 	public MuestraResultados() {
 		

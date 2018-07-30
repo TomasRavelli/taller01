@@ -5,12 +5,16 @@ import java.awt.event.ActionListener;
 
 import  javax.swing.*;
 
+import frsf.isi.died.app.dao.MaterialCapacitacionDao;
+import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
+import frsf.isi.died.tp.modelo.BibliotecaABB;
+
 public class Menu extends JFrame{
 	
 	public static void main(String[] args) {
 	javax.swing.SwingUtilities.invokeLater(new Runnable() {
 	public void run() {
-		Menu m = new Menu();
+		new Menu();
 	}
 	}); 
 	
@@ -43,12 +47,12 @@ public class Menu extends JFrame{
 		JButton salir = new JButton ("Salir");
 		salir.setForeground(Color.RED);
 		inicio.add(salir);
-		MaterialCapacitacionDao materialDAOlibro = new MaterialCapacitacionDaoDefault();
-		MaterialCapacitacionDao materialDAOvideo = new MaterialCapacitacionDaoDefault();
-	
+		
+		MaterialCapacitacionDaoDefault materiales = new MaterialCapacitacionDaoDefault();
+		
 		buscarMaterial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				BuscarMaterial b1 = new BuscarMaterial();
+				new BuscarMaterial(materiales);
 				principal.dispose();
 			}
 		});
@@ -61,42 +65,42 @@ public class Menu extends JFrame{
 		
 		crearLibro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				CrearLibro l1 = new CrearLibro((MaterialCapacitacionDaoDefault) materialDAOlibro);
+				new CrearLibro(materiales);
 				principal.dispose();
 			}
 		});
 		
 		crearVideo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				CrearVideo v1 = new CrearVideo((MaterialCapacitacionDaoDefault) materialDAOvideo);
+				new CrearVideo(materiales);
 				principal.dispose();
 			}
 		});
 		
 		actualizarLibro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				ActualizarLibro l1 = new ActualizarLibro();
+				new ActualizarLibro(materiales);
 				principal.dispose();
 			}
 		});
 		
 		actualizarVideo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				ActualizarVideo v1 = new ActualizarVideo();
+				new ActualizarVideo(materiales);
 				principal.dispose();
 			}
 		});
 		
 		borrarLibro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				BorrarLibro l1 = new BorrarLibro();
+				new BorrarLibro(materiales);
 				principal.dispose();
 			}
 		});
 		
 		borrarVideo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				BorrarVideo v1 = new BorrarVideo();
+				new BorrarVideo(materiales);
 				principal.dispose();
 			}
 		});

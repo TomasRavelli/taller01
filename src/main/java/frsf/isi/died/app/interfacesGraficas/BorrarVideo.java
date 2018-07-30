@@ -6,19 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import  javax.swing.*;
 
+import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
+
 public class BorrarVideo extends JFrame {
 
-	public static void main(String[] args) {
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				BorrarVideo v1 = new BorrarVideo();
-				}
-			});
 
-	}
 	
-	
-	public BorrarVideo() {
+	public BorrarVideo(MaterialCapacitacionDaoDefault materiales) {
 		JFrame borrarV = new JFrame("Borrar Video");
 		borrarV.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		borrarV.pack();
@@ -61,7 +55,7 @@ public class BorrarVideo extends JFrame {
 
 		btnIr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				BorrarVideo2 v1 = new BorrarVideo2();
+				BorrarVideo2 v1 = new BorrarVideo2(materiales);
 				borrarV.dispose();
 			}
 		});

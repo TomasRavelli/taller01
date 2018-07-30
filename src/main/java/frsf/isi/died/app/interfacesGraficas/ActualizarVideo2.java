@@ -14,18 +14,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
+import frsf.isi.died.tp.modelo.productos.Libro;
+import frsf.isi.died.tp.modelo.productos.Video;
+
 public class ActualizarVideo2 {
 	
-	public static void main(String[] args) {
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				ActualizarVideo2 a = new ActualizarVideo2();
-				}
-			});
-	}
 	
-	
-	public ActualizarVideo2(){
+	public ActualizarVideo2(Integer IDParaEliminar,MaterialCapacitacionDaoDefault materiales){
 		JFrame crearV = new JFrame("Actualizar Video");
 		crearV.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		crearV.pack();
@@ -104,6 +100,8 @@ public class ActualizarVideo2 {
 		gridConst.gridx=3;
 		panel.add(txtID, gridConst);
 		
+		//TODO Agregar lo de la fecha
+		
 		btnGuardarCambios = new JButton("Guardar Cambios");
 		gridConst.gridx=0;
 		gridConst.gridy=6;
@@ -116,8 +114,21 @@ public class ActualizarVideo2 {
 		
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				ActualizarVideo v1 = new ActualizarVideo();
+				ActualizarVideo v1 = new ActualizarVideo(materiales);
 				crearV.dispose();
+			}
+		});
+		
+		btnGuardarCambios.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//if() 
+				{
+					Video nuevoVideo = new Video();
+					//TODO cuando tengamos lo de la fecha, hay que crear el video con sus atrubitos
+					//tambien hay que agregarlo a la lista de materialesCapacitacion
+					//y eliminar el del ID que sacamos en la ventana anterior (IDParaEliminar)
+				}
 			}
 		});
 	}

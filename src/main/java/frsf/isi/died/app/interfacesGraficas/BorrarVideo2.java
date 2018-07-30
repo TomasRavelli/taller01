@@ -15,18 +15,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-public class BorrarVideo2 {
+import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
 
-	public static void main(String[] args) {
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				BorrarVideo2 a = new BorrarVideo2();
-				}
-			});
-	}
+public class BorrarVideo2 {
 	
-	
-	public BorrarVideo2(){
+	public BorrarVideo2(MaterialCapacitacionDaoDefault materiales){
 		JFrame crearV = new JFrame("Borrar Video");
 		crearV.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		crearV.pack();
@@ -124,7 +117,7 @@ public class BorrarVideo2 {
 		
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				  BorrarVideo v1 = new BorrarVideo();
+				  BorrarVideo v1 = new BorrarVideo(materiales);
 				crearV.dispose();
 			}
 		});

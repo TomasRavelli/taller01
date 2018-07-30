@@ -6,19 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import  javax.swing.*;
 
+import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
+
 public class BorrarLibro extends JFrame {
 
-	public static void main(String[] args) {
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				BorrarLibro l1 = new BorrarLibro();
-				}
-			});
 
-	}
 	
-	
-	public BorrarLibro() {
+	public BorrarLibro(MaterialCapacitacionDaoDefault materiales) {
 		JFrame borrarL = new JFrame("Borrar Libro");
 		borrarL.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		borrarL.pack();
@@ -27,11 +21,11 @@ public class BorrarLibro extends JFrame {
 		JPanel panel = new JPanel();
 		borrarL.setContentPane(panel);
 		panel.setLayout(new GridBagLayout());
-		ventanaBorrar(borrarL, panel);
+		ventanaBorrar(borrarL, panel,materiales);
 		
 	}
 	
-	private void ventanaBorrar(JFrame borrarL, JPanel panel) {
+	private void ventanaBorrar(JFrame borrarL, JPanel panel,MaterialCapacitacionDaoDefault materiales) {
 		GridBagConstraints gridConst = new GridBagConstraints();
 		JLabel ID = new JLabel("Ingrese ID libro: ");
 		gridConst.gridx=0;
@@ -56,14 +50,14 @@ public class BorrarLibro extends JFrame {
 				
 		btnIr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				BorrarLibro2 b1 = new BorrarLibro2();
+				BorrarLibro2 b1 = new BorrarLibro2(materiales);
 				borrarL.dispose();
 			}
 		});
 		
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				Menu v1 = new Menu();
+				new Menu();
 				borrarL.dispose();
 			}
 		});

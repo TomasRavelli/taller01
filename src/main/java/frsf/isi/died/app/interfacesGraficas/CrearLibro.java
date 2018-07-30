@@ -18,6 +18,7 @@ import java.util.Vector;
 import  javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
 import frsf.isi.died.tp.modelo.productos.Libro;
 import frsf.isi.died.tp.modelo.productos.Relevancia;
 
@@ -310,7 +311,7 @@ public class CrearLibro extends JFrame {
 		
 				
 	}
-	
+	//TODO cambiar estas 2 operaciones para trabajar directamente con el MaterialDao
 	public void agregarATabla(DefaultTableModel modelo, Libro libro) {
 		Object[] obj = {libro.getTitulo(),libro.getCosto(),libro.precio(),libro.getPaginas(),libro.getCalificacion(),libro.getRelevancia(),libro.getId(),libro.getFechaPublicacion()};
 		modelo.addRow(obj);

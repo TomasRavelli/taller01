@@ -12,9 +12,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
+
 public class BorrarLibro2 {
 	
-	public BorrarLibro2(){
+	public BorrarLibro2(MaterialCapacitacionDaoDefault materiales){
 		JFrame crearL = new JFrame("Actualizar Libro");
 		crearL.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		crearL.pack();
@@ -120,7 +122,7 @@ public class BorrarLibro2 {
 		
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				BorrarLibro v1 = new BorrarLibro();
+				BorrarLibro v1 = new BorrarLibro(materiales);
 				crearL.dispose();
 			}
 		});

@@ -1,4 +1,4 @@
-package frsf.isi.died.app.interfacesGraficas;
+package frsf.isi.died.app.dao;
 
 import java.util.List;
 

@@ -9,6 +9,7 @@ import java.util.List;
 
 import  javax.swing.*;
 
+import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
 import frsf.isi.died.tp.modelo.BibliotecaABB;
 import frsf.isi.died.tp.modelo.productos.Libro;
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
@@ -18,15 +19,8 @@ public class BuscarMaterial extends JFrame{
 	
 	Integer validacionBoton = -1;
 	
-	public static void main(String[] args) {
-	javax.swing.SwingUtilities.invokeLater(new Runnable() {
-	public void run() {
-		BuscarMaterial b1 = new BuscarMaterial();
-		}
-	}); 
-	}
 	
-	public BuscarMaterial() {
+	public BuscarMaterial(MaterialCapacitacionDaoDefault materiales) {
 	JFrame buscarM = new JFrame("Buscar Material de Capacitacion");
 	buscarM.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	buscarM.pack();
@@ -207,7 +201,7 @@ public class BuscarMaterial extends JFrame{
 	
 	cancelar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e){
-			Menu v1 = new Menu();
+			new Menu();
 			buscarM.dispose();
 		}
 	});

@@ -6,19 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import  javax.swing.*;
 
+import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
+
 public class ActualizarLibro extends JFrame {
-
-	public static void main(String[] args) {
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				ActualizarLibro l1 = new ActualizarLibro();
-				}
-			});
-
-	}
 	
 	
-	public ActualizarLibro() {
+	public ActualizarLibro(MaterialCapacitacionDaoDefault materiales) {
 		JFrame actualizarL = new JFrame("Actualizar Libro");
 		actualizarL.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		actualizarL.pack();
@@ -27,10 +20,10 @@ public class ActualizarLibro extends JFrame {
 		JPanel panel = new JPanel();
 		actualizarL.setContentPane(panel);
 		panel.setLayout(new GridBagLayout());
-		ventanaActualizarLibro(actualizarL, panel);
+		ventanaActualizarLibro(actualizarL, panel,materiales);
 	}
 	
-	public void ventanaActualizarLibro(JFrame actualizarL, JPanel panel) {
+	public void ventanaActualizarLibro(JFrame actualizarL, JPanel panel,MaterialCapacitacionDaoDefault materiales) {
 		GridBagConstraints gridConst = new GridBagConstraints();
 		
 		JLabel ID = new JLabel("Ingrese ID libro: ");
@@ -56,14 +49,25 @@ public class ActualizarLibro extends JFrame {
 				
 		btnIr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				ActualizarLibro2 b1 = new ActualizarLibro2();
+				if(!ID2.getText().isEmpty()) {
+				new ActualizarLibro2(Integer.valueOf(ID2.getText()),materiales);
 				actualizarL.dispose();
+				}
 			}
 		});
+		btnIr.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				if(ID2.getText().isEmpty()) {
+					//TODO Poner esto para que salga en una ventanita,ver que vengan solo enteros y que coincida con algun ID existente
+					System.out.println("Campo ID vacio");
+				}
+			}
+		}
+		);
 	
 	btnCancelar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e){
-			Menu v1 = new Menu();
+			new Menu();
 			actualizarL.dispose();
 		}
 	});
