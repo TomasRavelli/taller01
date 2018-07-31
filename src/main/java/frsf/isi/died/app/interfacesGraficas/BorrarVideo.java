@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import  javax.swing.*;
 
 import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
+import frsf.isi.died.tp.modelo.*;
+import frsf.isi.died.tp.modelo.productos.Video;
 
 public class BorrarVideo extends JFrame {
 
@@ -55,8 +57,20 @@ public class BorrarVideo extends JFrame {
 
 		btnIr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				BorrarVideo2 v1 = new BorrarVideo2(materiales);
+				boolean b=false;
+				Video estevideo = new Video();
+				for(Video elvideo : materiales.listaVideos()) {
+					if(elvideo.getId()==Integer.valueOf(txtID.getText())) {
+						estevideo=elvideo;
+						b=true;
+					}
+				}
+				if(b) {
+				new BorrarVideo2(materiales,estevideo);
 				borrarV.dispose();
+				}else {
+					//TODO ventana de error: no hay video/libro con ese id
+				}
 			}
 		});
 		

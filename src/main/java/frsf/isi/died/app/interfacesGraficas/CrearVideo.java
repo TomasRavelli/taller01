@@ -250,7 +250,7 @@ public class CrearVideo extends JFrame {
 			}
 		});
 
-		agregarVideosATabla(modeloTabla);
+		agregarVideosATabla(modeloTabla,materialDao);
 
 	btnAgregar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e){
@@ -298,8 +298,8 @@ public void agregarATabla(DefaultTableModel modelo, Video video) {
 	modelo.addRow(obj);
 }
 
-public void agregarVideosATabla(DefaultTableModel modelo) {
-	CsvDatasource archivo = new CsvDatasource();
+public void agregarVideosATabla(DefaultTableModel modelo,MaterialCapacitacionDaoDefault materiales) {
+	/*CsvDatasource archivo = new CsvDatasource();
 	
 	for(int i = 0; i<archivo.readFile("videos.csv").size();i++) {
 		Video video = new Video();
@@ -307,6 +307,9 @@ public void agregarVideosATabla(DefaultTableModel modelo) {
 		agregarATabla(modelo, video);
 
 	}
-	
+	*/
+	for(Video e: materiales.listaVideos()) {
+		agregarATabla(modelo, e);
+	}
 }
 }

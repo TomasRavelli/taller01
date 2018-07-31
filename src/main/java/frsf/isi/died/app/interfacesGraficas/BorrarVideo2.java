@@ -16,10 +16,11 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
+import frsf.isi.died.tp.modelo.productos.*;
 
 public class BorrarVideo2 {
 	
-	public BorrarVideo2(MaterialCapacitacionDaoDefault materiales){
+	public BorrarVideo2(MaterialCapacitacionDaoDefault materiales, Video paraBorrar){
 		JFrame crearV = new JFrame("Borrar Video");
 		crearV.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		crearV.pack();
@@ -28,7 +29,6 @@ public class BorrarVideo2 {
 		JPanel panel = new JPanel();
 		crearV.setContentPane(panel);
 		panel.setLayout(new GridBagLayout());
-		
 		
 		JLabel lblTitulo;
 		JTextField txtTitulo;
@@ -56,6 +56,7 @@ public class BorrarVideo2 {
 		txtTitulo.setColumns(20);
 		gridConst.gridx=1;
 		gridConst.gridwidth=5;
+		txtTitulo.setText(paraBorrar.getTitulo());
 		panel.add(txtTitulo, gridConst);
 		
 		lblCosto= new JLabel("Costo: ");		
@@ -68,6 +69,7 @@ public class BorrarVideo2 {
 		txtCosto.setEditable(false);
 		txtCosto.setColumns(5);
 		gridConst.gridx=1;
+		txtCosto.setText(paraBorrar.getCosto().toString());
 		panel.add(txtCosto, gridConst);
 		
 		lblPrecioCompra= new JLabel("Duracion: ");
@@ -79,6 +81,7 @@ public class BorrarVideo2 {
 		txtPrecioCompra.setEditable(false);
 		txtPrecioCompra.setColumns(5);
 		gridConst.gridx=3;
+		txtPrecioCompra.setText(paraBorrar.getDuracion().toString());
 		panel.add(txtPrecioCompra, gridConst);
 		
 		lblRelevancia= new JLabel("Relevancia: ");
@@ -90,6 +93,7 @@ public class BorrarVideo2 {
 		txtRelevancia.setEditable(false);
 		txtRelevancia.setColumns(5);
 		gridConst.gridx=3;
+		txtRelevancia.setText(paraBorrar.getRelevancia().toString());
 		panel.add(txtRelevancia, gridConst);
 				
 		lblID= new JLabel("ID: ");
@@ -101,6 +105,7 @@ public class BorrarVideo2 {
 		txtID.setEditable(false);
 		txtID.setColumns(5);
 		gridConst.gridx=3;
+		txtID.setText(paraBorrar.getId().toString());
 		panel.add(txtID, gridConst);
 		
 		

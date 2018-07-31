@@ -93,7 +93,7 @@ public class MuestraResultados extends JFrame{
 		modelo.addRow(obj);
 	}
 	public void volverAtras() {
-		BuscarMaterial m = new BuscarMaterial();
+		BuscarMaterial m = new BuscarMaterial(materiales);
 		this.dispose();
 	}
 }

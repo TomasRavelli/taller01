@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,7 +22,7 @@ import frsf.isi.died.tp.modelo.productos.Video;
 public class ActualizarVideo2 {
 	
 	
-	public ActualizarVideo2(Integer IDParaEliminar,MaterialCapacitacionDaoDefault materiales){
+	public ActualizarVideo2(MaterialCapacitacionDaoDefault materiales,Video paraActualizar){
 		JFrame crearV = new JFrame("Actualizar Video");
 		crearV.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		crearV.pack();
@@ -57,6 +58,7 @@ public class ActualizarVideo2 {
 		txtTitulo.setColumns(20);
 		gridConst.gridx=1;
 		gridConst.gridwidth=5;
+		txtTitulo.setText(paraActualizar.getTitulo().toString());
 		panel.add(txtTitulo, gridConst);
 		
 		lblCosto= new JLabel("Costo: ");		
@@ -68,6 +70,7 @@ public class ActualizarVideo2 {
 		txtCosto = new JTextField();
 		txtCosto.setColumns(5);
 		gridConst.gridx=1;
+		txtCosto.setText(paraActualizar.getCosto().toString());
 		panel.add(txtCosto, gridConst);
 		
 		lblPrecioCompra= new JLabel("Duracion: ");
@@ -78,6 +81,8 @@ public class ActualizarVideo2 {
 		txtPrecioCompra = new JTextField();
 		txtPrecioCompra.setColumns(5);
 		gridConst.gridx=3;
+		txtPrecioCompra.setText(paraActualizar.precio().toString());
+		//TODO no se bien que es este precio VER
 		panel.add(txtPrecioCompra, gridConst);
 		
 		lblRelevancia= new JLabel("Relevancia: ");
@@ -85,10 +90,16 @@ public class ActualizarVideo2 {
 		gridConst.gridy=3;
 		panel.add(lblRelevancia, gridConst);
 		
-		txtRelevancia = new JTextField();
+		/*txtRelevancia = new JTextField();
 		txtRelevancia.setColumns(5);
 		gridConst.gridx=3;
-		panel.add(txtRelevancia, gridConst);
+		panel.add(txtRelevancia, gridConst);*/
+		Object[] obj = {"ALTA","MEDIA","BAJA"};
+		JComboBox relevancia2 = new JComboBox(obj);
+		gridConst.gridx=1;
+		gridConst.gridy=5;
+		relevancia2.setSelectedItem(paraActualizar.getRelevancia());
+		panel.add(relevancia2,gridConst);
 				
 		lblID= new JLabel("ID: ");
 		gridConst.gridx=0;
@@ -98,6 +109,7 @@ public class ActualizarVideo2 {
 		txtID = new JTextField();
 		txtID.setColumns(5);
 		gridConst.gridx=3;
+		txtID.setText(paraActualizar.getId().toString());
 		panel.add(txtID, gridConst);
 		
 		//TODO Agregar lo de la fecha

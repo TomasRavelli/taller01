@@ -315,9 +315,11 @@ public class CrearLibro extends JFrame {
 	public void agregarATabla(DefaultTableModel modelo, Libro libro) {
 		Object[] obj = {libro.getTitulo(),libro.getCosto(),libro.precio(),libro.getPaginas(),libro.getCalificacion(),libro.getRelevancia(),libro.getId(),libro.getFechaPublicacion()};
 		modelo.addRow(obj);
+		
 	}
 	
 	public void agregarLibrosATabla(DefaultTableModel modelo, MaterialCapacitacionDaoDefault materiales) {
+		/*VERSION ANTERIOR
 		CsvDatasource archivo = new CsvDatasource();
 		for(int i = 0; i<archivo.readFile("libros.csv").size();i++) {
 			Libro l = new Libro();
@@ -325,7 +327,10 @@ public class CrearLibro extends JFrame {
 			agregarATabla(modelo, l);
 	
 		}
-		
+		*/
+		for(Libro e: materiales.listaLibros()) {
+			agregarATabla(modelo, e);
+		}
 	}
 	
 }

@@ -40,6 +40,8 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 	protected Date fecha_publicacion;
 	
 	protected Relevancia relevancia; 
+	
+	protected String tema;
 	/**
 	 * Constructor por defecto
 	 */

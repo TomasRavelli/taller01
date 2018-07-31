@@ -56,7 +56,7 @@ public class Menu extends JFrame{
 				principal.dispose();
 			}
 		});
-		
+		//TODO agregar lo de tema en todos lados
 		salir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 			System.exit(0);

@@ -13,11 +13,12 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
+import frsf.isi.died.tp.modelo.productos.*;
 
 public class BorrarLibro2 {
 	
-	public BorrarLibro2(MaterialCapacitacionDaoDefault materiales){
-		JFrame crearL = new JFrame("Actualizar Libro");
+	public BorrarLibro2(MaterialCapacitacionDaoDefault materiales, Libro paraBorrar){
+		JFrame crearL = new JFrame("Borrar Libro");
 		crearL.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		crearL.pack();
 		crearL.setSize(800,600);
@@ -49,6 +50,7 @@ public class BorrarLibro2 {
 		txtTitulo.setColumns(20);
 		gridConst.gridx=1;
 		gridConst.gridwidth=5;
+		txtTitulo.setText(paraBorrar.getTitulo());
 		panel.add(txtTitulo, gridConst);
 		
 		lblCosto= new JLabel("Costo: ");		
@@ -61,6 +63,7 @@ public class BorrarLibro2 {
 		txtCosto.setEditable(false);
 		txtCosto.setColumns(5);
 		gridConst.gridx=1;
+		txtCosto.setText(paraBorrar.getCosto().toString());
 		panel.add(txtCosto, gridConst);
 		
 		lblPrecioCompra= new JLabel("Precio Compra: ");
@@ -72,6 +75,7 @@ public class BorrarLibro2 {
 		txtPrecioCompra.setEditable(false);
 		txtPrecioCompra.setColumns(5);
 		gridConst.gridx=3;
+		txtPrecioCompra.setText(paraBorrar.getPrecioCompra().toString());
 		panel.add(txtPrecioCompra, gridConst);
 		
 		lblPaginas= new JLabel("Paginas: ");		
@@ -83,6 +87,7 @@ public class BorrarLibro2 {
 		txtPaginas.setEditable(false);
 		txtPaginas.setColumns(5);
 		gridConst.gridx=1;
+		txtPaginas.setText(paraBorrar.getPaginas().toString());
 		panel.add(txtPaginas, gridConst);
 		
 		JLabel relevancia = new JLabel("Relevancia:");
@@ -95,6 +100,7 @@ public class BorrarLibro2 {
 		relevancia2.setColumns(5);
 		gridConst.gridy=5;
 		relevancia2.setEditable(false);
+		relevancia2.setText(paraBorrar.getRelevancia().toString());
 		panel.add(relevancia2,gridConst);
 		
 		JLabel id = new JLabel("ID:");
@@ -107,6 +113,7 @@ public class BorrarLibro2 {
 		gridConst.gridx=1;
 		ID2.setColumns(5);
 		gridConst.gridy=6;
+		ID2.setText(paraBorrar.getId().toString());
 		panel.add(ID2,gridConst);
 		
 		

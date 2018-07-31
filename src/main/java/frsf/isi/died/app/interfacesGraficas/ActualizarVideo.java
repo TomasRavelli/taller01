@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import  javax.swing.*;
 
 import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
+import frsf.isi.died.tp.modelo.productos.Libro;
+import frsf.isi.died.tp.modelo.productos.*;
 
 public class ActualizarVideo extends JFrame {
 
@@ -61,10 +63,20 @@ public class ActualizarVideo extends JFrame {
 		});
 		btnIr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				if(!txtID.getText().isEmpty()) {
-				new ActualizarVideo2(Integer.valueOf(txtID.getText()),materiales);
-				actualizarV.dispose();
+				boolean b=false;
+				Video estevideo = new Video();
+				for(Video elvideo : materiales.listaVideos()) {
+					if(elvideo.getId()==Integer.valueOf(txtID.getText())) {
+						estevideo=elvideo;
+						b=true;
+					}
 				}
+				if(b) {
+					new ActualizarVideo2(materiales,estevideo);
+					actualizarV.dispose();
+					}else {
+						//TODO ventana de error: no hay video/libro con ese id
+					}
 			}
 		});
 		btnCancelar.addActionListener(new ActionListener() {

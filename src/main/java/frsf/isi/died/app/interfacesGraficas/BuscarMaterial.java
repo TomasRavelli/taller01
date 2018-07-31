@@ -104,6 +104,8 @@ public class BuscarMaterial extends JFrame{
 		validacionBoton = 4;
 	}
 	
+	//TODO preguntarle a tomi por esto
+	
 	JButton buscar = new JButton("Buscar");
 	buscar.setBounds(500, 500, 100, 30);
 	buscar.setVisible(true);
@@ -160,14 +162,16 @@ public class BuscarMaterial extends JFrame{
 		fechaDia2.setVisible(false);
 		panel.add(fechaDia2);	
 			
-	titulo.addActionListener(e->mostrarTitulo(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia,fechaDia2,buscar,buscarM));
+	titulo.addActionListener(e->mostrarTitulo(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia,fechaDia2,buscar,buscarM,materiales));
 	
-	calificacion.addActionListener(e->mostrarCalificacion(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia,fechaDia2,buscar));
+	calificacion.addActionListener(e->mostrarCalificacion(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia,fechaDia2,buscar,materiales));
 	
-	tema.addActionListener(e->mostrarTema(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia, fechaDia2,buscar));
+	tema.addActionListener(e->mostrarTema(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia, fechaDia2,buscar,materiales));
 	
-	rangoFecha.addActionListener(e->mostrarFecha(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia, fechaDia2, buscar));
+	rangoFecha.addActionListener(e->mostrarFecha(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia, fechaDia2, buscar,materiales));
 
+	
+	
 	tituloAlf.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e){
 			validacionBoton=0;
@@ -212,7 +216,7 @@ public class BuscarMaterial extends JFrame{
 	}
 	
 	private void mostrarTitulo(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,
-			JTextField eTe, JTextField fD, JTextField fD2,JButton buscar,JFrame buscarM) {
+			JTextField eTe, JTextField fD, JTextField fD2,JButton buscar,JFrame buscarM,MaterialCapacitacionDaoDefault materiales) {
 		
 		eTit.setVisible(true);
 		min.setVisible(false);
@@ -257,7 +261,7 @@ public class BuscarMaterial extends JFrame{
 		
 	}
 	
-	private void mostrarCalificacion(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2,JButton buscar) {
+	private void mostrarCalificacion(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2,JButton buscar,MaterialCapacitacionDaoDefault materiales) {
 		
 		eTit.setVisible(false);
 		min.setVisible(false);
@@ -271,7 +275,7 @@ public class BuscarMaterial extends JFrame{
 	}
 	
 
-	private void mostrarTema(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2, JButton buscar) {
+	private void mostrarTema(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2, JButton buscar,MaterialCapacitacionDaoDefault materiales) {
 		
 		eTit.setVisible(false);
 		min.setVisible(true);
@@ -283,7 +287,7 @@ public class BuscarMaterial extends JFrame{
 		fD2.setVisible(false);
 	}
 	
-	private void mostrarFecha(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2, JButton buscar) {
+	private void mostrarFecha(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2, JButton buscar, MaterialCapacitacionDaoDefault materiales) {
 		
 		eTit.setVisible(false);
 		min.setVisible(false);

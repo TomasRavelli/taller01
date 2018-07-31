@@ -20,7 +20,7 @@ import frsf.isi.died.tp.modelo.productos.Relevancia;
 
 public class ActualizarLibro2 {
 
-	public ActualizarLibro2(Integer IDParaEliminar,MaterialCapacitacionDaoDefault materiales){
+	public ActualizarLibro2(MaterialCapacitacionDaoDefault materiales,Libro paraActualizar){
 		JFrame crearL = new JFrame("Actualizar Libro");
 		crearL.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		crearL.pack();
@@ -52,6 +52,7 @@ public class ActualizarLibro2 {
 		txtTitulo.setColumns(20);
 		gridConst.gridx=1;
 		gridConst.gridwidth=5;
+		txtTitulo.setText(paraActualizar.getTitulo().toString());
 		panel.add(txtTitulo, gridConst);
 		
 		lblCosto= new JLabel("Costo: ");		
@@ -63,6 +64,7 @@ public class ActualizarLibro2 {
 		txtCosto = new JTextField();
 		txtCosto.setColumns(5);
 		gridConst.gridx=1;
+		txtCosto.setText(paraActualizar.getCosto().toString());
 		panel.add(txtCosto, gridConst);
 		
 		lblPrecioCompra= new JLabel("Precio Compra: ");
@@ -73,6 +75,7 @@ public class ActualizarLibro2 {
 		txtPrecioCompra = new JTextField();
 		txtPrecioCompra.setColumns(5);
 		gridConst.gridx=3;
+		txtPrecioCompra.setText(paraActualizar.getPrecioCompra().toString());
 		panel.add(txtPrecioCompra, gridConst);
 		
 		lblPaginas= new JLabel("Paginas: ");		
@@ -83,6 +86,7 @@ public class ActualizarLibro2 {
 		txtPaginas = new JTextField();
 		txtPaginas.setColumns(5);
 		gridConst.gridx=1;
+		txtPaginas.setText(paraActualizar.getPaginas().toString());
 		panel.add(txtPaginas, gridConst);
 		
 		JLabel relevancia = new JLabel("Relevancia:");
@@ -94,6 +98,7 @@ public class ActualizarLibro2 {
 		JComboBox relevancia2 = new JComboBox(obj);
 		gridConst.gridx=1;
 		gridConst.gridy=5;
+		relevancia2.setSelectedItem(paraActualizar.getRelevancia());
 		panel.add(relevancia2,gridConst);
 		
 		JLabel id = new JLabel("ID:");
@@ -105,6 +110,7 @@ public class ActualizarLibro2 {
 		gridConst.gridx=1;
 		ID2.setColumns(5);
 		gridConst.gridy=6;
+		ID2.setText(paraActualizar.getId().toString());
 		panel.add(ID2,gridConst);
 		
 		//TODO Agregar lo de la fecha
