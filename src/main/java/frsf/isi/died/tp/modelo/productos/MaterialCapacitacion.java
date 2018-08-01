@@ -83,6 +83,14 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	public String getTema() {
+		return tema;
+	}
+
+	public void setTema(String tema2) {
+		this.tema = tema2;
+	}
 
 	public String getTitulo() {
 		return titulo;

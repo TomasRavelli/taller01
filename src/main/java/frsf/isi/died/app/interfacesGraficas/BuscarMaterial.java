@@ -4,16 +4,21 @@ import java.awt.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import  javax.swing.*;
 
+import frsf.isi.died.app.dao.MaterialCapacitacionDao;
 import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
 import frsf.isi.died.tp.modelo.BibliotecaABB;
 import frsf.isi.died.tp.modelo.productos.Libro;
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 import frsf.isi.died.tp.modelo.productos.Video;
+import frsf.isi.died.app.dao.*;
 
 public class BuscarMaterial extends JFrame{
 	
@@ -64,47 +69,35 @@ public class BuscarMaterial extends JFrame{
 	tituloAlf.setVisible(true);
 	opciones.add(tituloAlf);
 	panel.add(tituloAlf);
-	if(tituloAlf.isSelected()) {
-		validacionBoton = 0;
-	}
+	
 	
 	JRadioButton xCalif = new JRadioButton("Calificacion");
 	xCalif.setBounds(430, 200, 200, 20);
 	xCalif.setVisible(true);
 	opciones.add(xCalif);
 	panel.add(xCalif);
-	if(xCalif.isSelected()) {
-		validacionBoton = 1;
-	}
+	
 	
 	JRadioButton xPrecio = new JRadioButton("Precio");
 	xPrecio.setBounds(430, 250, 200, 20);
 	xPrecio.setVisible(true);
 	opciones.add(xPrecio);
 	panel.add(xPrecio);
-	if(xPrecio.isSelected()) {
-		validacionBoton = 2;
-	}
+	
 	
 	JRadioButton xFechaPub = new JRadioButton("Fecha publicacion");
 	xFechaPub.setBounds(430, 300, 200, 20);
 	xFechaPub.setVisible(true);
 	opciones.add(xFechaPub);
 	panel.add(xFechaPub);
-	if(xFechaPub.isSelected()) {
-		validacionBoton = 3;
-	}
+	
 	
 	JRadioButton xRelevancia = new JRadioButton("Relevancia");
 	xRelevancia.setBounds(430, 350, 200, 20);
 	xRelevancia.setVisible(true);
 	opciones.add(xRelevancia);
 	panel.add(xRelevancia);
-	if(xRelevancia.isSelected()) {
-		validacionBoton = 4;
-	}
 	
-	//TODO preguntarle a tomi por esto
 	
 	JButton buscar = new JButton("Buscar");
 	buscar.setBounds(500, 500, 100, 30);
@@ -164,11 +157,11 @@ public class BuscarMaterial extends JFrame{
 			
 	titulo.addActionListener(e->mostrarTitulo(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia,fechaDia2,buscar,buscarM,materiales));
 	
-	calificacion.addActionListener(e->mostrarCalificacion(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia,fechaDia2,buscar,materiales));
+	calificacion.addActionListener(e->mostrarCalificacion(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia,fechaDia2,buscar, buscarM,materiales));
 	
-	tema.addActionListener(e->mostrarTema(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia, fechaDia2,buscar,materiales));
+	tema.addActionListener(e->mostrarTema(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia, fechaDia2,buscar, buscarM,materiales));
 	
-	rangoFecha.addActionListener(e->mostrarFecha(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia, fechaDia2, buscar,materiales));
+	rangoFecha.addActionListener(e->mostrarFecha(escribirTitulo,min,escribirMin,max,escribirMax,escribirTema,fechaDia, fechaDia2, buscar, buscarM,materiales));
 
 	
 	
@@ -231,29 +224,29 @@ public class BuscarMaterial extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				switch(validacionBoton) {
 				case 0:{
-				
-				ordenarPorTitulo(buscarPorTitulo(eTit.getText()),buscarM);
-				break;
+					ordenarPorTitulo(buscarPorTitulo(eTit.getText(),materiales),buscarM,materiales);
+					break;
 				}
 				case 1:{
-					//ordenarPorCalificacion();
+					ordenarPorCalificacion(buscarPorTitulo(eTit.getText(),materiales),buscarM,materiales);
 					break;
 				}
 				case 2:{
-					//ordenarPorPrecio();
+					ordenarPorPrecio(buscarPorTitulo(eTit.getText(),materiales),buscarM,materiales);
 					break;
 				}
 				case 3:{
-					//ordenarPorFecha();
+					ordenarPorFecha(buscarPorTitulo(eTit.getText(),materiales),buscarM,materiales);
 					break;
 				}
 				case 4:{
-					//ordenarPorRelevancia();
+					ordenarPorRelevancia(buscarPorTitulo(eTit.getText(),materiales),buscarM,materiales);
+					break;
 				}
 				default:{
 					JOptionPane noEligio = new JOptionPane();
 					noEligio.showConfirmDialog(buscarM, "Debe elegir un criterio de ordenamiento.", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
-
+					break;
 				}
 				}
 			}
@@ -261,7 +254,52 @@ public class BuscarMaterial extends JFrame{
 		
 	}
 	
-	private void mostrarCalificacion(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2,JButton buscar,MaterialCapacitacionDaoDefault materiales) {
+	private void mostrarCalificacion(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2,JButton buscar,JFrame buscarM,MaterialCapacitacionDaoDefault materiales) {
+		
+		eTit.setVisible(false);
+		min.setVisible(true);
+		emin.setVisible(true);
+		max.setVisible(true);
+		emax.setVisible(true);
+		eTe.setVisible(false);
+		fD.setVisible(false);
+		fD2.setVisible(false);
+		
+		buscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				switch(validacionBoton) {
+				case 0:{
+					ordenarPorTitulo(buscarPorCalificacion(Double.valueOf(emin.getText()),Double.valueOf(emax.getText()),materiales),buscarM,materiales);
+					break;
+				}
+				case 1:{
+					ordenarPorCalificacion(buscarPorCalificacion(Double.valueOf(emin.getText()),Double.valueOf(emax.getText()),materiales),buscarM,materiales);
+					break;
+				}
+				case 2:{
+					ordenarPorPrecio(buscarPorCalificacion(Double.valueOf(emin.getText()),Double.valueOf(emax.getText()),materiales),buscarM,materiales);
+					break;
+				}
+				case 3:{
+					ordenarPorFecha(buscarPorCalificacion(Double.valueOf(emin.getText()),Double.valueOf(emax.getText()),materiales),buscarM,materiales);
+					break;
+				}
+				case 4:{
+					ordenarPorRelevancia(buscarPorCalificacion(Double.valueOf(emin.getText()),Double.valueOf(emax.getText()),materiales),buscarM,materiales);
+					break;
+				}
+				default:{
+					JOptionPane noEligio = new JOptionPane();
+					noEligio.showConfirmDialog(buscarM, "Debe elegir un criterio de ordenamiento.", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+					break;
+				}
+				}
+			}
+		});
+	}
+	
+
+	private void mostrarTema(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2, JButton buscar,JFrame buscarM,MaterialCapacitacionDaoDefault materiales) {
 		
 		eTit.setVisible(false);
 		min.setVisible(false);
@@ -272,22 +310,40 @@ public class BuscarMaterial extends JFrame{
 		fD.setVisible(false);
 		fD2.setVisible(false);
 		
+		buscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				switch(validacionBoton) {
+				case 0:{
+					ordenarPorTitulo(buscarPorTema(eTe.getText(),materiales),buscarM,materiales);
+					break;
+				}
+				case 1:{
+					ordenarPorCalificacion(buscarPorTema(eTe.getText(),materiales),buscarM,materiales);
+					break;
+				}
+				case 2:{
+					ordenarPorPrecio(buscarPorTema(eTe.getText(),materiales),buscarM,materiales);
+					break;
+				}
+				case 3:{
+					ordenarPorFecha(buscarPorTema(eTe.getText(),materiales),buscarM,materiales);
+					break;
+				}
+				case 4:{
+					ordenarPorRelevancia(buscarPorTema(eTe.getText(),materiales),buscarM,materiales);
+					break;
+				}
+				default:{
+					JOptionPane noEligio = new JOptionPane();
+					noEligio.showConfirmDialog(buscarM, "Debe elegir un criterio de ordenamiento.", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+					break;
+				}
+				}
+			}
+		});
 	}
 	
-
-	private void mostrarTema(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2, JButton buscar,MaterialCapacitacionDaoDefault materiales) {
-		
-		eTit.setVisible(false);
-		min.setVisible(true);
-		emin.setVisible(true);
-		max.setVisible(true);
-		emax.setVisible(true);
-		eTe.setVisible(false);
-		fD.setVisible(false);
-		fD2.setVisible(false);
-	}
-	
-	private void mostrarFecha(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2, JButton buscar, MaterialCapacitacionDaoDefault materiales) {
+	private void mostrarFecha(JTextField eTit,JLabel min,JTextField emin,JLabel max, JTextField emax,JTextField eTe, JTextField fD, JTextField fD2, JButton buscar,JFrame buscarM, MaterialCapacitacionDaoDefault materiales) {
 		
 		eTit.setVisible(false);
 		min.setVisible(false);
@@ -297,59 +353,147 @@ public class BuscarMaterial extends JFrame{
 		eTe.setVisible(false);
 		fD.setVisible(true);
 		fD2.setVisible(true);
+		
+		Date fecha_publicacion1 = new Date();
+		SimpleDateFormat d = new SimpleDateFormat("dd/MM/yyyy");
+		try {
+			fecha_publicacion1 = d.parse(fD.getText());
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		final Date fecha1 = fecha_publicacion1;
+		
+		Date fecha_publicacion2 = new Date();
+		SimpleDateFormat d2 = new SimpleDateFormat("dd/MM/yyyy");
+		try {
+			fecha_publicacion2 = d2.parse(fD2.getText());
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		final Date fecha2 = fecha_publicacion2;
+		
+		buscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				switch(validacionBoton) {
+				case 0:{
+					ordenarPorTitulo(buscarPorFecha(fecha1,fecha2,materiales),buscarM,materiales);
+					break;
+				}
+				case 1:{
+					ordenarPorCalificacion(buscarPorFecha(fecha1,fecha2,materiales),buscarM,materiales);
+					break;
+				}
+				case 2:{
+					ordenarPorPrecio(buscarPorFecha(fecha1,fecha2,materiales),buscarM,materiales);
+					break;
+				}
+				case 3:{
+					ordenarPorFecha(buscarPorFecha(fecha1,fecha2,materiales),buscarM,materiales);
+					break;
+				}
+				case 4:{
+					ordenarPorRelevancia(buscarPorFecha(fecha1,fecha2,materiales),buscarM,materiales);
+					break;
+				}
+				default:{
+					JOptionPane noEligio = new JOptionPane();
+					noEligio.showConfirmDialog(buscarM, "Debe elegir un criterio de ordenamiento.", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+					break;
+				}
+				}
+			}
+		});
 	}
 	
-	public List<MaterialCapacitacion> buscarPorTitulo(String titulo) {
-		CsvDatasource archivo1 = new CsvDatasource();
-		CsvDatasource archivo2 = new CsvDatasource();
-		BibliotecaABB materiales = new BibliotecaABB();
+	public List<MaterialCapacitacion> buscarPorTitulo(String titulo, MaterialCapacitacionDaoDefault materiales) {
 		List<MaterialCapacitacion> encontrados = new ArrayList<>();
-		if(!titulo.isEmpty()) {
-		
-		agregarLibros(materiales,archivo1.readFile("libros.csv"));
-		agregarVideos(materiales,archivo2.readFile("videos.csv"));
-		
-		for(MaterialCapacitacion m: materiales.materiales() ) {
-			if( m.getTitulo().contains(titulo) ){
+		for(MaterialCapacitacion m: materiales.listaMateriales()) {
+			if(m.getTitulo().contains(titulo)) {
 				encontrados.add(m);
 			}
 		}
-		}
-		
 		return encontrados;
+	}
+	public List<MaterialCapacitacion> buscarPorCalificacion(Double min,Double max, MaterialCapacitacionDaoDefault materiales) {
+		List<MaterialCapacitacion> encontrados = new ArrayList<>();
+		for(MaterialCapacitacion m: materiales.listaMateriales()) {
+			if(m.getCalificacion()>=min && m.getCalificacion()<=max) {
+				encontrados.add(m);
+			}
 		}
-	public void ordenarPorTitulo(List<MaterialCapacitacion> encontrados, JFrame buscarM) {
+		return encontrados;
+	}
+	public List<MaterialCapacitacion> buscarPorTema(String tema, MaterialCapacitacionDaoDefault materiales) {
+		List<MaterialCapacitacion> encontrados = new ArrayList<>();
+		for(MaterialCapacitacion m: materiales.listaMateriales()) {
+			if(m.getTema().equals(tema)) {
+				encontrados.add(m);
+			}
+		}
+		return encontrados;
+	}
+	public List<MaterialCapacitacion> buscarPorFecha(Date f1,Date f2, MaterialCapacitacionDaoDefault materiales) {
+		List<MaterialCapacitacion> encontrados = new ArrayList<>();
+		for(MaterialCapacitacion m: materiales.listaMateriales()) {
+			if(m.getFechaPublicacion().compareTo(f1)>0 && m.getFechaPublicacion().compareTo(f2)<0) {
+				encontrados.add(m);
+			}
+		}
+		return encontrados;
+	}
+	public void ordenarPorTitulo(List<MaterialCapacitacion> encontrados, JFrame buscarM, MaterialCapacitacionDaoDefault materiales) {
 		encontrados.sort((e1,e2) -> e1.getTitulo().compareTo(e2.getTitulo()));
 		if(encontrados.isEmpty()){
 		JOptionPane noEncontrado = new JOptionPane();
 		noEncontrado.showConfirmDialog(buscarM, "Material no encontrado", "Aviso", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
 		}
 		else {
-			MuestraResultados muestra = new MuestraResultados(encontrados);
+			MuestraResultados muestra = new MuestraResultados(encontrados, materiales);
 			buscarM.dispose();
 		}
-
 	}
-	
-	private void agregarLibros(BibliotecaABB materiales, List<List<String>> libros) {
-		
-		for(int i=0; i< libros.size(); i++) {
-			Libro l = new Libro();
-			l.loadFromStringRow(libros.get(i));
-			materiales.agregar(l);
-		}		
-	
+	public void ordenarPorCalificacion(List<MaterialCapacitacion> encontrados, JFrame buscarM, MaterialCapacitacionDaoDefault materiales) {
+		encontrados.sort((e1,e2) -> e1.getCalificacion().compareTo(e2.getCalificacion()));
+		if(encontrados.isEmpty()){
+		JOptionPane noEncontrado = new JOptionPane();
+		noEncontrado.showConfirmDialog(buscarM, "Material no encontrado", "Aviso", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+		}
+		else {
+			MuestraResultados muestra = new MuestraResultados(encontrados, materiales);
+			buscarM.dispose();
+		}
 	}
-	
-private void agregarVideos(BibliotecaABB materiales, List<List<String>> videos) {
-		
-		for(int i=0; i< videos.size(); i++) {
-			Video l = new Video();
-			l.loadFromStringRow(videos.get(i));
-			materiales.agregar(l);
-		}		
-	
+	public void ordenarPorPrecio(List<MaterialCapacitacion> encontrados, JFrame buscarM, MaterialCapacitacionDaoDefault materiales) {
+		encontrados.sort((e1,e2) -> e1.precio().compareTo(e2.precio()));
+		if(encontrados.isEmpty()){
+		JOptionPane noEncontrado = new JOptionPane();
+		noEncontrado.showConfirmDialog(buscarM, "Material no encontrado", "Aviso", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+		}
+		else {
+			MuestraResultados muestra = new MuestraResultados(encontrados, materiales);
+			buscarM.dispose();
+		}
 	}
-	
-
+	public void ordenarPorFecha(List<MaterialCapacitacion> encontrados, JFrame buscarM, MaterialCapacitacionDaoDefault materiales) {
+		encontrados.sort((e1,e2) -> e1.getFechaPublicacion().compareTo(e2.getFechaPublicacion()));
+		if(encontrados.isEmpty()){
+		JOptionPane noEncontrado = new JOptionPane();
+		noEncontrado.showConfirmDialog(buscarM, "Material no encontrado", "Aviso", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+		}
+		else {
+			MuestraResultados muestra = new MuestraResultados(encontrados, materiales);
+			buscarM.dispose();
+		}
+	}
+	public void ordenarPorRelevancia(List<MaterialCapacitacion> encontrados, JFrame buscarM, MaterialCapacitacionDaoDefault materiales) {
+		encontrados.sort((e1,e2) -> e1.getRelevancia().compareTo(e2.getRelevancia()));
+		if(encontrados.isEmpty()){
+		JOptionPane noEncontrado = new JOptionPane();
+		noEncontrado.showConfirmDialog(buscarM, "Material no encontrado", "Aviso", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+		}
+		else {
+			MuestraResultados muestra = new MuestraResultados(encontrados, materiales);
+			buscarM.dispose();
+		}
+	}
 }

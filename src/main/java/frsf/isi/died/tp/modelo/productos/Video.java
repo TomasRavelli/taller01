@@ -71,7 +71,7 @@ public class Video extends MaterialCapacitacion{
 		lista.add(this.COSTOSEG.toString());
 		lista.add(this.calificacion.toString());
 		lista.add(this.relevancia.toString());
-		lista.add(this.fecha_publicacion.toString());
+		lista.add((new SimpleDateFormat("dd/MM/yyyy")).format(this.fecha_publicacion));
 		return lista;
 	}
 	
@@ -87,11 +87,12 @@ public class Video extends MaterialCapacitacion{
 		this.relevancia =Relevancia.valueOf(datos.get(7));
 		
 		
-		//SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		SimpleDateFormat formato = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		//SimpleDateFormat formato = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
         Date fechaDate = new Date();
         try {
             fechaDate = formato.parse(datos.get(8));
+            formato.format(fechaDate);
         } 
         catch (ParseException ex) 
         {

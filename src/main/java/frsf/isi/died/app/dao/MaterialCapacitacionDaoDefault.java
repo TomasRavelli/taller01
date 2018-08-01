@@ -51,7 +51,6 @@ public class MaterialCapacitacionDaoDefault implements MaterialCapacitacionDao{
 	
 	@Override
 	public void agregarLibro(Libro mat) {
-		mat.setId(this.listaLibros().size());
 		GRAFO_MATERIAL.addNodo(mat);	
 		biblioteca.agregar(mat);
 		try {
@@ -64,7 +63,7 @@ public class MaterialCapacitacionDaoDefault implements MaterialCapacitacionDao{
 
 	@Override
 	public void agregarVideo(Video mat) {
-		mat.setId(this.listaVideos().size());
+		
 		GRAFO_MATERIAL.addNodo(mat);				
 		biblioteca.agregar(mat);
 		try {

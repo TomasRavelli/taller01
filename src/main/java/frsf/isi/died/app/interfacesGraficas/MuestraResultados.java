@@ -1,6 +1,7 @@
 package frsf.isi.died.app.interfacesGraficas;
 
 import java.awt.GridBagConstraints;
+
 import java.awt.GridBagLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -16,27 +17,18 @@ import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
+import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
 import frsf.isi.died.tp.modelo.productos.Libro;
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 import frsf.isi.died.tp.modelo.productos.Video;
+import frsf.isi.died.app.dao.*;
 
 public class MuestraResultados extends JFrame{
-	List<List<String>> libros;
-	List<List<String>> videos;
-	
-	public static void main(String[] args) {
-	javax.swing.SwingUtilities.invokeLater(new Runnable() {
-		public void run() {
-			MuestraResultados prueba  = new MuestraResultados(new ArrayList<>());
-			}
-		});
-
-	}
 	
 	public MuestraResultados() {
 		
 	}
-	public MuestraResultados(List<MaterialCapacitacion> materiales){
+	public MuestraResultados(List<MaterialCapacitacion> materiales, MaterialCapacitacionDaoDefault retorno){
 		
 		this.setTitle("Resultados de busqueda");
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -68,7 +60,7 @@ public class MuestraResultados extends JFrame{
 		atras.setBounds(650, 505, 120, 50);
 		panel.add(atras);
 		
-		atras.addActionListener(e->volverAtras());
+		atras.addActionListener(e->volverAtras(retorno));
 		
 		for(MaterialCapacitacion m: materiales) {
 			
@@ -92,8 +84,8 @@ public class MuestraResultados extends JFrame{
 		Object[] obj = {video.getTitulo(),video.getDuracion(),video.getCosto(),video.getCalificacion(),video.getRelevancia(),video.getId(),video.getFechaPublicacion()};
 		modelo.addRow(obj);
 	}
-	public void volverAtras() {
-		BuscarMaterial m = new BuscarMaterial(materiales);
+	public void volverAtras(MaterialCapacitacionDaoDefault retorno) {
+		BuscarMaterial m = new BuscarMaterial(retorno);
 		this.dispose();
 	}
 }

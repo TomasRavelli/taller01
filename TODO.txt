@@ -1,0 +1,3 @@
+correjir el coso de la fecha
+borrar
+actualizar
