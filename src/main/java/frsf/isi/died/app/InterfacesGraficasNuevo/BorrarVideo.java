@@ -52,6 +52,7 @@ public class BorrarVideo extends JPanel {
 		gridConst.gridx=1;
 		gridConst.gridy=6;
 		this.add(btnCancelar, gridConst);
+		
 
 		btnIr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
@@ -68,12 +69,14 @@ public class BorrarVideo extends JPanel {
 					//TODO ventana de error: no hay video/libro con ese id
 					JOptionPane noEncontrado = new JOptionPane();
 					noEncontrado.showConfirmDialog(ventana, "No existe video con ese ID", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
-					}else {
-						ventana.setContentPane(new ActualizarVideo2(ventana,estevideo));
-						ventana.pack();
 					}
+				else {
+					ventana.setContentPane(new BorrarVideo2(ventana,estevideo));
+					ventana.pack();
+				}
 			}
 		});
+		
 		
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
@@ -81,8 +84,5 @@ public class BorrarVideo extends JPanel {
 				ventana.pack();
 			}
 		});
-		
-
+	}
 }
-}
-

@@ -1,10 +1,16 @@
 package frsf.isi.died.app.InterfacesGraficasNuevo;
 
 import java.awt.Dimension;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,12 +24,13 @@ import javax.swing.WindowConstants;
 
 import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
 import frsf.isi.died.tp.modelo.productos.Libro;
+import frsf.isi.died.tp.modelo.productos.Relevancia;
 import frsf.isi.died.tp.modelo.productos.Video;
 
 public class ActualizarVideo2 extends JPanel{
 	
 	
-	public ActualizarVideo2(Menu ventana, Video video){
+	public ActualizarVideo2(Menu ventana, Video paraActualizar){
 		this.setPreferredSize(new Dimension(800,600));
 		this.setVisible(true);
 		this.setLayout(new GridBagLayout());
@@ -32,17 +39,17 @@ public class ActualizarVideo2 extends JPanel{
 		JLabel lblTitulo;
 		JTextField txtTitulo;
 		JLabel lblCosto;
-		JLabel lblPrecioCompra;
+		JLabel lblDuracion;
 		JTextField txtCosto;
-		JTextField txtPrecioCompra;
+		JTextField txtDuracion;
 		JButton btnGuardarCambios;
 		JButton btnCancelar;
 		JLabel lblRelevancia;
-		JTextField txtRelevancia;
 		JLabel lblID;
 		JTextField txtID;
 		
 		GridBagConstraints gridConst= new GridBagConstraints();
+		
 		
 		
 		lblTitulo = new JLabel("Titulo: ");
@@ -54,7 +61,7 @@ public class ActualizarVideo2 extends JPanel{
 		txtTitulo.setColumns(20);
 		gridConst.gridx=1;
 		gridConst.gridwidth=5;
-		//txtTitulo.setText(paraActualizar.getTitulo().toString());
+		txtTitulo.setText(paraActualizar.getTitulo().toString());
 		this.add(txtTitulo, gridConst);
 		
 		lblCosto= new JLabel("Costo: ");		
@@ -66,35 +73,31 @@ public class ActualizarVideo2 extends JPanel{
 		txtCosto = new JTextField();
 		txtCosto.setColumns(5);
 		gridConst.gridx=1;
-		//txtCosto.setText(paraActualizar.getCosto().toString());
+		txtCosto.setText(paraActualizar.getCosto().toString());
 		this.add(txtCosto, gridConst);
 		
-		lblPrecioCompra= new JLabel("Duracion: ");
+		lblDuracion= new JLabel("Duracion: ");
 		gridConst.gridx=0;
 		gridConst.gridy=2;
-		this.add(lblPrecioCompra, gridConst);
+		this.add(lblDuracion, gridConst);
 		
-		txtPrecioCompra = new JTextField();
-		txtPrecioCompra.setColumns(5);
+		txtDuracion = new JTextField();
+		txtDuracion.setColumns(5);
 		gridConst.gridx=3;
-		//txtPrecioCompra.setText(paraActualizar.precio().toString());
-		//TODO no se bien que es este precio VER
-		this.add(txtPrecioCompra, gridConst);
+		txtDuracion.setText(paraActualizar.precio().toString());
+		this.add(txtDuracion, gridConst);
 		
 		lblRelevancia= new JLabel("Relevancia: ");
 		gridConst.gridx=0;
 		gridConst.gridy=3;
 		this.add(lblRelevancia, gridConst);
 		
-		/*txtRelevancia = new JTextField();
-		txtRelevancia.setColumns(5);
-		gridConst.gridx=3;
-		this.add(txtRelevancia, gridConst);*/
+		
 		Object[] obj = {"ALTA","MEDIA","BAJA"};
 		JComboBox relevancia2 = new JComboBox(obj);
 		gridConst.gridx=1;
-		gridConst.gridy=5;
-		//relevancia2.setSelectedItem(paraActualizar.getRelevancia());
+		gridConst.gridy=3;
+		relevancia2.setSelectedItem(paraActualizar.getRelevancia());
 		this.add(relevancia2,gridConst);
 				
 		lblID= new JLabel("ID: ");
@@ -105,8 +108,9 @@ public class ActualizarVideo2 extends JPanel{
 		txtID = new JTextField();
 		txtID.setColumns(5);
 		gridConst.gridx=3;
-		//txtID.setText(paraActualizar.getId().toString());
+		txtID.setText(paraActualizar.getId().toString());
 		this.add(txtID, gridConst);
+		
 		
 		//TODO Agregar lo de la fecha
 		
@@ -120,6 +124,7 @@ public class ActualizarVideo2 extends JPanel{
 		gridConst.gridy=6;
 		this.add(btnCancelar, gridConst);
 		
+		
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				ventana.setContentPane(new ActualizarVideo(ventana));
@@ -127,15 +132,55 @@ public class ActualizarVideo2 extends JPanel{
 			}
 		});
 		
+		
 		btnGuardarCambios.addActionListener(new ActionListener() {
+			
+			//List<List<String>> nuevoContenido = new ArrayList<>();
+		
+			
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//if() 
-				{
-					Video nuevoVideo = new Video();
-					//TODO cuando tengamos lo de la fecha, hay que crear el video con sus atrubitos
-					//tambien hay que agregarlo a la lista de materialesCapacitacion
-					//y eliminar el del ID que sacamos en la ventana anterior (IDParaEliminar)
+				
+				Date fecha = new Date();
+				fecha = paraActualizar.getFechaPublicacion();
+				
+				String tema = paraActualizar.getTema();
+				
+				Integer idAnterior = paraActualizar.getId();
+				
+				
+				if(!txtTitulo.getText().isEmpty() && !txtCosto.getText().isEmpty() && !txtDuracion.getText().isEmpty() && !txtID.getText().isEmpty()) {
+					
+					Double costo = new Double(txtCosto.getText());
+					Integer duracion = new Integer(txtDuracion.getText());
+					Integer id = new Integer(txtID.getText());
+					
+					Relevancia aux;
+					if(relevancia2.getSelectedIndex()==0){
+						aux=Relevancia.ALTA;
+					}else {
+						if(relevancia2.getSelectedIndex()==1){
+							aux=Relevancia.MEDIA;
+						}else {
+							 aux=Relevancia.BAJA;
+						}
+					}
+					
+					Video nuevoVideo = new Video(id, txtTitulo.getText(), costo, duracion, aux, fecha, tema);
+					ventana.getMateriales().agregarVideo(nuevoVideo);
+					
+					ventana.setContentPane(new Inicio(ventana));
+					ventana.pack();
+					
+					
+					for (Video v : ventana.getMateriales().listaVideos()) {
+						if(v.getId().equals(idAnterior)) {
+							
+						}
+					}
+					
+					//TODO hay que eliminar el del ID que sacamos en la ventana anterior (IDParaEliminar)
 				}
 			}
 		});

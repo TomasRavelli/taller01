@@ -30,9 +30,6 @@ import frsf.isi.died.tp.modelo.productos.Relevancia;
 
 public class CrearLibro extends JPanel {
 
-
-	
-	
 	public CrearLibro(Menu ventana) {
 		
 		this.setPreferredSize(new Dimension(800,600));
@@ -274,6 +271,7 @@ public class CrearLibro extends JPanel {
 		
 		agregarLibrosATabla(modeloTabla,ventana.getMateriales());	
 		
+		
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				ventana.setContentPane(new Inicio(ventana));
@@ -281,59 +279,60 @@ public class CrearLibro extends JPanel {
 			}
 		});
 		
+		
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				if(!txtTitulo.getText().isEmpty() && !txtCosto.getText().isEmpty() && !txtPrecioCompra.getText().isEmpty() &&
-					!txtPaginas.getText().isEmpty()  && !ID2.getText().isEmpty() && !txtFechaPublicacion.getText().isEmpty() && !txtTema.getText().isEmpty())
-				{Integer id = new Integer(ID2.getText());
-				Double costo = new Double(txtCosto.getText());
-				Double precioCompra = new Double(txtPrecioCompra.getText());
-				Integer paginas = new Integer(txtPaginas.getText());
+				if(!txtTitulo.getText().isEmpty() && !txtCosto.getText().isEmpty() && !txtPrecioCompra.getText().isEmpty() && !txtPaginas.getText().isEmpty()  && !ID2.getText().isEmpty() && !txtFechaPublicacion.getText().isEmpty() && !txtTema.getText().isEmpty()){
+					
+					Integer id = new Integer(ID2.getText());
+					Double costo = new Double(txtCosto.getText());
+					Double precioCompra = new Double(txtPrecioCompra.getText());
+					Integer paginas = new Integer(txtPaginas.getText());
 				
 				
-				//Formato fecha de publicacion
-				Date fecha_publicacion = new Date();
-				SimpleDateFormat d = new SimpleDateFormat("dd/MM/yyyy");
-				try {
-					fecha_publicacion = d.parse(txtFechaPublicacion.getText());
-				} catch (ParseException e1) {
-					e1.printStackTrace();
-				}
-				
-				
-				Relevancia aux;
-				if(relevancia2.getSelectedIndex()==0){
-					aux=Relevancia.ALTA;
-				}else {
-					if(relevancia2.getSelectedIndex()==1){
-						aux=Relevancia.MEDIA;
-					}else {
-						 aux=Relevancia.BAJA;
+					//Formato fecha de publicacion
+					Date fecha_publicacion = new Date();
+					SimpleDateFormat d = new SimpleDateFormat("dd/MM/yyyy");
+					try {
+						fecha_publicacion = d.parse(txtFechaPublicacion.getText());
+					} catch (ParseException e1) {
+						e1.printStackTrace();
 					}
-				}
-				Libro libro=new Libro(id,(String) txtTitulo.getText(), costo,precioCompra,paginas,aux,fecha_publicacion,txtTema.getText().toString());
-				JOptionPane nuevoLibro = new JOptionPane();
-				agregarATabla(modeloTabla,libro);
-				nuevoLibro.showConfirmDialog(ventana, "El libro se creo exitosamente.", "Agregar Libro", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
-				ventana.getMateriales().agregarLibro(libro);			
+				
+				
+					Relevancia aux;
+					if(relevancia2.getSelectedIndex()==0){
+						aux=Relevancia.ALTA;
+					}
+					else {
+						if(relevancia2.getSelectedIndex()==1){
+							aux=Relevancia.MEDIA;
+						}
+						else {
+							aux=Relevancia.BAJA;
+						}
+					}
+					
+					Libro libro=new Libro(id,(String) txtTitulo.getText(), costo,precioCompra,paginas,aux,fecha_publicacion,txtTema.getText().toString());
+					JOptionPane nuevoLibro = new JOptionPane();
+					agregarATabla(modeloTabla,libro);
+					nuevoLibro.showConfirmDialog(ventana, "El libro se creo exitosamente.", "Agregar Libro", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+					ventana.getMateriales().agregarLibro(libro);			
 				}
 			}
-		});
-		
-				
+		});		
 	}
+	
+	
 	//TODO cambiar estas 2 operaciones para trabajar directamente con el MaterialDao
 	public void agregarATabla(DefaultTableModel modelo, Libro libro) {
 		Object[] obj = {libro.getTitulo(),libro.getCosto(),libro.precio(),libro.getPaginas(),libro.getCalificacion(),libro.getRelevancia(),libro.getId(),libro.getFechaPublicacion()};
 		modelo.addRow(obj);
-		
 	}
 	
 	public void agregarLibrosATabla(DefaultTableModel modelo, MaterialCapacitacionDaoDefault materiales) {
-
 		for(Libro e: materiales.listaLibros()) {
 			agregarATabla(modelo, e);
 		}
 	}
-	
 }

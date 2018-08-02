@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -37,6 +38,7 @@ public class ActualizarLibro2 extends JPanel {
 		JTextField txtPaginas;
 		JButton btnGuardar;
 		JButton btnCancelar;
+		
 		
 		GridBagConstraints gridConst= new GridBagConstraints();
 		
@@ -123,21 +125,61 @@ public class ActualizarLibro2 extends JPanel {
 		gridConst.gridy=7;
 		this.add(btnCancelar, gridConst);
 		
+		
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				ventana.setContentPane(new ActualizarLibro(ventana));
 				ventana.pack();
 			}
 		});
+		
+		
 		btnGuardar.addActionListener(new ActionListener() {
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//if() 
-				{
-					Libro nuevoLibro = new Libro();
+				
+				Date fecha = new Date();
+				fecha = paraActualizar.getFechaPublicacion();
+				
+				String tema = paraActualizar.getTema();
+				
+				Integer idAnterior = paraActualizar.getId();
+				
+				
+				if(!txtTitulo.getText().isEmpty() && !txtCosto.getText().isEmpty() && !txtPrecioCompra.getText().isEmpty() && !txtPaginas.getText().isEmpty() && !ID2.getText().isEmpty()) {
+					
+					Double costo = new Double(txtCosto.getText());
+					Double precioCompra = new Double(txtPrecioCompra.getText());
+					Integer id = new Integer(ID2.getText());
+					Integer paginas = new Integer(txtPaginas.getText());
+					
+					Relevancia aux;
+					if(relevancia2.getSelectedIndex()==0){
+						aux=Relevancia.ALTA;
+					}else {
+						if(relevancia2.getSelectedIndex()==1){
+							aux=Relevancia.MEDIA;
+						}else {
+							 aux=Relevancia.BAJA;
+						}
+					}
+					
+					Libro nuevoLibro = new Libro(id, txtTitulo.getText(), costo, precioCompra, paginas, aux, fecha, tema);
 					ventana.getMateriales().agregarLibro(nuevoLibro);
-					//TODO cuando tengamos lo de la fecha, hay que crear el libro con sus atrubitos
-					//y eliminar el del ID que sacamos en la ventana anterior (IDParaEliminar)
+					
+					ventana.setContentPane(new Inicio(ventana));
+					ventana.pack();
+					
+					
+					for (Libro l : ventana.getMateriales().listaLibros()) {
+						if(l.getId().equals(idAnterior)) {
+							
+						}
+					}
+					
+					
+					//TODO hay que eliminar el del ID que sacamos en la ventana anterior (IDParaEliminar)
 				}
 			}
 		});

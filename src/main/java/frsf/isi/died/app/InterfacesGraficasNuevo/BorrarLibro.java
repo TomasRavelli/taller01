@@ -14,16 +14,13 @@ import frsf.isi.died.tp.modelo.productos.*;
 
 public class BorrarLibro extends JPanel {
 
-
-	
 	public BorrarLibro(Menu ventana) {
-		
 		this.setPreferredSize(new Dimension(800,600));
 		this.setVisible(true);
 		this.setLayout(new GridBagLayout());
 		ventanaBorrar(ventana);
-		
 	}
+	
 	
 	private void ventanaBorrar(Menu ventana) {
 		GridBagConstraints gridConst = new GridBagConstraints();
@@ -48,6 +45,7 @@ public class BorrarLibro extends JPanel {
 		gridConst.gridy=1;
 		this.add(btnCancelar, gridConst);		
 				
+		
 		btnIr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				boolean b=false;
@@ -62,18 +60,20 @@ public class BorrarLibro extends JPanel {
 					//TODO ventana de error: no hay video/libro con ese id
 					JOptionPane noEncontrado = new JOptionPane();
 					noEncontrado.showConfirmDialog(ventana, "No existe libro con ese ID", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
-					}else {
-						ventana.setContentPane(new ActualizarLibro2(ventana,estelibro));
-						ventana.pack();
 					}
+				else {
+					ventana.setContentPane(new BorrarLibro2(ventana,estelibro));
+					ventana.pack();
+				}
 			}
 		});
+		
 		
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				ventana.setContentPane(new Inicio(ventana));
-				ventana.pack();			}
+				ventana.pack();			
+			}
 		});
 	}
-
 }

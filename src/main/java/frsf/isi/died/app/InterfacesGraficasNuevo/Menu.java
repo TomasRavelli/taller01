@@ -18,16 +18,14 @@ public class Menu extends JFrame{
 	private PriorityQueue<MaterialCapacitacion> wishlist = new PriorityQueue<>((m1,m2)->comparar(m1,m2)) ;
 	
 	public static void main(String[] args) {
-	javax.swing.SwingUtilities.invokeLater(new Runnable() {
-	public void run() {
-		
-		new Menu();
-
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				new Menu();
+			}
+		}); 
 	}
-	}); 
 	
 	
-	}
 	public  Menu() {
 		this.setTitle("Aplicacion");
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -57,4 +55,3 @@ public class Menu extends JFrame{
 		}
 	}	
 }
-		

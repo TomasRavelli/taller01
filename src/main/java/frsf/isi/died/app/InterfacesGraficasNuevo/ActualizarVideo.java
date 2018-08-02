@@ -51,6 +51,7 @@ public class ActualizarVideo extends JPanel {
 		gridConst.gridy=6;
 		this.add(btnCancelar, gridConst);	
 		
+		
 		btnIr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				if(txtID.getText().isEmpty()) {
@@ -59,6 +60,8 @@ public class ActualizarVideo extends JPanel {
 				}
 			}
 		});
+		
+		
 		btnIr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				boolean b=false;
@@ -73,12 +76,15 @@ public class ActualizarVideo extends JPanel {
 					//TODO ventana de error: no hay video/libro con ese id
 					JOptionPane noEncontrado = new JOptionPane();
 					noEncontrado.showConfirmDialog(ventana, "No existe video con ese ID", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
-					}else {
+					}
+				else {
 						ventana.setContentPane(new ActualizarVideo2(ventana,estevideo));
 						ventana.pack();									
-					}
+				}
 			}
 		});
+		
+		
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				ventana.setContentPane(new Inicio(ventana));

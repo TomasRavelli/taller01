@@ -19,30 +19,40 @@ public class Video extends MaterialCapacitacion{
 	static Double COSTOSEG=0.15;
 	private Integer duracion;
 	
+	
 	public Video() {
 	}
+	
+	
 	public Video(Integer id,String titulo) {
 		this.id=id;
 		this.titulo=titulo;
 	}
+	
+	
 	public Video(Integer id,String titulo, Double costo, Integer duracion) {
 		this.id=id;
 		this.titulo=titulo;
 		this.costo=costo;
 		this.duracion=duracion;
 	}
+	
+	
 	public Video(Integer id,String titulo, Double costo, Integer durac,Relevancia r, Date date, String tema2) {
 		super(id,titulo,costo, r, tema2);
 		this.duracion=durac;
 		this.calificacion = 0.0;
 		this.votantes = 0;
 		this.fecha_publicacion = date;
+		this.tema = tema2;
 	}
+	
 	
 	
 	public Integer getDuracion(){
 		return duracion;
 	}
+	
 	public Double getCostoxSeg() {
 		return COSTOSEG;
 	}
@@ -50,13 +60,16 @@ public class Video extends MaterialCapacitacion{
 	public Boolean esVideo() {
 		return true;
 	}
+	
 	public Boolean esLibro() {
 		return false;
 	}
+	
 	public Double precio(){
 		return(this.costo+this.duracion.doubleValue()*this.COSTOSEG);
 	}
 
+	
 	@Override
 	public List<String> asCsvRow() {
 		List<String> lista = new ArrayList<String>();
@@ -97,7 +110,5 @@ public class Video extends MaterialCapacitacion{
         }
 		this.fecha_publicacion = fechaDate;
 		
-		
 	}
-	
 }

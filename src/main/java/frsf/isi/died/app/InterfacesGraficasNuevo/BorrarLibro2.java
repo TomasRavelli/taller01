@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -36,6 +37,7 @@ public class BorrarLibro2 extends JPanel{
 		JButton btnCancelar;
 		
 		GridBagConstraints gridConst= new GridBagConstraints();
+		
 		
 		lblTitulo = new JLabel("Titulo: ");
 		gridConst.gridx=0;
@@ -124,15 +126,29 @@ public class BorrarLibro2 extends JPanel{
 		gridConst.gridy=7;
 		this.add(btnCancelar, gridConst);
 		
+		
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				for (Libro l : ventana.getMateriales().listaLibros()) {
+					if (l.getId() == paraBorrar.getId()) {
+						ventana.getMateriales().listaLibros().remove(l);
+					}
+				}
+				
+				//File fichero = new File("libros.csv");
+				
+				ventana.setContentPane(new BorrarLibro(ventana));
+				ventana.pack();
+			}
+		});
+		
+			
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				ventana.setContentPane(new BorrarLibro(ventana));
 				ventana.pack();
-				
 			}
-		});
-		
-	}
-	
-	
+		});	
+	}	
 }

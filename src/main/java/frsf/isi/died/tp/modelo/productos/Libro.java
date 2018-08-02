@@ -23,39 +23,25 @@ public class Libro extends MaterialCapacitacion {
 	 * Precio al que el libro se compro a la editorial que lo vende
 	 */
 	private Double precioCompra;
-	/**
-	 * Cantidad de paginas del libro
-	 */
+	
 	private Integer paginas;
 
-	/**
-	 * Constructor por defecto del Libro
-	 */
+	
 	public Libro() {
 	}
 
-	/**
-	 * permite crerar un libro solo con su titulo e identificador
-	 * @param id es el identificador del libro
-	 * @param titulo es el titulo del libro
-	 */
+	
 	public Libro(Integer id, String titulo) {
 		this(id, titulo,0.0,0.0,0);
 	}
 
-	/**
-	 * permite crear un libro con todos sus parametros
-	 * @param id es el identificador del libro
-	 * @param titulo es el titulo del libro
-	 * @param costo es el costo de ofrecerlo online
-	 * @param duracion es el precio al que se adquirió el libro a la editorial
-	 * @param aux cantidad de paginas del libro
-	 */
+	
 	public Libro(Integer id, String titulo, Double costo, Double precioCompra, Integer paginas) {
 		super(id, titulo, costo);
 		this.precioCompra = precioCompra;
 		this.paginas = paginas;
 	}
+	
 	
 	public Libro(Integer id, String titulo, Double costo, Double precioCompra, Integer paginas,Relevancia r, Date date, String tema2) {
 		super(id, titulo, costo, r,tema2);
@@ -64,43 +50,31 @@ public class Libro extends MaterialCapacitacion {
 		this.calificacion = 0.0;
 		this.votantes = 0;
 		this.fecha_publicacion = date;
+		this.tema = tema2;
 	}
 
-	/**
-	 * retorna el precio al que el libro fue comprado
-	 * @return precio al que el libro fue comprado
-	 */
+	
+	
 	public Double getPrecioCompra() {
 		return precioCompra;
 	}
 	
 	
-
-
-	/**
-	 * asigna el precio de compra del libro
-	 * @param precioCompra
-	 */
 	public void setPrecioCompra(Double precioCompra) {
 		this.precioCompra = precioCompra;
 	}
 
-	/**
-	 * retorna la cantidad de paginas del libro
-	 * @return cantidad de paginas
-	 */
+
 	public Integer getPaginas() {
 		return paginas;
 	}
 
-	/**
-	 * asigna la cantidad de paginas del libro
-	 * @param paginas
-	 */
+	
 	public void setPaginas(Integer paginas) {
 		this.paginas = paginas;
 	}
 
+	
 	@Override
 	public Boolean esLibro() {
 		//TODO 03: implementar metodo abstracto
@@ -125,7 +99,6 @@ public class Libro extends MaterialCapacitacion {
 	 */
 	@Override
 	public Double precio() {
-		//TODO 05: implementar metodo abstracto
 		return (this.costo+(this.precioCompra*(1.0+(0.03*this.paginas.doubleValue()/150.0))));
 	}
 	
@@ -135,7 +108,8 @@ public class Libro extends MaterialCapacitacion {
 		System.out.println("L1: "+L1.esLibro());
 	}
 
-		@Override
+	
+	@Override
 	public List<String> asCsvRow() {
 		List<String> lista = new ArrayList<String>();
 		lista.add(this.id+"");
@@ -151,29 +125,29 @@ public class Libro extends MaterialCapacitacion {
 	}
 
 	
-		@Override
-		public void loadFromStringRow(List<String> datos) {
-			this.id =Integer.valueOf(datos.get(0));
-			this.titulo = datos.get(1);
-			this.costo =Double.valueOf(datos.get(2));
-			this.paginas =Integer.valueOf(datos.get(3));
-			this.precioCompra =Double.valueOf(datos.get(4));
-			this.calificacion = Double.valueOf(datos.get(5));
-			this.relevancia = Relevancia.valueOf(datos.get(6));
-			this.tema = String.valueOf(datos.get(8));
-			
-			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-	        Date fechaDate = new Date();
+	@Override
+	public void loadFromStringRow(List<String> datos) {
+		this.id =Integer.valueOf(datos.get(0));
+		this.titulo = datos.get(1);
+		this.costo =Double.valueOf(datos.get(2));
+		this.paginas =Integer.valueOf(datos.get(3));
+		this.precioCompra =Double.valueOf(datos.get(4));
+		this.calificacion = Double.valueOf(datos.get(5));
+		this.relevancia = Relevancia.valueOf(datos.get(6));
+		this.tema = String.valueOf(datos.get(8));
+		
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+	       Date fechaDate = new Date();
 	      
-	        try {
+	       try {
 	            fechaDate = formato.parse(datos.get(7));
 	            formato.format(fechaDate);
-	        } 
-	        catch (ParseException ex) 
-	        {
-	            System.out.println(ex);
-	        }
-			this.fecha_publicacion = fechaDate;
+	       } 
+	       catch (ParseException ex) 
+	       {
+	           System.out.println(ex);
+	       }
+		this.fecha_publicacion = fechaDate;
 			
-		}
+	}
 }

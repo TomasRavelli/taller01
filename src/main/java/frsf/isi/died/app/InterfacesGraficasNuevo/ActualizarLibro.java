@@ -22,6 +22,7 @@ public class ActualizarLibro extends JPanel {
 		ventanaActualizarLibro(ventana);
 	}
 	
+	
 	public void ventanaActualizarLibro(Menu actualizarL) {
 		GridBagConstraints gridConst = new GridBagConstraints();
 		
@@ -46,6 +47,7 @@ public class ActualizarLibro extends JPanel {
 		gridConst.gridy=1;
 		this.add(btnCancelar, gridConst);		
 				
+		
 		btnIr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				boolean b=false;
@@ -60,10 +62,11 @@ public class ActualizarLibro extends JPanel {
 					//TODO ventana de error: no hay video/libro con ese id
 					JOptionPane noEncontrado = new JOptionPane();
 					noEncontrado.showConfirmDialog(actualizarL, "No existe libro con ese ID", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
-					}else {
+					}
+				else {
 						actualizarL.setContentPane(new ActualizarLibro2(actualizarL,estelibro));
 						actualizarL.pack();
-					}
+				}
 				/*
 				if(!ID2.getText().isEmpty()) {
 				new ActualizarLibro2(Integer.valueOf(ID2.getText()),materiales);
@@ -72,6 +75,8 @@ public class ActualizarLibro extends JPanel {
 				*/
 			}
 		});
+		
+		
 		btnIr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				if(ID2.getText().isEmpty()) {
@@ -79,16 +84,14 @@ public class ActualizarLibro extends JPanel {
 					System.out.println("Campo ID vacio");
 				}
 			}
-		}
-		);
+		});
 	
-	btnCancelar.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e){
-			new Menu();
-			actualizarL.dispose();
-		}
-	});
-	
-
-}
+		
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				actualizarL.setContentPane(new Inicio(actualizarL));
+				actualizarL.pack();
+			}
+		});
 	}
+}

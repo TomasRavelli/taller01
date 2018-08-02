@@ -33,7 +33,7 @@ public class BorrarVideo2 extends JPanel {
 		JLabel lblPrecioCompra;
 		JTextField txtCosto;
 		JTextField txtPrecioCompra;
-		JButton btnGuardarCambios;
+		JButton btnEliminar;
 		JButton btnCancelar;
 		JLabel lblRelevancia;
 		JTextField txtRelevancia;
@@ -105,15 +105,23 @@ public class BorrarVideo2 extends JPanel {
 		txtID.setText(paraBorrar.getId().toString());
 		this.add(txtID, gridConst);
 		
-		btnGuardarCambios = new JButton("Borrar");
+		btnEliminar = new JButton("Eliminar");
 		gridConst.gridx=0;
 		gridConst.gridy=6;
-		this.add(btnGuardarCambios, gridConst);
+		this.add(btnEliminar, gridConst);
 		
 		btnCancelar = new JButton("Cancelar");
 		gridConst.gridx=1;
 		gridConst.gridy=6;
 		this.add(btnCancelar, gridConst);
+		
+		
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
 		
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){

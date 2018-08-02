@@ -39,11 +39,11 @@ public class Inicio extends JPanel {
 	
 	buscarMaterial.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e){
-		
 			menu.setContentPane(new  BuscarMaterial(menu));
 			menu.pack();
 		}
 	});
+	
 	//TODO agregar lo de tema en todos lados
 	salir.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e){
@@ -76,7 +76,6 @@ public class Inicio extends JPanel {
 		public void actionPerformed(ActionEvent e){
 			menu.setContentPane(new ActualizarVideo(menu));
 			menu.pack();
-			
 		}
 	});
 	
