@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import frsf.isi.died.app.interfacesGraficas.CsvDatasource;
+import frsf.isi.died.app.InterfacesGraficasNuevo.CsvDatasource;
 import frsf.isi.died.tp.estructuras.Grafo;
 import frsf.isi.died.tp.modelo.Biblioteca;
 import frsf.isi.died.tp.modelo.BibliotecaABB;

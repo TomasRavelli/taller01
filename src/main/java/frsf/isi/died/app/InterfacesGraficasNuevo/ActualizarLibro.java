@@ -1,68 +1,68 @@
-package frsf.isi.died.app.interfacesGraficas;
+package frsf.isi.died.app.InterfacesGraficasNuevo;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import  javax.swing.*;
 
+import frsf.isi.died.app.InterfacesGraficasNuevo.Menu;
 import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
 import frsf.isi.died.tp.modelo.productos.*;
 
-public class ActualizarLibro extends JFrame {
+public class ActualizarLibro extends JPanel {
 	
 	
-	public ActualizarLibro(MaterialCapacitacionDaoDefault materiales) {
-		JFrame actualizarL = new JFrame("Actualizar Libro");
-		actualizarL.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		actualizarL.pack();
-		actualizarL.setSize(800,600);
-		actualizarL.setVisible(true);
-		JPanel panel = new JPanel();
-		actualizarL.setContentPane(panel);
-		panel.setLayout(new GridBagLayout());
-		ventanaActualizarLibro(actualizarL, panel,materiales);
+	public ActualizarLibro(Menu ventana) {
+		
+		this.setPreferredSize(new Dimension(800,600));
+		this.setVisible(true);
+		this.setLayout(new GridBagLayout());
+		ventanaActualizarLibro(ventana);
 	}
 	
-	public void ventanaActualizarLibro(JFrame actualizarL, JPanel panel,MaterialCapacitacionDaoDefault materiales) {
+	public void ventanaActualizarLibro(Menu actualizarL) {
 		GridBagConstraints gridConst = new GridBagConstraints();
 		
 		JLabel ID = new JLabel("Ingrese ID libro: ");
 		gridConst.gridx=0;
 		gridConst.gridy=0;
-		panel.add(ID, gridConst);
+		this.add(ID, gridConst);
 		
 		JTextField ID2 = new JTextField();
 		ID2.setColumns(10);
 		gridConst.gridx=1;
 		gridConst.gridwidth=2;
-		panel.add(ID2, gridConst);
+		this.add(ID2, gridConst);
 		
 		JButton btnIr = new JButton("Ir");
 		gridConst.gridx=0;
 		gridConst.gridy=1;
-		panel.add(btnIr, gridConst);
+		this.add(btnIr, gridConst);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		gridConst.gridx=1;
 		gridConst.gridy=1;
-		panel.add(btnCancelar, gridConst);		
+		this.add(btnCancelar, gridConst);		
 				
 		btnIr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				boolean b=false;
 				Libro estelibro = new Libro();
-				for(Libro ellibro : materiales.listaLibros()) {
+				for(Libro ellibro : actualizarL.getMateriales().listaLibros()) {
 					if(ellibro.getId()==Integer.valueOf(ID2.getText())) {
 						estelibro=ellibro;
 						b=true;
 					}
 				}
-				if(b) {
-					new ActualizarLibro2(materiales,estelibro);
-					actualizarL.dispose();
+				if(!b || ID2.getText().isEmpty()) {
+					//TODO ventana de error: no hay video/libro con ese id
+					JOptionPane noEncontrado = new JOptionPane();
+					noEncontrado.showConfirmDialog(actualizarL, "No existe libro con ese ID", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 					}else {
-						//TODO ventana de error: no hay video/libro con ese id
+						actualizarL.setContentPane(new ActualizarLibro2(actualizarL,estelibro));
+						actualizarL.pack();
 					}
 				/*
 				if(!ID2.getText().isEmpty()) {

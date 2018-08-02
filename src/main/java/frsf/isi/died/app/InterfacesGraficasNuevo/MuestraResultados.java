@@ -1,5 +1,6 @@
-package frsf.isi.died.app.interfacesGraficas;
+package frsf.isi.died.app.InterfacesGraficasNuevo;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 
 import java.awt.GridBagLayout;
@@ -8,6 +9,8 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,30 +26,24 @@ import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 import frsf.isi.died.tp.modelo.productos.Video;
 import frsf.isi.died.app.dao.*;
 
-public class MuestraResultados extends JFrame{
+public class MuestraResultados extends JPanel{
 	
 	public MuestraResultados() {
 		
 	}
-	public MuestraResultados(List<MaterialCapacitacion> materiales, MaterialCapacitacionDaoDefault retorno){
-		
-		this.setTitle("Resultados de busqueda");
-		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		this.pack();
-		this.setSize(800,600);
+	public MuestraResultados (Menu ventana, List<MaterialCapacitacion> encontrados){
+	
+		this.setPreferredSize(new Dimension(800,600));
 		this.setVisible(true);
-		JPanel panel = new JPanel();
-		this.setContentPane(panel);
-		panel.setLayout(null);
+		this.setLayout(null);
 		
-
 	
 		String[] columnasLibro = {"Titulo","Costo","Precio","Paginas","Calificacion","Relevancia","ID","Fecha Publicacion"};
 		DefaultTableModel modeloTablaLibro = new DefaultTableModel(null,columnasLibro);
 		JTable tablaLibro = new JTable(modeloTablaLibro);
 		JScrollPane scrollTablaLibro = new JScrollPane(tablaLibro);	
 		scrollTablaLibro.setBounds(20, 20, 750, 235);
-		panel.add(scrollTablaLibro);
+		this.add(scrollTablaLibro);
 				
 
 		String[] columnasVideo = {"Titulo","Duracion","Costo","Calificacion","Relevancia","ID","Fecha Publicacion"};		
@@ -54,15 +51,19 @@ public class MuestraResultados extends JFrame{
 		JTable tablaVideo = new JTable(modeloTablaVideo);
 		JScrollPane scrollTablaVideo = new JScrollPane(tablaVideo);	
 		scrollTablaVideo.setBounds(20, 255, 750, 245);
-		panel.add(scrollTablaVideo);
+		this.add(scrollTablaVideo);
 		
 		JButton atras = new JButton("Atras");
 		atras.setBounds(650, 505, 120, 50);
-		panel.add(atras);
+		this.add(atras);
 		
-		atras.addActionListener(e->volverAtras(retorno));
+		JButton agregarWish = new JButton("Agregar a Wishlist");
+		agregarWish.setBounds(450, 505, 150, 50);
+		this.add(agregarWish);
 		
-		for(MaterialCapacitacion m: materiales) {
+		atras.addActionListener(e->volverAtras(ventana));
+		
+		for(MaterialCapacitacion m: encontrados) {
 			
 			if(m.esLibro()) {
 				agregarLibroATabla(modeloTablaLibro,(Libro) m);				
@@ -70,8 +71,53 @@ public class MuestraResultados extends JFrame{
 			else {
 				agregarVideoATabla(modeloTablaVideo,(Video) m);	
 			}
-		}
+		}		
+				
+		agregarWish.addActionListener(e->agregarAWish(ventana,(Vector)modeloTablaLibro.getDataVector(), (Vector)modeloTablaVideo.getDataVector(), tablaLibro.getSelectedRow(), tablaVideo.getSelectedRow()));
+	
+	}
+	
+	
+	
 
+	private void agregarAWish(Menu ventana, Vector libro, Vector video, int filaLibro, int filaVideo) {
+
+		if(filaLibro!=-1 && filaVideo!=-1) {
+		agregarAWish(ventana, (Vector) libro.get(filaLibro), (Vector) video.get(filaVideo));
+		} else {
+			if (filaLibro != -1 && filaVideo == -1) {
+				agregarAWish(ventana, (Vector) libro.get(filaLibro), new Vector());		
+			}
+			else {
+				if(filaVideo != -1 && filaLibro == -1) {
+				agregarAWish(ventana,new Vector(), (Vector) video.get(filaVideo));
+				}
+			}
+		}
+	}
+		
+		
+		
+	private void agregarAWish(Menu ventana, Vector<Object> libro, Vector<Object> video) {	
+		if(!libro.isEmpty()) {
+		for(Libro m: ventana.getMateriales().listaLibros()) {
+				if(m.getId() == libro.get(6)){
+				if(!ventana.getWishlist().contains(m)) {
+				ventana.getWishlist().add(m);
+				}
+			}
+		}	
+	}	
+		if(!video.isEmpty()) {
+			for(Video v2: ventana.getMateriales().listaVideos()) {
+				if(v2.getId() == video.get(5)){
+					if(!ventana.getWishlist().contains(v2)) {
+						ventana.getWishlist().add(v2);
+					}
+				}	
+			}			
+		}
+		
 	}
 	
 	public void agregarLibroATabla(DefaultTableModel modelo, Libro libro) {
@@ -84,8 +130,9 @@ public class MuestraResultados extends JFrame{
 		Object[] obj = {video.getTitulo(),video.getDuracion(),video.getCosto(),video.getCalificacion(),video.getRelevancia(),video.getId(),video.getFechaPublicacion()};
 		modelo.addRow(obj);
 	}
-	public void volverAtras(MaterialCapacitacionDaoDefault retorno) {
-		BuscarMaterial m = new BuscarMaterial(retorno);
-		this.dispose();
+	public void volverAtras(Menu ventana) {
+		ventana.setContentPane(new BuscarMaterial(ventana));
+		ventana.pack();
 	}
+	
 }

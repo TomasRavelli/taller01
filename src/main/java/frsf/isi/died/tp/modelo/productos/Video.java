@@ -31,12 +31,9 @@ public class Video extends MaterialCapacitacion{
 		this.costo=costo;
 		this.duracion=duracion;
 	}
-	public Video(Integer id,String titulo, Double costo, Integer duracion,Relevancia r, Date date) {
-		this.id=id;
-		this.titulo=titulo;
-		this.costo=costo;
-		this.duracion=duracion;
-		this.relevancia = r;
+	public Video(Integer id,String titulo, Double costo, Integer durac,Relevancia r, Date date, String tema2) {
+		super(id,titulo,costo, r, tema2);
+		this.duracion=durac;
 		this.calificacion = 0.0;
 		this.votantes = 0;
 		this.fecha_publicacion = date;
@@ -63,7 +60,6 @@ public class Video extends MaterialCapacitacion{
 	@Override
 	public List<String> asCsvRow() {
 		List<String> lista = new ArrayList<String>();
-		lista.add("0");
 		lista.add(this.id+"");
 		lista.add("\""+this.titulo.toString()+"\"");
 		lista.add(this.costo.toString());
@@ -72,26 +68,27 @@ public class Video extends MaterialCapacitacion{
 		lista.add(this.calificacion.toString());
 		lista.add(this.relevancia.toString());
 		lista.add((new SimpleDateFormat("dd/MM/yyyy")).format(this.fecha_publicacion));
+		lista.add(this.tema.toString());
 		return lista;
 	}
 	
 
 	@Override
 	public void loadFromStringRow(List<String> datos) {
-		this.id =Integer.valueOf(datos.get(1));
-		this.titulo = datos.get(2);
-		this.costo =Double.valueOf(datos.get(3));
-		this.duracion =Integer.valueOf(datos.get(4));
-		this.COSTOSEG =Double.valueOf(datos.get(5));
-		this.calificacion =Double.valueOf(datos.get(6));
-		this.relevancia =Relevancia.valueOf(datos.get(7));
-		
+		this.id =Integer.valueOf(datos.get(0));
+		this.titulo = datos.get(1);
+		this.costo =Double.valueOf(datos.get(2));
+		this.duracion =Integer.valueOf(datos.get(3));
+		this.COSTOSEG =Double.valueOf(datos.get(4));
+		this.calificacion =Double.valueOf(datos.get(5));
+		this.relevancia =Relevancia.valueOf(datos.get(6));
+		this.tema = String.valueOf(datos.get(8));
 		
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		//SimpleDateFormat formato = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+		
         Date fechaDate = new Date();
         try {
-            fechaDate = formato.parse(datos.get(8));
+            fechaDate = formato.parse(datos.get(7));
             formato.format(fechaDate);
         } 
         catch (ParseException ex) 
@@ -99,7 +96,7 @@ public class Video extends MaterialCapacitacion{
             System.out.println(ex);
         }
 		this.fecha_publicacion = fechaDate;
-		System.out.println(fecha_publicacion);
+		
 		
 	}
 	

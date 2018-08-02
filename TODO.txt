@@ -1,3 +1,5 @@
 correjir el coso de la fecha
 borrar
 actualizar
+actualizarLibro
+actualizarLibro2

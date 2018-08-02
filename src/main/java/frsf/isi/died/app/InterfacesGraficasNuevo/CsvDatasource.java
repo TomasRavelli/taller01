@@ -1,4 +1,4 @@
-package frsf.isi.died.app.interfacesGraficas;
+package frsf.isi.died.app.InterfacesGraficasNuevo;
 
 import java.io.File;
 import java.io.FileNotFoundException;

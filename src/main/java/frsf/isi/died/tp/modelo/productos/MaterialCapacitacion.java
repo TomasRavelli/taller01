@@ -70,6 +70,15 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 		this.titulo = titulo;
 		this.costo = costo;
 	}
+	
+	public MaterialCapacitacion(Integer id,String titulo, Double costo, Relevancia r,String tema2) {
+		this.id =id;
+		this.titulo = titulo;
+		this.costo = costo;
+		this.tema = tema2;
+		this.relevancia = r;
+	
+	}
 
 
 	//TODO 01 implementar los metodos getters y setters y escribir el javadoc

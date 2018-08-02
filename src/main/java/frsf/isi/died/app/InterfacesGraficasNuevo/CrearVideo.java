@@ -1,7 +1,9 @@
-package frsf.isi.died.app.interfacesGraficas;
+package frsf.isi.died.app.InterfacesGraficasNuevo;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -11,32 +13,20 @@ import java.util.Date;
 import  javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import frsf.isi.died.app.InterfacesGraficasNuevo.Menu;
 import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
 import frsf.isi.died.tp.modelo.productos.Libro;
 import frsf.isi.died.tp.modelo.productos.Relevancia;
 import frsf.isi.died.tp.modelo.productos.Video;
 
-public class CrearVideo extends JFrame {
+public class CrearVideo extends JPanel {
 
-/*	public static void main(String[] args) {
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				CrearVideo v1 = new CrearVideo();
-				}
-			});
-
-	}*/
 	
 	
-	public CrearVideo(MaterialCapacitacionDaoDefault materialDao) {
-		JFrame crearV = new JFrame("Crear Video");
-		crearV.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		crearV.pack();
-		crearV.setSize(800,600);
-		crearV.setVisible(true);
-		JPanel panel = new JPanel();
-		crearV.setContentPane(panel);
-		panel.setLayout(new GridBagLayout());
+	public CrearVideo(Menu ventana) {
+		this.setPreferredSize(new Dimension(800,600));
+		this.setVisible(true);
+		this.setLayout(new GridBagLayout());
 		
 		
 		JLabel lblTitulo;
@@ -53,6 +43,8 @@ public class CrearVideo extends JFrame {
 		JTextField txtRelevancia;
 		JLabel lblID;
 		JTextField txtID;
+		JLabel lblTema;
+		JTextField txtTema;
 		
 		
 		GridBagConstraints gridConst= new GridBagConstraints();
@@ -66,7 +58,7 @@ public class CrearVideo extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		
 		lblTitulo = new JLabel("Titulo");
-		panel.add(lblTitulo,gridConst);
+		this.add(lblTitulo,gridConst);
 		
 		gridConst.gridx=1;
 		gridConst.gridy=0;
@@ -77,7 +69,7 @@ public class CrearVideo extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		
 		txtTitulo = new JTextField();
-		panel.add(txtTitulo,gridConst);
+		this.add(txtTitulo,gridConst);
 		
 		gridConst.gridx=0;
 		gridConst.gridy=1;
@@ -88,7 +80,7 @@ public class CrearVideo extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		
 		lblDuracion = new JLabel("Duracion");
-		panel.add(lblDuracion, gridConst);
+		this.add(lblDuracion, gridConst);
 		
 		gridConst.gridx=1;
 		gridConst.gridy=1;
@@ -99,7 +91,7 @@ public class CrearVideo extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 
 		txtDuracion = new JTextField();
-		panel.add(txtDuracion, gridConst);
+		this.add(txtDuracion, gridConst);
 		
 		gridConst.gridx=2;
 		gridConst.gridy=1;
@@ -110,7 +102,7 @@ public class CrearVideo extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		
 		lblCosto = new JLabel("Costo");
-		panel.add(lblCosto,gridConst);
+		this.add(lblCosto,gridConst);
 		
 		
 		gridConst.gridx=3;
@@ -122,8 +114,7 @@ public class CrearVideo extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		
 		txtCosto = new JTextField();
-		panel.add(txtCosto, gridConst);
-		
+		this.add(txtCosto, gridConst);
 		
 		
 		gridConst.gridx=4;
@@ -135,7 +126,7 @@ public class CrearVideo extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		
 		JLabel lblFechaPublicacion = new JLabel("Fecha publicacion: ");		
-		panel.add(lblFechaPublicacion, gridConst);
+		this.add(lblFechaPublicacion, gridConst);
 		
 		
 		
@@ -148,11 +139,8 @@ public class CrearVideo extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		
 		JTextField txtFechaPublicacion = new JTextField();
-		panel.add(txtFechaPublicacion, gridConst);
-		
-		
-		
-
+		this.add(txtFechaPublicacion, gridConst);
+	
 		gridConst.gridx=0;
 		gridConst.gridy=2;
 		gridConst.gridheight = 1 ;
@@ -162,7 +150,7 @@ public class CrearVideo extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		
 		lblRelevancia = new JLabel("Relevancia");
-		panel.add(lblRelevancia, gridConst);
+		this.add(lblRelevancia, gridConst);
 		
 
 		gridConst.gridx=1;
@@ -175,7 +163,7 @@ public class CrearVideo extends JFrame {
 		
 		Object[] obj = {"ALTA","MEDIA","BAJA"};
 		JComboBox relevancia2 = new JComboBox(obj);
-		panel.add(relevancia2,gridConst);
+		this.add(relevancia2,gridConst);
 
 		gridConst.gridx=2;
 		gridConst.gridy=2;
@@ -186,7 +174,7 @@ public class CrearVideo extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		
 		lblID = new JLabel("ID");
-		panel.add(lblID, gridConst);
+		this.add(lblID, gridConst);
 		
 		gridConst.gridx=3;
 		gridConst.gridy=2;
@@ -197,7 +185,29 @@ public class CrearVideo extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		
 		txtID = new JTextField();
-		panel.add(txtID, gridConst);
+		this.add(txtID, gridConst);
+	
+		gridConst.gridx=4;
+		gridConst.gridy=2;
+		gridConst.gridheight = 1 ;
+		gridConst.gridwidth = 1;
+		gridConst.weightx = 1.0;
+		gridConst.weighty = 1.0;
+		gridConst.fill = GridBagConstraints.BOTH;
+		
+		lblTema = new JLabel("Tema");
+		this.add(lblTema, gridConst);
+		
+		gridConst.gridx=5;
+		gridConst.gridy=2;
+		gridConst.gridheight = 1 ;
+		gridConst.gridwidth = 1;
+		gridConst.weightx = 1.0;
+		gridConst.weighty = 1.0;
+		gridConst.fill = GridBagConstraints.BOTH;
+		
+		txtTema = new JTextField();
+		this.add(txtTema,gridConst);
 		
 		
 
@@ -217,7 +227,7 @@ public class CrearVideo extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		gridConst.anchor = GridBagConstraints.PAGE_START;
 	
-		panel.add(scrollTabla,gridConst);
+		this.add(scrollTabla,gridConst);
 		
 		gridConst.gridx = 5;
 		gridConst.gridy = 8;
@@ -228,7 +238,7 @@ public class CrearVideo extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		
 		btnCancelar = new JButton("Cancelar");
-		panel.add(btnCancelar, gridConst);
+		this.add(btnCancelar, gridConst);
 		
 
 		gridConst.gridx = 4;
@@ -239,23 +249,23 @@ public class CrearVideo extends JFrame {
 		gridConst.weighty = 1.0;
 		gridConst.fill = GridBagConstraints.BOTH;
 		btnAgregar = new JButton("Agregar");
-		panel.add(btnAgregar,gridConst);
+		this.add(btnAgregar,gridConst);
 		
 		
 
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				Menu v1 = new Menu();
-				crearV.dispose();
+				ventana.setContentPane(new Inicio(ventana));
+				ventana.pack();
 			}
 		});
 
-		agregarVideosATabla(modeloTabla,materialDao);
+		agregarVideosATabla(modeloTabla,ventana.getMateriales());
 
 	btnAgregar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e){
 			if(!txtTitulo.getText().isEmpty() && !txtCosto.getText().isEmpty() &&
-				!txtDuracion.getText().isEmpty()  && !txtID.getText().isEmpty() && !txtFechaPublicacion.getText().isEmpty())
+				!txtDuracion.getText().isEmpty()  && !txtID.getText().isEmpty() && !txtFechaPublicacion.getText().isEmpty() && !txtTema.getText().isEmpty())
 			{Integer id = new Integer(txtID.getText());
 			Double costo = new Double(txtCosto.getText());
 			String titulo = new String(txtTitulo.getText());
@@ -281,11 +291,11 @@ public class CrearVideo extends JFrame {
 					 aux=Relevancia.BAJA;
 				}
 			}
-			Video video = new Video(id,titulo, costo,duracion,aux,fecha_publicacion);
+			Video video = new Video(id,titulo, costo,duracion,aux,fecha_publicacion, txtTema.getText().toString());
 			JOptionPane nuevoLibro = new JOptionPane();
 			agregarATabla(modeloTabla, video);
-			nuevoLibro.showConfirmDialog(crearV, "El video se creo exitosamente.", "Agregar Video", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
-			materialDao.agregarVideo(video);
+			nuevoLibro.showConfirmDialog(ventana, "El video se creo exitosamente.", "Agregar Video", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+			ventana.getMateriales().agregarVideo(video);
 			}
 		}
 	});
@@ -299,15 +309,7 @@ public void agregarATabla(DefaultTableModel modelo, Video video) {
 }
 
 public void agregarVideosATabla(DefaultTableModel modelo,MaterialCapacitacionDaoDefault materiales) {
-	/*CsvDatasource archivo = new CsvDatasource();
-	
-	for(int i = 0; i<archivo.readFile("videos.csv").size();i++) {
-		Video video = new Video();
-		video.loadFromStringRow(archivo.readFile("videos.csv").get(i));
-		agregarATabla(modelo, video);
 
-	}
-	*/
 	for(Video e: materiales.listaVideos()) {
 		agregarATabla(modelo, e);
 	}

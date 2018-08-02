@@ -1,5 +1,6 @@
-package frsf.isi.died.app.interfacesGraficas;
+package frsf.isi.died.app.InterfacesGraficasNuevo;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -19,18 +20,13 @@ import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
 import frsf.isi.died.tp.modelo.productos.Libro;
 import frsf.isi.died.tp.modelo.productos.Video;
 
-public class ActualizarVideo2 {
+public class ActualizarVideo2 extends JPanel{
 	
 	
-	public ActualizarVideo2(MaterialCapacitacionDaoDefault materiales,Video paraActualizar){
-		JFrame crearV = new JFrame("Actualizar Video");
-		crearV.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		crearV.pack();
-		crearV.setSize(800,600);
-		crearV.setVisible(true);
-		JPanel panel = new JPanel();
-		crearV.setContentPane(panel);
-		panel.setLayout(new GridBagLayout());
+	public ActualizarVideo2(Menu ventana, Video video){
+		this.setPreferredSize(new Dimension(800,600));
+		this.setVisible(true);
+		this.setLayout(new GridBagLayout());
 		
 		
 		JLabel lblTitulo;
@@ -52,82 +48,82 @@ public class ActualizarVideo2 {
 		lblTitulo = new JLabel("Titulo: ");
 		gridConst.gridx=0;
 		gridConst.gridy=0;
-		panel.add(lblTitulo, gridConst);
+		this.add(lblTitulo, gridConst);
 		
 		txtTitulo = new JTextField();
 		txtTitulo.setColumns(20);
 		gridConst.gridx=1;
 		gridConst.gridwidth=5;
-		txtTitulo.setText(paraActualizar.getTitulo().toString());
-		panel.add(txtTitulo, gridConst);
+		//txtTitulo.setText(paraActualizar.getTitulo().toString());
+		this.add(txtTitulo, gridConst);
 		
 		lblCosto= new JLabel("Costo: ");		
 		gridConst.gridx=0;
 		gridConst.gridy=1;
 		gridConst.weightx=0.0;
-		panel.add(lblCosto, gridConst);
+		this.add(lblCosto, gridConst);
 		
 		txtCosto = new JTextField();
 		txtCosto.setColumns(5);
 		gridConst.gridx=1;
-		txtCosto.setText(paraActualizar.getCosto().toString());
-		panel.add(txtCosto, gridConst);
+		//txtCosto.setText(paraActualizar.getCosto().toString());
+		this.add(txtCosto, gridConst);
 		
 		lblPrecioCompra= new JLabel("Duracion: ");
 		gridConst.gridx=0;
 		gridConst.gridy=2;
-		panel.add(lblPrecioCompra, gridConst);
+		this.add(lblPrecioCompra, gridConst);
 		
 		txtPrecioCompra = new JTextField();
 		txtPrecioCompra.setColumns(5);
 		gridConst.gridx=3;
-		txtPrecioCompra.setText(paraActualizar.precio().toString());
+		//txtPrecioCompra.setText(paraActualizar.precio().toString());
 		//TODO no se bien que es este precio VER
-		panel.add(txtPrecioCompra, gridConst);
+		this.add(txtPrecioCompra, gridConst);
 		
 		lblRelevancia= new JLabel("Relevancia: ");
 		gridConst.gridx=0;
 		gridConst.gridy=3;
-		panel.add(lblRelevancia, gridConst);
+		this.add(lblRelevancia, gridConst);
 		
 		/*txtRelevancia = new JTextField();
 		txtRelevancia.setColumns(5);
 		gridConst.gridx=3;
-		panel.add(txtRelevancia, gridConst);*/
+		this.add(txtRelevancia, gridConst);*/
 		Object[] obj = {"ALTA","MEDIA","BAJA"};
 		JComboBox relevancia2 = new JComboBox(obj);
 		gridConst.gridx=1;
 		gridConst.gridy=5;
-		relevancia2.setSelectedItem(paraActualizar.getRelevancia());
-		panel.add(relevancia2,gridConst);
+		//relevancia2.setSelectedItem(paraActualizar.getRelevancia());
+		this.add(relevancia2,gridConst);
 				
 		lblID= new JLabel("ID: ");
 		gridConst.gridx=0;
 		gridConst.gridy=5;
-		panel.add(lblID, gridConst);
+		this.add(lblID, gridConst);
 		
 		txtID = new JTextField();
 		txtID.setColumns(5);
 		gridConst.gridx=3;
-		txtID.setText(paraActualizar.getId().toString());
-		panel.add(txtID, gridConst);
+		//txtID.setText(paraActualizar.getId().toString());
+		this.add(txtID, gridConst);
 		
 		//TODO Agregar lo de la fecha
 		
 		btnGuardarCambios = new JButton("Guardar Cambios");
 		gridConst.gridx=0;
 		gridConst.gridy=6;
-		panel.add(btnGuardarCambios, gridConst);
+		this.add(btnGuardarCambios, gridConst);
 		
 		btnCancelar = new JButton("Cancelar");
 		gridConst.gridx=1;
 		gridConst.gridy=6;
-		panel.add(btnCancelar, gridConst);
+		this.add(btnCancelar, gridConst);
 		
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				ActualizarVideo v1 = new ActualizarVideo(materiales);
-				crearV.dispose();
+				ventana.setContentPane(new ActualizarVideo(ventana));
+				ventana.pack();;
 			}
 		});
 		

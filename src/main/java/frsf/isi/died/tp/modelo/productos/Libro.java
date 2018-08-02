@@ -57,11 +57,10 @@ public class Libro extends MaterialCapacitacion {
 		this.paginas = paginas;
 	}
 	
-	public Libro(Integer id, String titulo, Double costo, Double precioCompra, Integer paginas,Relevancia r, Date date) {
-		super(id, titulo, costo);
+	public Libro(Integer id, String titulo, Double costo, Double precioCompra, Integer paginas,Relevancia r, Date date, String tema2) {
+		super(id, titulo, costo, r,tema2);
 		this.precioCompra = precioCompra;
 		this.paginas = paginas;
-		this.setRelevancia(r);
 		this.calificacion = 0.0;
 		this.votantes = 0;
 		this.fecha_publicacion = date;
@@ -139,7 +138,6 @@ public class Libro extends MaterialCapacitacion {
 		@Override
 	public List<String> asCsvRow() {
 		List<String> lista = new ArrayList<String>();
-		lista.add("1");
 		lista.add(this.id+"");
 		lista.add("\""+this.titulo.toString()+"\"");
 		lista.add(this.costo.toString());
@@ -148,27 +146,27 @@ public class Libro extends MaterialCapacitacion {
 		lista.add(this.calificacion.toString());
 		lista.add(this.relevancia.toString());
 		lista.add((new SimpleDateFormat("dd/MM/yyyy")).format(this.fecha_publicacion));
+		lista.add(this.tema.toString());
 		return lista;
 	}
 
 	
 		@Override
 		public void loadFromStringRow(List<String> datos) {
-			this.id =Integer.valueOf(datos.get(1));
-			this.titulo = datos.get(2);
-			this.costo =Double.valueOf(datos.get(3));
-			this.paginas =Integer.valueOf(datos.get(4));
-			this.precioCompra =Double.valueOf(datos.get(5));
-			this.calificacion = Double.valueOf(datos.get(6));
-			this.relevancia = Relevancia.valueOf(datos.get(7));
-			
+			this.id =Integer.valueOf(datos.get(0));
+			this.titulo = datos.get(1);
+			this.costo =Double.valueOf(datos.get(2));
+			this.paginas =Integer.valueOf(datos.get(3));
+			this.precioCompra =Double.valueOf(datos.get(4));
+			this.calificacion = Double.valueOf(datos.get(5));
+			this.relevancia = Relevancia.valueOf(datos.get(6));
+			this.tema = String.valueOf(datos.get(8));
 			
 			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-			//SimpleDateFormat formato = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
 	        Date fechaDate = new Date();
-	        
+	      
 	        try {
-	            fechaDate = formato.parse(datos.get(8));
+	            fechaDate = formato.parse(datos.get(7));
 	            formato.format(fechaDate);
 	        } 
 	        catch (ParseException ex) 

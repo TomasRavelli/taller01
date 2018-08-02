@@ -1,6 +1,7 @@
-package frsf.isi.died.app.interfacesGraficas;
+package frsf.isi.died.app.InterfacesGraficasNuevo;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 
 import java.awt.GridBagLayout;
@@ -18,6 +19,7 @@ import java.util.Vector;
 import  javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import frsf.isi.died.app.InterfacesGraficasNuevo.Menu;
 import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
 import frsf.isi.died.tp.modelo.productos.Libro;
 import frsf.isi.died.tp.modelo.productos.Relevancia;
@@ -26,31 +28,22 @@ import frsf.isi.died.tp.modelo.productos.Relevancia;
 //import frsf.isi.died.app.vista.material.LibroTableModel;
 
 
-public class CrearLibro extends JFrame {
+public class CrearLibro extends JPanel {
 
-	/*public static void main(String[] args) {
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				CrearLibro l1 = new CrearLibro();
-				}
-			});
 
-	}*/
 	
 	
-	public CrearLibro(MaterialCapacitacionDaoDefault materialDao) {
-		JFrame crearL = new JFrame("Crear Libro");
-		crearL.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		crearL.pack();
-		crearL.setSize(800,600);
-		crearL.setVisible(true);
-		JPanel panel = new JPanel();
-		crearL.setContentPane(panel);
-		panel.setLayout(new GridBagLayout());
+	public CrearLibro(Menu ventana) {
+		
+		this.setPreferredSize(new Dimension(800,600));
+		this.setVisible(true);
+		this.setLayout(new GridBagLayout());
 		
 		
 		JLabel lblTitulo;
 		JTextField txtTitulo;
+		JLabel lblTema;
+		JTextField txtTema;
 		JLabel lblCosto;
 		JLabel lblPrecioCompra;
 		JLabel lblPaginas;
@@ -58,35 +51,53 @@ public class CrearLibro extends JFrame {
 		JTextField txtPrecioCompra;
 		JTextField txtPaginas;
 		JButton btnAgregar;
-
 		JButton btnCancelar;
-
-		
-
 		
 		GridBagConstraints gridConst= new GridBagConstraints();
+		
 		gridConst.gridx=0;
 		gridConst.gridy=0;
 		gridConst.gridheight = 1 ;
-		gridConst.gridwidth = 5;
+		gridConst.gridwidth = 1;
 		gridConst.weightx = 1.0;
 		gridConst.weighty = 1.0;
 		gridConst.fill = GridBagConstraints.BOTH;
 		
-		lblTitulo = new JLabel("Titulo: ");
-		panel.add(lblTitulo, gridConst);
+		lblTitulo = new JLabel("Titulo");
+		this.add(lblTitulo, gridConst);
 		
 		gridConst.gridx=1;
 		gridConst.gridy=0;
 		gridConst.gridheight = 1 ;
-		gridConst.gridwidth = 5;
+		gridConst.gridwidth = 3;
 		gridConst.weightx = 1.0;
 		gridConst.weighty = 1.0;
 		gridConst.fill = GridBagConstraints.BOTH;
 		
-		
 		txtTitulo = new JTextField();
-		panel.add(txtTitulo, gridConst);
+		this.add(txtTitulo, gridConst);
+		
+		gridConst.gridx=4;
+		gridConst.gridy=0;
+		gridConst.gridheight = 1 ;
+		gridConst.gridwidth = 1;
+		gridConst.weightx = 1.0;
+		gridConst.weighty = 1.0;
+		gridConst.fill = GridBagConstraints.BOTH;
+		
+		lblTema = new JLabel("Tema");
+		this.add(lblTema, gridConst);
+		
+		gridConst.gridx=5;
+		gridConst.gridy=0;
+		gridConst.gridheight = 1 ;
+		gridConst.gridwidth = 1;
+		gridConst.weightx = 1.0;
+		gridConst.weighty = 1.0;
+		gridConst.fill = GridBagConstraints.BOTH;
+		
+		txtTema = new JTextField();
+		this.add(txtTema, gridConst);
 		
 		gridConst.gridx=0;
 		gridConst.gridy=1;
@@ -97,7 +108,7 @@ public class CrearLibro extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		
 		lblCosto= new JLabel("Costo: ");		
-		panel.add(lblCosto, gridConst);
+		this.add(lblCosto, gridConst);
 		
 		gridConst.gridx=1;
 		gridConst.gridy=1;
@@ -108,7 +119,7 @@ public class CrearLibro extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		
 		txtCosto = new JTextField();
-		panel.add(txtCosto, gridConst);
+		this.add(txtCosto, gridConst);
 		
 		gridConst.gridx=2;
 		gridConst.gridy=1;
@@ -119,7 +130,7 @@ public class CrearLibro extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		
 		lblPrecioCompra= new JLabel("Precio Compra: ");
-		panel.add(lblPrecioCompra, gridConst);
+		this.add(lblPrecioCompra, gridConst);
 		
 		gridConst.gridx=3;
 		gridConst.gridy=1;
@@ -130,7 +141,7 @@ public class CrearLibro extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		
 		txtPrecioCompra = new JTextField();
-		panel.add(txtPrecioCompra, gridConst);
+		this.add(txtPrecioCompra, gridConst);
 		
 		gridConst.gridx=4;
 		gridConst.gridy=1;
@@ -141,7 +152,7 @@ public class CrearLibro extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		
 		lblPaginas= new JLabel("Paginas: ");		
-		panel.add(lblPaginas, gridConst);
+		this.add(lblPaginas, gridConst);
 		
 		gridConst.gridx=5;
 		gridConst.gridy=1;
@@ -152,7 +163,7 @@ public class CrearLibro extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		
 		txtPaginas = new JTextField();
-		panel.add(txtPaginas, gridConst);
+		this.add(txtPaginas, gridConst);
 		
 		gridConst.gridx=4;
 		gridConst.gridy=2;
@@ -163,7 +174,7 @@ public class CrearLibro extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		
 		JLabel lblFechaPublicacion = new JLabel("Fecha publicacion: ");		
-		panel.add(lblFechaPublicacion, gridConst);
+		this.add(lblFechaPublicacion, gridConst);
 		
 		gridConst.gridx=5;
 		gridConst.gridy=2;
@@ -174,7 +185,7 @@ public class CrearLibro extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		
 		JTextField txtFechaPublicacion = new JTextField();
-		panel.add(txtFechaPublicacion, gridConst);
+		this.add(txtFechaPublicacion, gridConst);
 		
 		gridConst.gridx=0;
 		gridConst.gridy=2;
@@ -187,7 +198,7 @@ public class CrearLibro extends JFrame {
 		JLabel relevancia = new JLabel("Relevancia:");
 		
 		btnAgregar = new JButton("Agregar");
-		panel.add(relevancia,gridConst);
+		this.add(relevancia,gridConst);
 		
 		gridConst.gridx=1;
 		gridConst.gridy=2;
@@ -199,7 +210,7 @@ public class CrearLibro extends JFrame {
 		
 		Object[] obj = {"ALTA","MEDIA","BAJA"};
 		JComboBox relevancia2 = new JComboBox(obj);
-		panel.add(relevancia2,gridConst);
+		this.add(relevancia2,gridConst);
 
 		gridConst.gridx=2;
 		gridConst.gridy=2;
@@ -210,7 +221,7 @@ public class CrearLibro extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 	
 		JLabel id = new JLabel("ID:");
-		panel.add(id,gridConst);
+		this.add(id,gridConst);
 		
 		gridConst.gridx=3;
 		gridConst.gridy=2;
@@ -221,7 +232,7 @@ public class CrearLibro extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		
 		JTextField ID2 = new JTextField();
-		panel.add(ID2,gridConst);
+		this.add(ID2,gridConst);
 		
 		String[] columnas = {"Titulo","Costo","Precio","Paginas","Calificacion","Relevancia","ID","Fecha Publicacion"};
 		
@@ -238,7 +249,7 @@ public class CrearLibro extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		gridConst.anchor = GridBagConstraints.PAGE_START;
 	
-		panel.add(scrollTabla,gridConst);
+		this.add(scrollTabla,gridConst);
 		
 		gridConst.gridx = 5;
 		gridConst.gridy = 8;
@@ -249,7 +260,7 @@ public class CrearLibro extends JFrame {
 		gridConst.fill = GridBagConstraints.BOTH;
 		btnCancelar = new JButton("Cancelar");
 		
-		panel.add(btnCancelar, gridConst);
+		this.add(btnCancelar, gridConst);
 		
 		gridConst.gridx = 4;
 		gridConst.gridy = 8;
@@ -259,21 +270,21 @@ public class CrearLibro extends JFrame {
 		gridConst.weighty = 1.0;
 		gridConst.fill = GridBagConstraints.BOTH;
 		btnAgregar = new JButton("Agregar");
-		panel.add(btnAgregar,gridConst);
+		this.add(btnAgregar,gridConst);
 		
-		agregarLibrosATabla(modeloTabla,materialDao);	
+		agregarLibrosATabla(modeloTabla,ventana.getMateriales());	
 		
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				Menu v1 = new Menu();
-				crearL.dispose();
+				ventana.setContentPane(new Inicio(ventana));
+				ventana.pack();				
 			}
 		});
 		
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				if(!txtTitulo.getText().isEmpty() && !txtCosto.getText().isEmpty() && !txtPrecioCompra.getText().isEmpty() &&
-					!txtPaginas.getText().isEmpty()  && !ID2.getText().isEmpty() && !txtFechaPublicacion.getText().isEmpty())
+					!txtPaginas.getText().isEmpty()  && !ID2.getText().isEmpty() && !txtFechaPublicacion.getText().isEmpty() && !txtTema.getText().isEmpty())
 				{Integer id = new Integer(ID2.getText());
 				Double costo = new Double(txtCosto.getText());
 				Double precioCompra = new Double(txtPrecioCompra.getText());
@@ -300,11 +311,11 @@ public class CrearLibro extends JFrame {
 						 aux=Relevancia.BAJA;
 					}
 				}
-				Libro libro=new Libro(id,(String) txtTitulo.getText(), costo,precioCompra,paginas,aux,fecha_publicacion);
+				Libro libro=new Libro(id,(String) txtTitulo.getText(), costo,precioCompra,paginas,aux,fecha_publicacion,txtTema.getText().toString());
 				JOptionPane nuevoLibro = new JOptionPane();
 				agregarATabla(modeloTabla,libro);
-				nuevoLibro.showConfirmDialog(crearL, "El libro se creo exitosamente.", "Agregar Libro", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
-				materialDao.agregarLibro(libro);			
+				nuevoLibro.showConfirmDialog(ventana, "El libro se creo exitosamente.", "Agregar Libro", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+				ventana.getMateriales().agregarLibro(libro);			
 				}
 			}
 		});
@@ -319,15 +330,7 @@ public class CrearLibro extends JFrame {
 	}
 	
 	public void agregarLibrosATabla(DefaultTableModel modelo, MaterialCapacitacionDaoDefault materiales) {
-		/*VERSION ANTERIOR
-		CsvDatasource archivo = new CsvDatasource();
-		for(int i = 0; i<archivo.readFile("libros.csv").size();i++) {
-			Libro l = new Libro();
-			l.loadFromStringRow(archivo.readFile("libros.csv").get(i));
-			agregarATabla(modelo, l);
-	
-		}
-		*/
+
 		for(Libro e: materiales.listaLibros()) {
 			agregarATabla(modelo, e);
 		}
