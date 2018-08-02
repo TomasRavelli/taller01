@@ -436,7 +436,7 @@ public class BuscarMaterial extends JPanel{
 	public List<MaterialCapacitacion> buscarPorTema(String tema, MaterialCapacitacionDaoDefault materiales) {
 		List<MaterialCapacitacion> encontrados = new ArrayList<>();
 		for(MaterialCapacitacion m: materiales.listaMateriales()) {
-			if(m.getTema().equals(tema)) {
+			if(m.getTema().contains(tema)) {
 				encontrados.add(m);
 			}
 		}

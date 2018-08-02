@@ -169,6 +169,7 @@ public class ActualizarVideo2 extends JPanel{
 					
 					Video nuevoVideo = new Video(id, txtTitulo.getText(), costo, duracion, aux, fecha, tema);
 					ventana.getMateriales().actualizarMaterial(paraActualizar, nuevoVideo);
+					ventana.getMateriales().modificarArchivoVideo(ventana);
 					ventana.setContentPane(new Inicio(ventana));
 					ventana.pack();
 					

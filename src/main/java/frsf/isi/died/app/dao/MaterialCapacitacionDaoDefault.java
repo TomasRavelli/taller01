@@ -6,7 +6,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import frsf.isi.died.app.InterfacesGraficasNuevo.CsvDatasource;
+import frsf.isi.died.app.InterfacesGraficasNuevo.Menu;
 import frsf.isi.died.tp.estructuras.Grafo;
 import frsf.isi.died.tp.modelo.Biblioteca;
 import frsf.isi.died.tp.modelo.BibliotecaABB;
@@ -139,5 +142,50 @@ public class MaterialCapacitacionDaoDefault implements MaterialCapacitacionDao{
 		}
 	}
 	
+	public void modificarArchivoVideo (Menu ventana) {
+
+		CsvDatasource archivoL = new CsvDatasource();
+		File videos = new File("videos.csv");
+	
+		if (videos.exists() && videos.delete()) {
+		
+			for(Video v: ventana.getMateriales().listaVideos()) {
+			try {
+				archivoL.agregarFilaAlFinal("videos.csv", v.asCsvRow());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+	}
+		}
+		else {
+			JOptionPane noEncontrado = new JOptionPane();
+			noEncontrado.showConfirmDialog(ventana, "No se pudo efectuar el cambio", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+		}			
+		
+	}
+	
+	public void modificarArchivoLibro(Menu ventana) {
+
+		CsvDatasource archivoL = new CsvDatasource();
+		File libros = new File("libros.csv");
+		
+		if (libros.exists() && libros.delete()) {
+		for(Libro l: ventana.getMateriales().listaLibros()) {
+			try {
+				archivoL.agregarFilaAlFinal("libros.csv", l.asCsvRow());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+	}
+		}
+		else {
+			JOptionPane noEncontrado = new JOptionPane();
+			noEncontrado.showConfirmDialog(ventana, "No se pudo efectuar el cambio", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+		}
+	}
 	
 }

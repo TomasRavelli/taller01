@@ -205,15 +205,7 @@ public class Grafo<T> {
     	enTratamiento.addAll(this.getAdyacentes(vertice));
     	visitados.add(vertice);
     	return primerVerticeGradoK(gradoK, visitados,enTratamiento);
-    	
-    	/*for(int i=0;i<this.getAdyacentes(vertice).size();i++) {
-    		if(!visitados.contains(this.getAdyacentes(v).get(i)) && this.gradoSalida(this.getAdyacentes(v).get(i))==gradoK) {
-    			return this.getAdyacentes(v).get(i);
-    		}else {
-    			visitados.add(this.getNodo(this.getAdyacentes(v).get(i)));
-    		}
-    	}*/
-		
+    			
     }
     private T primerVerticeGradoK(Integer gradoK, HashSet<Vertice> visitados, HashSet<Vertice> enTratamiento) {
     	HashSet<Vertice> aux= new HashSet<>();

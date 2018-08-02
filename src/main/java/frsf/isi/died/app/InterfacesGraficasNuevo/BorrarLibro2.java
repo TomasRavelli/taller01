@@ -6,10 +6,12 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
@@ -129,11 +131,9 @@ public class BorrarLibro2 extends JPanel{
 		
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//System.out.println(ventana.getMateriales().listaLibros().toString());
+
 				ventana.getMateriales().borrarMaterial(paraBorrar);
-				//System.out.println(ventana.getMateriales().listaLibros().toString());
-				//File fichero = new File("libros.csv");
-				
+				ventana.getMateriales().modificarArchivoLibro(ventana);
 				ventana.setContentPane(new BorrarLibro(ventana));
 				ventana.pack();
 			}

@@ -167,6 +167,7 @@ public class ActualizarLibro2 extends JPanel {
 					
 					Libro nuevoLibro = new Libro(id, txtTitulo.getText(), costo, precioCompra, paginas, aux, fecha, tema);
 					ventana.getMateriales().actualizarMaterial(paraActualizar, nuevoLibro);
+					ventana.getMateriales().modificarArchivoLibro(ventana);
 					ventana.setContentPane(new Inicio(ventana));
 					ventana.pack();
 					

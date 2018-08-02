@@ -67,12 +67,6 @@ public class ActualizarLibro extends JPanel {
 						actualizarL.setContentPane(new ActualizarLibro2(actualizarL,estelibro));
 						actualizarL.pack();
 				}
-				/*
-				if(!ID2.getText().isEmpty()) {
-				new ActualizarLibro2(Integer.valueOf(ID2.getText()),materiales);
-				actualizarL.dispose();
-				}
-				*/
 			}
 		});
 		

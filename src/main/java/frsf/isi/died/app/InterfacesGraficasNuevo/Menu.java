@@ -15,7 +15,7 @@ import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 public class Menu extends JFrame{
 	
 	private MaterialCapacitacionDaoDefault materiales = new MaterialCapacitacionDaoDefault();
-	private PriorityQueue<MaterialCapacitacion> wishlist = new PriorityQueue<>((m1,m2)->comparar(m1,m2)) ;
+	private PriorityQueue<MaterialCapacitacion> wishlist = new PriorityQueue<>((m1,m2)->comparar(m1,m2));
 	
 	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
