@@ -168,19 +168,14 @@ public class ActualizarVideo2 extends JPanel{
 					}
 					
 					Video nuevoVideo = new Video(id, txtTitulo.getText(), costo, duracion, aux, fecha, tema);
-					ventana.getMateriales().agregarVideo(nuevoVideo);
-					
+					ventana.getMateriales().actualizarMaterial(paraActualizar, nuevoVideo);
 					ventana.setContentPane(new Inicio(ventana));
 					ventana.pack();
 					
 					
-					for (Video v : ventana.getMateriales().listaVideos()) {
-						if(v.getId().equals(idAnterior)) {
-							
-						}
-					}
 					
-					//TODO hay que eliminar el del ID que sacamos en la ventana anterior (IDParaEliminar)
+					
+					
 				}
 			}
 		});

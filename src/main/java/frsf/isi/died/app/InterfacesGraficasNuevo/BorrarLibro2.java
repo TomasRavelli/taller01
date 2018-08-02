@@ -129,13 +129,9 @@ public class BorrarLibro2 extends JPanel{
 		
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				for (Libro l : ventana.getMateriales().listaLibros()) {
-					if (l.getId() == paraBorrar.getId()) {
-						ventana.getMateriales().listaLibros().remove(l);
-					}
-				}
-				
+				//System.out.println(ventana.getMateriales().listaLibros().toString());
+				ventana.getMateriales().borrarMaterial(paraBorrar);
+				//System.out.println(ventana.getMateriales().listaLibros().toString());
 				//File fichero = new File("libros.csv");
 				
 				ventana.setContentPane(new BorrarLibro(ventana));

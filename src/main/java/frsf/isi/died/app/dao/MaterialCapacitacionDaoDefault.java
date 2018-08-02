@@ -1,6 +1,7 @@
 package frsf.isi.died.app.dao;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +60,12 @@ public class MaterialCapacitacionDaoDefault implements MaterialCapacitacionDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public void borrarMaterial(MaterialCapacitacion param) {
+		GRAFO_MATERIAL.deleteNodo(param);
+	}
+	public void actualizarMaterial(MaterialCapacitacion viejo, MaterialCapacitacion nuevo) {
+		GRAFO_MATERIAL.updateNodo(viejo, nuevo);
 	}
 
 	@Override
@@ -131,6 +138,6 @@ public class MaterialCapacitacionDaoDefault implements MaterialCapacitacionDao{
 			e.printStackTrace();
 		}
 	}
-
+	
 	
 }

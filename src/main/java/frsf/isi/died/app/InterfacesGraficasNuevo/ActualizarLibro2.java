@@ -166,20 +166,10 @@ public class ActualizarLibro2 extends JPanel {
 					}
 					
 					Libro nuevoLibro = new Libro(id, txtTitulo.getText(), costo, precioCompra, paginas, aux, fecha, tema);
-					ventana.getMateriales().agregarLibro(nuevoLibro);
-					
+					ventana.getMateriales().actualizarMaterial(paraActualizar, nuevoLibro);
 					ventana.setContentPane(new Inicio(ventana));
 					ventana.pack();
 					
-					
-					for (Libro l : ventana.getMateriales().listaLibros()) {
-						if(l.getId().equals(idAnterior)) {
-							
-						}
-					}
-					
-					
-					//TODO hay que eliminar el del ID que sacamos en la ventana anterior (IDParaEliminar)
 				}
 			}
 		});

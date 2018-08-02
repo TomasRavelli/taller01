@@ -5,6 +5,7 @@
  */
 package frsf.isi.died.tp.estructuras;
 
+import java.io.File;
 /**
  *
  * @author mdominguez
@@ -14,6 +15,8 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+
+import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 
 public class Grafo<T> {
 
@@ -34,12 +37,29 @@ public class Grafo<T> {
 	public void addNodo(T nodo){
 		this.addNodo(new Vertice<T>(nodo));
 	}
-
 	/**
 	 * @param nodo
 	 */
 	public void addNodo(Vertice<T> nodo){
 		this.vertices.add(nodo);
+	}
+	
+	public void deleteNodo(T nodo) {
+		Vertice<T> x = new Vertice<>(nodo);
+		vertices.remove(x);
+		List<Arista<T>> aux= new ArrayList<>();
+		for(Arista<T> a: aristas) {
+			if(a.getInicio().equals(x) || a.getFin().equals(x)) {
+				aux.add(a);
+			}
+		}
+		aristas.removeAll(aux);
+	}
+	public void updateNodo(T viejo, T nuevo) {
+		Vertice<T> v = new Vertice<>(viejo);
+		Vertice<T> n = new Vertice<>(nuevo);
+		vertices.remove(v);
+		vertices.add(n);
 	}
 	
 	/**
