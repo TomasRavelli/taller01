@@ -1,5 +1,10 @@
 correjir el coso de la fecha
 borrar
 actualizar
-actualizarLibro
-actualizarLibro2
+clase actualizarLibro
+clase actualizarLibro2
+clase Inicio
+clase actualizarVideo2
+clase actualizarVideo
+clase borrarlibro
+clase borrarVideo
