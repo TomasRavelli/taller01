@@ -55,6 +55,7 @@ public class Grafo<T> {
 		}
 		aristas.removeAll(aux);
 	}
+	
 	public void updateNodo(T viejo, T nuevo) {
 		Vertice<T> v = new Vertice<>(viejo);
 		Vertice<T> n = new Vertice<>(nuevo);
@@ -207,6 +208,7 @@ public class Grafo<T> {
     	return primerVerticeGradoK(gradoK, visitados,enTratamiento);
     			
     }
+    
     private T primerVerticeGradoK(Integer gradoK, HashSet<Vertice> visitados, HashSet<Vertice> enTratamiento) {
     	HashSet<Vertice> aux= new HashSet<>();
     	for(Vertice<T> vertice : enTratamiento) {
@@ -238,6 +240,7 @@ public class Grafo<T> {
         return this.buscarCaminoNSaltos(origen, destino, saltos, new HashSet<Vertice>());
          
     }
+    
     private List<T> buscarCaminoNSaltos(Vertice<T> n1,Vertice<T> n2,Integer saltos,HashSet<Vertice> visitados){
         ArrayList<T> resultado = new ArrayList<>();
         ArrayList<T> auxiliar = new ArrayList<>();
@@ -258,7 +261,4 @@ public class Grafo<T> {
         }
         return resultado;
     }
-
-
 }
-

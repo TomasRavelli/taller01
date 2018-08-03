@@ -12,12 +12,14 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
 import frsf.isi.died.tp.modelo.productos.Libro;
+import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 import frsf.isi.died.tp.modelo.productos.Relevancia;
 
 public class ActualizarLibro2 extends JPanel {
@@ -148,29 +150,41 @@ public class ActualizarLibro2 extends JPanel {
 				
 				
 				if(!txtTitulo.getText().isEmpty() && !txtCosto.getText().isEmpty() && !txtPrecioCompra.getText().isEmpty() && !txtPaginas.getText().isEmpty() && !ID2.getText().isEmpty()) {
-					
-					Double costo = new Double(txtCosto.getText());
-					Double precioCompra = new Double(txtPrecioCompra.getText());
-					Integer id = new Integer(ID2.getText());
-					Integer paginas = new Integer(txtPaginas.getText());
-					
-					Relevancia aux;
-					if(relevancia2.getSelectedIndex()==0){
-						aux=Relevancia.ALTA;
-					}else {
-						if(relevancia2.getSelectedIndex()==1){
-							aux=Relevancia.MEDIA;
-						}else {
-							 aux=Relevancia.BAJA;
+					boolean b=false;
+					for(MaterialCapacitacion m : ventana.getMateriales().listaMateriales()) {
+						if(m.getId().equals(Integer.valueOf(ID2.getText())) && !(m.getId().equals(idAnterior))) {
+							b=true;
 						}
 					}
-					
-					Libro nuevoLibro = new Libro(id, txtTitulo.getText(), costo, precioCompra, paginas, aux, fecha, tema);
-					ventana.getMateriales().actualizarMaterial(paraActualizar, nuevoLibro);
-					ventana.getMateriales().modificarArchivoLibro(ventana);
-					ventana.setContentPane(new Inicio(ventana));
-					ventana.pack();
-					
+					if(b) {
+						JOptionPane noEligio = new JOptionPane();
+						noEligio.showConfirmDialog(ventana, "Ese ID no esta libre", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+					}else {
+						Double costo = new Double(txtCosto.getText());
+						Double precioCompra = new Double(txtPrecioCompra.getText());
+						Integer id = new Integer(ID2.getText());
+						Integer paginas = new Integer(txtPaginas.getText());
+						
+						Relevancia aux;
+						if(relevancia2.getSelectedIndex()==0){
+							aux=Relevancia.ALTA;
+						}else {
+							if(relevancia2.getSelectedIndex()==1){
+								aux=Relevancia.MEDIA;
+							}else {
+								 aux=Relevancia.BAJA;
+							}
+						}
+						
+						Libro nuevoLibro = new Libro(id, txtTitulo.getText(), costo, precioCompra, paginas, aux, fecha, tema);
+						ventana.getMateriales().actualizarMaterial(paraActualizar, nuevoLibro);
+						ventana.getMateriales().modificarArchivoLibro(ventana);
+						ventana.setContentPane(new Inicio(ventana));
+						ventana.pack();
+					}
+				}else {
+					JOptionPane noEligio = new JOptionPane();
+					noEligio.showConfirmDialog(ventana, "Faltan campos por completar", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
