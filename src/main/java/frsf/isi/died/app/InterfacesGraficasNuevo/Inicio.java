@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import frsf.isi.died.app.dao.*;
 
 public class Inicio extends JPanel {
 	
@@ -17,6 +18,7 @@ public class Inicio extends JPanel {
 	this.setVisible(true);
 	this.setLayout(new GridLayout(0,2));
 	
+	menu.RecargarMateriales();
 	
 	JButton crearLibro = new JButton ("Crear Libro");
 	this.add(crearLibro);

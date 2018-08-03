@@ -134,6 +134,7 @@ public class BorrarLibro2 extends JPanel{
 
 				ventana.getMateriales().borrarMaterial(paraBorrar);
 				ventana.getMateriales().modificarArchivoLibro(ventana);
+				//ventana.RecargarMateriales();
 				ventana.setContentPane(new BorrarLibro(ventana));
 				ventana.pack();
 			}

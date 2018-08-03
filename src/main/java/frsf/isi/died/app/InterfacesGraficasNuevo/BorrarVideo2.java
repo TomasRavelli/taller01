@@ -126,6 +126,7 @@ public class BorrarVideo2 extends JPanel {
 				
 				ventana.getMateriales().borrarMaterial(paraBorrar);
 				ventana.getMateriales().modificarArchivoVideo(ventana);
+				//ventana.RecargarMateriales();
 				ventana.setContentPane(new BorrarLibro(ventana));
 				ventana.pack();
 			}

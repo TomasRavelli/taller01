@@ -27,9 +27,9 @@ public class MaterialCapacitacionDaoDefault implements MaterialCapacitacionDao{
 	
 	public MaterialCapacitacionDaoDefault() {
 		dataSource = new CsvDatasource();
-		if(GRAFO_MATERIAL.esVacio()) {
+		//if(GRAFO_MATERIAL.esVacio()) {
 			cargarGrafo();
-		}
+		//}
 	}
 
 	private void cargarGrafo() {

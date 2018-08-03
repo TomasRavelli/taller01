@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import frsf.isi.died.app.InterfacesGraficasNuevo.Menu;
 import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
 import frsf.isi.died.tp.modelo.productos.Libro;
+import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 import frsf.isi.died.tp.modelo.productos.Relevancia;
 import frsf.isi.died.tp.modelo.productos.Video;
 
@@ -265,38 +266,56 @@ public class CrearVideo extends JPanel {
 	btnAgregar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e){
 			if(!txtTitulo.getText().isEmpty() && !txtCosto.getText().isEmpty() &&
-				!txtDuracion.getText().isEmpty()  && !txtID.getText().isEmpty() && !txtFechaPublicacion.getText().isEmpty() && !txtTema.getText().isEmpty())
-			{Integer id = new Integer(txtID.getText());
-			Double costo = new Double(txtCosto.getText());
-			String titulo = new String(txtTitulo.getText());
-			Integer duracion = new Integer(txtDuracion.getText());
-			
-			//Formato fecha de publicacion
-			Date fecha_publicacion = new Date();
-			SimpleDateFormat d = new SimpleDateFormat("dd/MM/yyyy");
-			try {
-				fecha_publicacion = d.parse(txtFechaPublicacion.getText());
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}
-			
-			
-			Relevancia aux;
-			if(relevancia2.getSelectedIndex()==0){
-				aux=Relevancia.ALTA;
-			}else {
-				if(relevancia2.getSelectedIndex()==1){
-					aux=Relevancia.MEDIA;
-				}else {
-					 aux=Relevancia.BAJA;
+				!txtDuracion.getText().isEmpty()  && !txtID.getText().isEmpty() && !txtFechaPublicacion.getText().isEmpty() && !txtTema.getText().isEmpty()){
+				boolean IDlibre=true;
+				for(MaterialCapacitacion m: ventana.getMateriales().listaMateriales()) {
+					if(m.getId()==Integer.valueOf(txtID.getText())) {
+						IDlibre=false;
+					}
 				}
+				if(IDlibre) {
+					Integer id = new Integer(txtID.getText());
+					Double costo = new Double(txtCosto.getText());
+					String titulo = new String(txtTitulo.getText());
+					Integer duracion = new Integer(txtDuracion.getText());
+					
+					//Formato fecha de publicacion
+					Date fecha_publicacion = new Date();
+					SimpleDateFormat d = new SimpleDateFormat("dd/MM/yyyy");
+					try {
+						fecha_publicacion = d.parse(txtFechaPublicacion.getText());
+					} catch (ParseException e1) {
+						e1.printStackTrace();
+					}
+					
+					
+					Relevancia aux;
+					if(relevancia2.getSelectedIndex()==0){
+						aux=Relevancia.ALTA;
+					}else {
+						if(relevancia2.getSelectedIndex()==1){
+							aux=Relevancia.MEDIA;
+						}else {
+							 aux=Relevancia.BAJA;
+						}
+					}
+					Video video = new Video(id,titulo, costo,duracion,aux,fecha_publicacion, txtTema.getText().toString());
+					JOptionPane nuevoLibro = new JOptionPane();
+					agregarATabla(modeloTabla, video);
+					nuevoLibro.showConfirmDialog(ventana, "El video se creo exitosamente.", "Agregar Video", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+					ventana.getMateriales().agregarVideo(video);
+					ventana.RecargarMateriales();
+				}else {
+					//ID ocupado
+					JOptionPane noEligio = new JOptionPane();
+					noEligio.showConfirmDialog(ventana, "Ese ID no esta libre", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+				}
+			}else {
+				//campos vacios
+				JOptionPane noEligio = new JOptionPane();
+				noEligio.showConfirmDialog(ventana, "Faltan campos por llenar", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 			}
-			Video video = new Video(id,titulo, costo,duracion,aux,fecha_publicacion, txtTema.getText().toString());
-			JOptionPane nuevoLibro = new JOptionPane();
-			agregarATabla(modeloTabla, video);
-			nuevoLibro.showConfirmDialog(ventana, "El video se creo exitosamente.", "Agregar Video", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
-			ventana.getMateriales().agregarVideo(video);
-			}
+		
 		}
 	});
 	

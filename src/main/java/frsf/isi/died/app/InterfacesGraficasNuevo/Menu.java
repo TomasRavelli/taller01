@@ -39,6 +39,10 @@ public class Menu extends JFrame{
 		return materiales;
 	}
 	
+	public void RecargarMateriales() {
+		this.materiales = new MaterialCapacitacionDaoDefault();
+	}
+	
 	public PriorityQueue<MaterialCapacitacion> getWishlist(){
 		return wishlist;
 	}

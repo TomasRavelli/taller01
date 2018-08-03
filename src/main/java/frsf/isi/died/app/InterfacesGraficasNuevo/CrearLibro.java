@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 import frsf.isi.died.app.InterfacesGraficasNuevo.Menu;
 import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
 import frsf.isi.died.tp.modelo.productos.Libro;
+import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 import frsf.isi.died.tp.modelo.productos.Relevancia;
 
 
@@ -283,7 +284,13 @@ public class CrearLibro extends JPanel {
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				if(!txtTitulo.getText().isEmpty() && !txtCosto.getText().isEmpty() && !txtPrecioCompra.getText().isEmpty() && !txtPaginas.getText().isEmpty()  && !ID2.getText().isEmpty() && !txtFechaPublicacion.getText().isEmpty() && !txtTema.getText().isEmpty()){
-					
+					boolean IDlibre=true;
+					for(MaterialCapacitacion m: ventana.getMateriales().listaMateriales()) {
+						if(m.getId()==Integer.valueOf(ID2.getText())) {
+							IDlibre=false;
+						}
+					}
+					if(IDlibre) {
 					Integer id = new Integer(ID2.getText());
 					Double costo = new Double(txtCosto.getText());
 					Double precioCompra = new Double(txtPrecioCompra.getText());
@@ -317,8 +324,19 @@ public class CrearLibro extends JPanel {
 					JOptionPane nuevoLibro = new JOptionPane();
 					agregarATabla(modeloTabla,libro);
 					nuevoLibro.showConfirmDialog(ventana, "El libro se creo exitosamente.", "Agregar Libro", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
-					ventana.getMateriales().agregarLibro(libro);			
+					ventana.getMateriales().agregarLibro(libro);	
+					ventana.RecargarMateriales();
+					}else {
+						//ID ocupado
+						JOptionPane noEligio = new JOptionPane();
+						noEligio.showConfirmDialog(ventana, "Ese ID no esta libre", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+					}
+				}else {
+					//faltan campos de llenar
+					JOptionPane noEligio = new JOptionPane();
+					noEligio.showConfirmDialog(ventana, "Faltan campos por llenar", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 				}
+			
 			}
 		});		
 	}
