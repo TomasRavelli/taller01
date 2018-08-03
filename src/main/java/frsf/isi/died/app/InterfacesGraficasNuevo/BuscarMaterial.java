@@ -363,46 +363,28 @@ public class BuscarMaterial extends JPanel{
 		eTe.setVisible(false);
 		fD.setVisible(true);
 		fD2.setVisible(true);
-		
-		Date fecha_publicacion1 = new Date();
-		SimpleDateFormat d = new SimpleDateFormat("dd/MM/yyyy");
-		try {
-			fecha_publicacion1 = d.parse(fD.getText());
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
-		final Date fecha1 = fecha_publicacion1;
-		
-		Date fecha_publicacion2 = new Date();
-		SimpleDateFormat d2 = new SimpleDateFormat("dd/MM/yyyy");
-		try {
-			fecha_publicacion2 = d2.parse(fD2.getText());
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
-		final Date fecha2 = fecha_publicacion2;
-		
+
 		buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				switch(validacionBoton) {
 				case 0:{
-					ordenarPorTitulo(buscarPorFecha(fecha1,fecha2,buscarM.getMateriales()),buscarM);
+					ordenarPorTitulo(buscarPorFecha(fD.getText(), fD2.getText(),buscarM.getMateriales()),buscarM);
 					break;
 				}
 				case 1:{
-					ordenarPorCalificacion(buscarPorFecha(fecha1,fecha2,buscarM.getMateriales()),buscarM);
+					ordenarPorCalificacion(buscarPorFecha(fD.getText(), fD2.getText(),buscarM.getMateriales()),buscarM);
 					break;
 				}
 				case 2:{
-					ordenarPorPrecio(buscarPorFecha(fecha1,fecha2,buscarM.getMateriales()),buscarM);
+					ordenarPorPrecio(buscarPorFecha(fD.getText(), fD2.getText(),buscarM.getMateriales()),buscarM);
 					break;
 				}
 				case 3:{
-					ordenarPorFecha(buscarPorFecha(fecha1,fecha2,buscarM.getMateriales()),buscarM);
+					ordenarPorFecha(buscarPorFecha(fD.getText(), fD2.getText(),buscarM.getMateriales()),buscarM);
 					break;
 				}
 				case 4:{
-					ordenarPorRelevancia(buscarPorFecha(fecha1,fecha2,buscarM.getMateriales()),buscarM);
+					ordenarPorRelevancia(buscarPorFecha(fD.getText(), fD2.getText(),buscarM.getMateriales()),buscarM);
 					break;
 				}
 				default:{
@@ -442,10 +424,24 @@ public class BuscarMaterial extends JPanel{
 		}
 		return encontrados;
 	}
-	public List<MaterialCapacitacion> buscarPorFecha(Date f1,Date f2, MaterialCapacitacionDaoDefault materiales) {
+	public List<MaterialCapacitacion> buscarPorFecha(String f1, String f2, MaterialCapacitacionDaoDefault materiales) {
 		List<MaterialCapacitacion> encontrados = new ArrayList<>();
+		Date fecha1 = new Date();
+		Date fecha2 = new Date();
+		
+		try {
+			fecha1 = (new SimpleDateFormat("dd/MM/yyy")).parse(f1);
+			fecha2 = (new SimpleDateFormat("dd/MM/yyy")).parse(f2);
+			
+		} catch (ParseException e) {
+	
+			JOptionPane fechaInvalida = new JOptionPane();
+			fechaInvalida.showConfirmDialog(this, "Fecha Invalida", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+			
+		}
+		
 		for(MaterialCapacitacion m: materiales.listaMateriales()) {
-			if(m.getFechaPublicacion().compareTo(f1)>0 && m.getFechaPublicacion().compareTo(f2)<0) {
+			if(m.getFechaPublicacion().compareTo(fecha1) > 0 && m.getFechaPublicacion().compareTo(fecha2) < 0) {
 				encontrados.add(m);
 			}
 		}

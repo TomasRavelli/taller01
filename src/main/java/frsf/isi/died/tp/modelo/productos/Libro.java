@@ -140,14 +140,13 @@ public class Libro extends MaterialCapacitacion {
 	       Date fechaDate = new Date();
 	      
 	       try {
-	            fechaDate = formato.parse(datos.get(7));
-	            formato.format(fechaDate);
+	            fechaDate = (new SimpleDateFormat("dd/MM/yyy")).parse(datos.get(7));
 	       } 
 	       catch (ParseException ex) 
 	       {
 	           System.out.println(ex);
 	       }
-		this.fecha_publicacion = fechaDate;
+	       fecha_publicacion = fechaDate;
 			
 	}
 }
