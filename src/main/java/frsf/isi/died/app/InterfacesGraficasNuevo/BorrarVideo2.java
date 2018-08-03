@@ -135,7 +135,7 @@ public class BorrarVideo2 extends JPanel {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				 ventana.setContentPane(new BorrarVideo(ventana));;
-				ventana.pack();
+				 ventana.pack();
 			}
 		});
 	}

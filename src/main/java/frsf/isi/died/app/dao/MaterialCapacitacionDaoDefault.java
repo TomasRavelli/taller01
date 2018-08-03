@@ -172,20 +172,18 @@ public class MaterialCapacitacionDaoDefault implements MaterialCapacitacionDao{
 		File libros = new File("libros.csv");
 		
 		if (libros.exists() && libros.delete()) {
-		for(Libro l: ventana.getMateriales().listaLibros()) {
-			try {
-				archivoL.agregarFilaAlFinal("libros.csv", l.asCsvRow());
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			for(Libro l: ventana.getMateriales().listaLibros()) {
+				try {
+					archivoL.agregarFilaAlFinal("libros.csv", l.asCsvRow());
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 
-	}
+			}
 		}
 		else {
 			JOptionPane noEncontrado = new JOptionPane();
 			noEncontrado.showConfirmDialog(ventana, "No se pudo efectuar el cambio", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 		}
-	}
-	
+	}	
 }

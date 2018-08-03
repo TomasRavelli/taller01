@@ -135,10 +135,6 @@ public class ActualizarVideo2 extends JPanel{
 		
 		btnGuardarCambios.addActionListener(new ActionListener() {
 			
-			//List<List<String>> nuevoContenido = new ArrayList<>();
-		
-			
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
@@ -172,11 +168,7 @@ public class ActualizarVideo2 extends JPanel{
 					ventana.getMateriales().modificarArchivoVideo(ventana);
 					ventana.setContentPane(new Inicio(ventana));
 					ventana.pack();
-					
-					
-					
-					
-					
+							
 				}
 			}
 		});

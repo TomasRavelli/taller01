@@ -97,6 +97,8 @@ public class BuscarMaterial extends JPanel{
 	this.add(xRelevancia);
 	
 	
+	//BOTONES
+		
 	JButton wishlist = new JButton("Wishlist");
 	wishlist.setBounds(350, 500, 100, 30);
 	wishlist.setVisible(true);
@@ -111,6 +113,7 @@ public class BuscarMaterial extends JPanel{
 	cancelar.setBounds(650, 500, 100, 30);
 	cancelar.setVisible(true);
 	this.add(cancelar);
+	
 	
 	//Dibujar campo titulo
 	JTextField escribirTitulo = new JTextField();

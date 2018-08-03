@@ -27,6 +27,11 @@ import frsf.isi.died.tp.modelo.productos.Video;
 import frsf.isi.died.app.dao.*;
 
 public class MuestraResultados extends JPanel{
+
+	DefaultTableModel modeloTablaLibro;
+	JTable tablaLibro;
+	DefaultTableModel modeloTablaVideo;
+	JTable tablaVideo;
 	
 	public MuestraResultados() {
 		
@@ -39,19 +44,26 @@ public class MuestraResultados extends JPanel{
 		
 	
 		String[] columnasLibro = {"Titulo","Costo","Precio","Paginas","Calificacion","Relevancia","ID","Fecha Publicacion"};
-		DefaultTableModel modeloTablaLibro = new DefaultTableModel(null,columnasLibro);
-		JTable tablaLibro = new JTable(modeloTablaLibro);
+		modeloTablaLibro = new DefaultTableModel(null,columnasLibro);
+	     tablaLibro = new JTable(modeloTablaLibro);
 		JScrollPane scrollTablaLibro = new JScrollPane(tablaLibro);	
 		scrollTablaLibro.setBounds(20, 20, 750, 235);
 		this.add(scrollTablaLibro);
 				
 
 		String[] columnasVideo = {"Titulo","Duracion","Costo","Calificacion","Relevancia","ID","Fecha Publicacion"};		
-		DefaultTableModel modeloTablaVideo = new DefaultTableModel(null,columnasVideo);
-		JTable tablaVideo = new JTable(modeloTablaVideo);
+		modeloTablaVideo = new DefaultTableModel(null,columnasVideo);
+		tablaVideo = new JTable(modeloTablaVideo);
 		JScrollPane scrollTablaVideo = new JScrollPane(tablaVideo);	
 		scrollTablaVideo.setBounds(20, 255, 750, 245);
 		this.add(scrollTablaVideo);
+		
+		//BOTONES
+		
+		JButton asignarRelaciones = new JButton("Asignar Relaciones");
+		asignarRelaciones.setBounds(220, 505, 180, 50);
+		asignarRelaciones.setVisible(true);
+		this.add(asignarRelaciones);
 		
 		JButton atras = new JButton("Atras");
 		atras.setBounds(650, 505, 120, 50);
@@ -75,10 +87,46 @@ public class MuestraResultados extends JPanel{
 				
 		agregarWish.addActionListener(e->agregarAWish(ventana,(Vector)modeloTablaLibro.getDataVector(), (Vector)modeloTablaVideo.getDataVector(), tablaLibro.getSelectedRow(), tablaVideo.getSelectedRow()));
 	
+		asignarRelaciones.addActionListener(e->mostrarNodosxTema(tablaVideo.getSelectedRow(),tablaLibro.getSelectedRow(), ventana));
+		
 	}
 	
 	
-	
+	public void mostrarNodosxTema (Integer v, Integer l, Menu ventana) {
+		
+		if (l!=-1 && v!=-1) {
+			tablaVideo.clearSelection();
+			tablaLibro.clearSelection();
+		}
+		else {
+			if (l!=-1) {
+				Integer idSeleccionado = Integer.valueOf(modeloTablaLibro.getValueAt(l, 6).toString());
+				Libro libroSeleccionado = new Libro();
+				
+				for (Libro libro : ventana.getMateriales().listaLibros()) {
+					if (libro.getId().equals(idSeleccionado)) {
+						libroSeleccionado = libro;
+						ventana.setContentPane(new MuestraNodos(ventana,buscarNodosTema(libro,ventana.getMateriales())));
+						ventana.pack();
+					}
+				}
+				
+			}
+			else {
+				Integer idSeleccionado = Integer.valueOf(modeloTablaVideo.getValueAt(l, 5).toString());
+				Video videoSeleccionado = new Video();
+				
+				for (Video video : ventana.getMateriales().listaVideos()) {
+					if (video.getId().equals(idSeleccionado)) {
+						videoSeleccionado = video;
+						ventana.setContentPane(new MuestraNodos(ventana,buscarNodosTema(videoSeleccionado,ventana.getMateriales())));
+						ventana.pack();
+					}
+				}
+			}
+		}
+	}
+		
 
 	private void agregarAWish(Menu ventana, Vector libro, Vector video, int filaLibro, int filaVideo) {
 
@@ -130,9 +178,24 @@ public class MuestraResultados extends JPanel{
 		Object[] obj = {video.getTitulo(),video.getDuracion(),video.getCosto(),video.getCalificacion(),video.getRelevancia(),video.getId(),video.getFechaPublicacion()};
 		modelo.addRow(obj);
 	}
+	
 	public void volverAtras(Menu ventana) {
 		ventana.setContentPane(new BuscarMaterial(ventana));
 		ventana.pack();
 	}
-	
+
+
+
+	public List<MaterialCapacitacion> buscarNodosTema(MaterialCapacitacion mat, MaterialCapacitacionDaoDefault materiales) {
+		List<MaterialCapacitacion> encontrados = new ArrayList<>();
+		for(MaterialCapacitacion m: materiales.listaMateriales()) {
+			if(m.getTema().equals(mat.getTema())) {
+				encontrados.add(m);
+			}
+		}
+		return encontrados;
+	}
+
+
+
 }
