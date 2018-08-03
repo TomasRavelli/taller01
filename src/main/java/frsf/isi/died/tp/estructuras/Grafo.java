@@ -5,7 +5,6 @@
  */
 package frsf.isi.died.tp.estructuras;
 
-import java.io.File;
 /**
  *
  * @author mdominguez

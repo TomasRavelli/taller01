@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package frsf.isi.died.app.vistaGrafo;
+package frsf.isi.died.app.grafo;
 
 import java.awt.BasicStroke;
 import java.awt.GradientPaint;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package frsf.isi.died.app.vistaGrafo;
+package frsf.isi.died.app.grafo;
 
 import frsf.isi.died.tp.estructuras.Vertice;
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;

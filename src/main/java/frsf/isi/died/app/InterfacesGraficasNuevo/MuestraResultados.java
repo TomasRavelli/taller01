@@ -24,6 +24,7 @@ import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
 import frsf.isi.died.tp.modelo.productos.Libro;
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 import frsf.isi.died.tp.modelo.productos.Video;
+import frsf.isi.died.app.controller.GrafoController;
 import frsf.isi.died.app.dao.*;
 
 public class MuestraResultados extends JPanel{
@@ -87,12 +88,12 @@ public class MuestraResultados extends JPanel{
 				
 		agregarWish.addActionListener(e->agregarAWish(ventana,(Vector)modeloTablaLibro.getDataVector(), (Vector)modeloTablaVideo.getDataVector(), tablaLibro.getSelectedRow(), tablaVideo.getSelectedRow()));
 	
-		asignarRelaciones.addActionListener(e->mostrarNodosxTema(tablaVideo.getSelectedRow(),tablaLibro.getSelectedRow(), ventana));
+		asignarRelaciones.addActionListener(e->mostrarNodosxTema(tablaVideo.getSelectedRow(),tablaLibro.getSelectedRow(), ventana, encontrados));
 		
 	}
 	
 	
-	public void mostrarNodosxTema (Integer v, Integer l, Menu ventana) {
+	public void mostrarNodosxTema (Integer v, Integer l, Menu ventana, List<MaterialCapacitacion> encontrados) {
 		
 		if (l!=-1 && v!=-1) {
 			tablaVideo.clearSelection();
@@ -106,11 +107,10 @@ public class MuestraResultados extends JPanel{
 				for (Libro libro : ventana.getMateriales().listaLibros()) {
 					if (libro.getId().equals(idSeleccionado)) {
 						libroSeleccionado = libro;
-						ventana.setContentPane(new MuestraNodos(ventana,buscarNodosTema(libro,ventana.getMateriales())));
-						ventana.pack();
 					}
 				}
-				
+				ventana.setContentPane(new MuestraNodos(ventana,buscarNodosTema(libroSeleccionado,ventana.getMateriales()),encontrados));
+				ventana.pack();
 			}
 			else {
 				Integer idSeleccionado = Integer.valueOf(modeloTablaVideo.getValueAt(l, 5).toString());
@@ -119,10 +119,10 @@ public class MuestraResultados extends JPanel{
 				for (Video video : ventana.getMateriales().listaVideos()) {
 					if (video.getId().equals(idSeleccionado)) {
 						videoSeleccionado = video;
-						ventana.setContentPane(new MuestraNodos(ventana,buscarNodosTema(videoSeleccionado,ventana.getMateriales())));
-						ventana.pack();
 					}
 				}
+				ventana.setContentPane(new MuestraNodos(ventana,buscarNodosTema(videoSeleccionado,ventana.getMateriales()),encontrados));
+				ventana.pack();
 			}
 		}
 	}
@@ -193,6 +193,7 @@ public class MuestraResultados extends JPanel{
 				encontrados.add(m);
 			}
 		}
+		System.out.println(encontrados.toString());
 		return encontrados;
 	}
 
