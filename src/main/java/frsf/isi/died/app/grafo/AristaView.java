@@ -95,10 +95,10 @@ public class AristaView {
         this.destino = destino;
     }
 
-    @Override
+     @Override
     public String toString() {
         return "Arista{" + "origen=" + origen + ", destino=" + destino + ", linea=" + linea + ", formatoLinea=" + formatoLinea + ", gradiente=" + color + '}';
-    }
+     }
 
 
 

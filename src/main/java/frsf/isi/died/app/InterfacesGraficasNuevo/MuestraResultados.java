@@ -113,7 +113,8 @@ public class MuestraResultados extends JPanel{
 				ventana.pack();
 			}
 			else {
-				Integer idSeleccionado = Integer.valueOf(modeloTablaVideo.getValueAt(l, 5).toString());
+				if(v!=-1) {
+				Integer idSeleccionado = Integer.valueOf(modeloTablaVideo.getValueAt(v, 5).toString());
 				Video videoSeleccionado = new Video();
 				
 				for (Video video : ventana.getMateriales().listaVideos()) {
@@ -124,6 +125,7 @@ public class MuestraResultados extends JPanel{
 				ventana.setContentPane(new MuestraNodos(ventana,buscarNodosTema(videoSeleccionado,ventana.getMateriales()),encontrados));
 				ventana.pack();
 			}
+		}
 		}
 	}
 		
@@ -193,7 +195,6 @@ public class MuestraResultados extends JPanel{
 				encontrados.add(m);
 			}
 		}
-		System.out.println(encontrados.toString());
 		return encontrados;
 	}
 

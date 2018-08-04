@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import frsf.isi.died.app.InterfacesGraficasNuevo.CsvDatasource;
 import frsf.isi.died.app.InterfacesGraficasNuevo.Menu;
+import frsf.isi.died.tp.estructuras.Arista;
 import frsf.isi.died.tp.estructuras.Grafo;
 import frsf.isi.died.tp.modelo.Biblioteca;
 import frsf.isi.died.tp.modelo.BibliotecaABB;
@@ -27,10 +28,10 @@ public class MaterialCapacitacionDaoDefault implements MaterialCapacitacionDao{
 	
 	public MaterialCapacitacionDaoDefault() {
 		dataSource = new CsvDatasource();
-		//if(GRAFO_MATERIAL.esVacio()) {
+		if(GRAFO_MATERIAL.esVacio()) {
 			borrar();
 			cargarGrafo();
-		//}
+		}
 	}
 
 	private void borrar() {
@@ -40,6 +41,7 @@ public class MaterialCapacitacionDaoDefault implements MaterialCapacitacionDao{
 	}
 	
 	private void cargarGrafo() {
+	
 		List<List<String>> libros = dataSource.readFile("libros.csv");
 		for(List<String> filaLibro : libros) {
 			Libro aux = new Libro();
@@ -58,6 +60,9 @@ public class MaterialCapacitacionDaoDefault implements MaterialCapacitacionDao{
 			MaterialCapacitacion n2 = this.findById(Integer.valueOf(filaArista.get(2)));
 			GRAFO_MATERIAL.conectar(n1, n2);
 		}
+	
+			
+		
  	}
 	
 	@Override
@@ -130,12 +135,23 @@ public class MaterialCapacitacionDaoDefault implements MaterialCapacitacionDao{
 		MaterialCapacitacion n2 = this.findById(idDestino);
 		return GRAFO_MATERIAL.buscarCaminoNSaltos(n1, n2, saltos);
 	}
+	
+	public List<MaterialCapacitacion> buscarCamino(Integer idOrigen, Integer idDestino) {
+		MaterialCapacitacion n1 = this.findById(idOrigen);
+		MaterialCapacitacion n2 = this.findById(idDestino);
+		return GRAFO_MATERIAL.buscarCamino(n1, n2);
+	}
 
 	@Override
 	public void crearCamino(Integer idOrigen, Integer idDestino) {
 		MaterialCapacitacion n1 = this.findById(idOrigen);
 		MaterialCapacitacion n2 = this.findById(idDestino);
+		Arista<MaterialCapacitacion> auxiliar = new Arista<>(GRAFO_MATERIAL.getNodo(n1), GRAFO_MATERIAL.getNodo(n2));
+		
+		if(!GRAFO_MATERIAL.getAristas().contains(auxiliar)) {
+		
 		GRAFO_MATERIAL.conectar(n1, n2);
+		
 		List<String> fila = new ArrayList<>();
 		fila.add(n1.getId()+"");
 		fila.add(n1.getTitulo());
@@ -146,6 +162,7 @@ public class MaterialCapacitacionDaoDefault implements MaterialCapacitacionDao{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
 		}
 	}
 	
@@ -192,5 +209,6 @@ public class MaterialCapacitacionDaoDefault implements MaterialCapacitacionDao{
 			JOptionPane noEncontrado = new JOptionPane();
 			noEncontrado.showConfirmDialog(ventana, "No se pudo efectuar el cambio", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 		}
-	}	
+	}
+
 }

@@ -89,6 +89,9 @@ public class GrafoPanel extends JPanel {
                     	}
                     
                  }
+                    for(int i = 0; i<mats.length; i++) {
+                    
+                    }
                     flag = false;
                //     }
              } 
@@ -116,7 +119,9 @@ public class GrafoPanel extends JPanel {
     }
 
     public void agregar(AristaView arista){
+    	if(!this.aristas.contains(arista)) {
         this.aristas.add(arista);
+    	}
     }    
     
     public void agregar(VerticeView vert){
@@ -125,6 +130,7 @@ public class GrafoPanel extends JPanel {
 
     public void caminoPintar(List<MaterialCapacitacion> camino){
         //this.vertices.add(vert);
+    	if(camino.size()>1 || camino.size()>0) {
     	Integer idOrigen =-1;
     	Integer idDestino =-1;
     	for(MaterialCapacitacion mat : camino) {
@@ -134,14 +140,15 @@ public class GrafoPanel extends JPanel {
     			idDestino = mat.getId();
     			for(AristaView av : this.aristas) {
     				if(av.getOrigen().getId().equals(idOrigen) && av.getDestino().getId().equals(idDestino) ) {
-    	    			av.setColor(Color.YELLOW);
-    	    			av.getOrigen().setColor(Color.PINK);
-    	    			av.getDestino().setColor(Color.PINK);
+    	    			av.setColor(Color.BLACK);
+    	    			av.getOrigen().setColor(Color.BLACK);
+    	    			av.getDestino().setColor(Color.BLACK);
     				}
     			}
     			idOrigen = idDestino;
     		}
     	}
+    }
     }
     
     private void dibujarVertices(Graphics2D g2d) {
@@ -154,7 +161,7 @@ public class GrafoPanel extends JPanel {
     }
 
     private void dibujarAristas(Graphics2D g2d) {
-        System.out.println(this.aristas);
+        //System.out.println(this.aristas);
         for (AristaView a : this.aristas) {
             g2d.setPaint(a.getColor());
             g2d.setStroke ( a.getFormatoLinea());

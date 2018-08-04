@@ -43,10 +43,16 @@ public class ControlPanel extends JPanel {
         this.btnBuscarCamino = new JButton("Buscar Camino");
         this.btnBuscarCamino.addActionListener(
                 e -> { 
+                	if(! txtLongitudCamino.getText().isEmpty()) {
                     Integer n =Integer.parseInt(txtLongitudCamino.getText());
                     Integer idOrigen = this.listaVertices.get(cmbVertice1.getSelectedIndex()).getId();
                     Integer idDestino= this.listaVertices.get(cmbVertice2.getSelectedIndex()).getId();
-                    controller.buscarCamino(idOrigen,idDestino,n); 
+                    controller.buscarCamino(idOrigen,idDestino,n); }
+                	else {
+                		Integer idOrigen = this.listaVertices.get(cmbVertice1.getSelectedIndex()).getId();
+                        Integer idDestino= this.listaVertices.get(cmbVertice2.getSelectedIndex()).getId();
+                        controller.buscarCamino(idOrigen,idDestino);
+                	}
                 }
         );
         this.volver = new JButton("Volver");

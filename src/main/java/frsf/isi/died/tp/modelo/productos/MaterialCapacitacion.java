@@ -133,9 +133,6 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 	
 	public abstract Boolean esVideo();
 
-	//public abstract void setRelevancia(Relevancia r);
-	
-	//public abstract Relevancia getRelevancia();
 
 	
 	//TODO 02: sobrescribir el metodo toString de la clase "Object"

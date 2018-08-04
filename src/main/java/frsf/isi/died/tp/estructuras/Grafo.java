@@ -79,7 +79,9 @@ public class Grafo<T> {
             this.aristas.add(arista);
             return arista;
 	}
-        
+    public List<Arista<T>> getAristas(){
+    	return this.aristas;
+    }    
 	/**
 	 * @param n1
 	 * @param n2
@@ -260,4 +262,27 @@ public class Grafo<T> {
         }
         return resultado;
     }
+    
+   /* public List<T> buscarCamino(T n1,T n2){
+		Vertice<T> origen = this.getNodo(n1);
+		Vertice<T> destino= this.getNodo(n2);
+        return this.buscarCamino(origen, destino,new HashSet<Vertice>());
+    }
+    private List<T> buscarCamino(Vertice<T> n1,Vertice<T> n2, HashSet<Vertice> visitados){
+        ArrayList<T> resultado = new ArrayList<>();
+        ArrayList<T> auxiliar = new ArrayList<>();
+       
+        visitados.add(n1);
+        
+        	for(int i=0;i<this.getAdyacentes(n1.getValor()).size();i++) {
+            	auxiliar.addAll(buscarCamino(this.getNodo(this.getAdyacentes(n1.getValor()).get(i)), n2,  visitados));
+            	if(auxiliar.size()!=0) {
+            		auxiliar.add(0, n1.getValor());
+            		return auxiliar;
+            	}
+            }
+       
+        return resultado;
+    }
+    */
 }

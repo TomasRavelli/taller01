@@ -53,6 +53,13 @@ public class GrafoController {
 		this.vistaGrafo.caminoPintar(camino);
 		this.vistaGrafo.repaint();
 	}
+	
+	public void buscarCamino(Integer nodo1, Integer nodo2) {
+		List<MaterialCapacitacion> camino = this.materialDao.buscarCamino(nodo1, nodo2);
+		this.vistaGrafo.caminoPintar(camino);
+		this.vistaGrafo.repaint();
+		
+	}
 
 
 	public List<MaterialCapacitacion> listaVertices() {
