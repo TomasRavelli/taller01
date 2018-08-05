@@ -285,4 +285,10 @@ public class Grafo<T> {
         return resultado;
     }
     */
+
+    public void actualizarPR() {
+    	for(Vertice<T> m: this.vertices) {
+    		((MaterialCapacitacion)m.getValor()).setPR(1.0);;
+    	}
+    }
 }

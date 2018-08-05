@@ -37,15 +37,18 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 	
 	protected String tema;
 	
+	protected Double pageRank;
 	
 	
 	public MaterialCapacitacion() {
 		this(0,"en desarrollo",0.0);
+		this.pageRank = 1.0;
 	}
 	
 
 	public MaterialCapacitacion(Integer id, String titulo) {
 		this(id,titulo,0.0);
+		this.pageRank = 1.0;
 	}
 
 	
@@ -53,6 +56,7 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 		this.id =id;
 		this.titulo = titulo;
 		this.costo = costo;
+		this.pageRank = 1.0;
 	}
 	
 	public MaterialCapacitacion(Integer id,String titulo, Double costo, Relevancia r,String tema2) {
@@ -61,6 +65,7 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 		this.costo = costo;
 		this.tema = tema2;
 		this.relevancia = r;
+		this.pageRank = 1.0;
 	}
 
 	
@@ -103,6 +108,14 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 
 	public Relevancia getRelevancia () {
 		return relevancia;
+	}
+	
+	public void setPR (Double r) {
+		this.pageRank = r;
+	}
+	
+	public Double getPR() {
+		return this.pageRank;
 	}
 	
 	public void setCalificacion (Double c) {

@@ -210,5 +210,19 @@ public class MaterialCapacitacionDaoDefault implements MaterialCapacitacionDao{
 			noEncontrado.showConfirmDialog(ventana, "No se pudo efectuar el cambio", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
+	public Integer gradoSalida(MaterialCapacitacion m) {
+		return GRAFO_MATERIAL.gradoSalida(m);
+	}
+	
+	public  List<Arista<MaterialCapacitacion>> getAristas() {
+		return GRAFO_MATERIAL.getAristas();
+	}
+	
+	public void actualizarPR() {
+		GRAFO_MATERIAL.actualizarPR();
+	}
+	
+	
 
 }
