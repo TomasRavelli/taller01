@@ -36,7 +36,6 @@ import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 public class GrafoPanel extends JPanel {
 
     private JFrame framePadre;
-   // private Queue<Color> colaColores;
     private GrafoController controller;
     private Color[] coloresVertices = {Color.RED,Color.GREEN} ; 
     private List<VerticeView> vertices;
@@ -49,13 +48,7 @@ public class GrafoPanel extends JPanel {
         this.vertices = new ArrayList<>();
         this.aristas = new ArrayList<>();
         flag = true;
-        
-       
-        /*this.colaColores = new LinkedList<Color>();
-        this.colaColores.add(Color.RED);
-        this.colaColores.add(Color.BLUE);
-        this.colaColores.add(Color.ORANGE);
-        this.colaColores.add(Color.CYAN);*/
+
         
       addMouseListener(new MouseAdapter() {
     	  public void mouseClicked(MouseEvent event) {
@@ -85,7 +78,6 @@ public class GrafoPanel extends JPanel {
                     	else {
                     		 Color aux = coloresVertices[1];
                              controller.crearVertice(posX, posY, aux,(MaterialCapacitacion) mats[i]);
-
                     	}
                     
                  }
@@ -104,7 +96,6 @@ public class GrafoPanel extends JPanel {
                     auxiliar = null;
                 }
             }
-         
         });
 
         addMouseMotionListener(new MouseAdapter() {
@@ -118,6 +109,7 @@ public class GrafoPanel extends JPanel {
         });
     }
 
+    
     public void agregar(AristaView arista){
     	if(!this.aristas.contains(arista)) {
         this.aristas.add(arista);
@@ -204,6 +196,4 @@ public class GrafoPanel extends JPanel {
     public void setController(GrafoController controller) {
         this.controller = controller;
     }
-    
-    
 }

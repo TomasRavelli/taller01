@@ -57,7 +57,6 @@ public class BorrarLibro extends JPanel {
 					}
 				}
 				if(!b || ID2.getText().isEmpty()) {
-					//TODO ventana de error: no hay video/libro con ese id
 					JOptionPane noEncontrado = new JOptionPane();
 					noEncontrado.showConfirmDialog(ventana, "No existe libro con ese ID", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 					}

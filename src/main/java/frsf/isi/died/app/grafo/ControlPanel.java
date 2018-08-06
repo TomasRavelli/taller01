@@ -5,7 +5,6 @@
  */
 package frsf.isi.died.app.grafo;
 
-
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.List;
@@ -70,7 +69,6 @@ public class ControlPanel extends JPanel {
     	this.add(txtLongitudCamino);        
     	this.add(btnBuscarCamino);    
         this.add(volver);    
-   
     }
 
     public GrafoController getController() {
@@ -80,6 +78,4 @@ public class ControlPanel extends JPanel {
     public void setController(GrafoController controller) {
         this.controller = controller;
     }
-
-    
 }

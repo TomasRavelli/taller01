@@ -21,12 +21,10 @@ import java.awt.geom.Point2D;
 public class VerticeView {
     private Paint color;
     private Color colorBase;
-
     private Integer coordenadaX;
     private Integer coordenadaY;
     private final Integer RADIO = 20;
     private Shape nodo;
-
     private String nombre;
     private Integer id;
 
@@ -81,9 +79,7 @@ public class VerticeView {
     public String etiqueta() {
     	return "["+id+"]"+this.nombre;
     }
-    
-
-    
+   
     public Color getColorBase() {
         return colorBase;
     }
@@ -112,7 +108,4 @@ public class VerticeView {
     public String toString() {
         return "Vertice{" + "coordenadaX=" + coordenadaX + ", coordenadaY=" + coordenadaY + '}';
     }
-
-    
-    
 }

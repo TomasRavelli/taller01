@@ -37,6 +37,7 @@ public class MuestraResultados extends JPanel{
 	public MuestraResultados() {
 		
 	}
+	
 	public MuestraResultados (Menu ventana, List<MaterialCapacitacion> encontrados){
 	
 		this.setPreferredSize(new Dimension(800,600));
@@ -46,7 +47,7 @@ public class MuestraResultados extends JPanel{
 	
 		String[] columnasLibro = {"Titulo","Costo","Precio","Paginas","Calificacion","Relevancia","ID","Fecha Publicacion"};
 		modeloTablaLibro = new DefaultTableModel(null,columnasLibro);
-	     tablaLibro = new JTable(modeloTablaLibro);
+	    tablaLibro = new JTable(modeloTablaLibro);
 		JScrollPane scrollTablaLibro = new JScrollPane(tablaLibro);	
 		scrollTablaLibro.setBounds(20, 20, 750, 235);
 		this.add(scrollTablaLibro);
@@ -59,7 +60,12 @@ public class MuestraResultados extends JPanel{
 		scrollTablaVideo.setBounds(20, 255, 750, 245);
 		this.add(scrollTablaVideo);
 		
+		
 		//BOTONES
+		JButton arbol = new JButton("Arbol");
+		arbol.setBounds(30, 505, 180, 50);
+		arbol.setVisible(true);
+		this.add(arbol);
 		
 		JButton asignarRelaciones = new JButton("Asignar Relaciones");
 		asignarRelaciones.setBounds(220, 505, 180, 50);
@@ -90,6 +96,41 @@ public class MuestraResultados extends JPanel{
 	
 		asignarRelaciones.addActionListener(e->mostrarNodosxTema(tablaVideo.getSelectedRow(),tablaLibro.getSelectedRow(), ventana, encontrados));
 		
+		arbol.addActionListener(e->modificarMaterial(tablaVideo.getSelectedRow(),tablaLibro.getSelectedRow(),ventana,encontrados));
+		
+	}
+	
+	
+	public void modificarMaterial (Integer v, Integer l, Menu ventana, List<MaterialCapacitacion> encontrados) {
+		
+		if (l!=-1 && v!=-1) {
+			tablaVideo.clearSelection();
+			tablaLibro.clearSelection();
+		}
+		
+		else {
+			if (l!=-1) {
+				Integer id = Integer.valueOf(modeloTablaLibro.getValueAt(l, 6).toString());
+				
+				for (MaterialCapacitacion m : encontrados) {
+					if (m.getId() == id) {
+						ventana.setContentPane(new ModificarMaterialArbolN(ventana,m));
+						ventana.pack();
+					}
+				}
+			}	
+			
+			else {
+				Integer id = Integer.valueOf(modeloTablaVideo.getValueAt(v, 5).toString());
+				
+				for (MaterialCapacitacion m : encontrados) {
+					if (m.getId() == id) {
+						ventana.setContentPane(new ModificarMaterialArbolN(ventana,m));
+						ventana.pack();
+					}
+				}
+			}
+		}	
 	}
 	
 	
@@ -145,8 +186,7 @@ public class MuestraResultados extends JPanel{
 			}
 		}
 	}
-		
-		
+			
 		
 	private void agregarAWish(Menu ventana, Vector<Object> libro, Vector<Object> video) {	
 		if(!libro.isEmpty()) {
@@ -166,8 +206,7 @@ public class MuestraResultados extends JPanel{
 					}
 				}	
 			}			
-		}
-		
+		}	
 	}
 	
 	public void agregarLibroATabla(DefaultTableModel modelo, Libro libro) {
@@ -187,7 +226,6 @@ public class MuestraResultados extends JPanel{
 	}
 
 
-
 	public List<MaterialCapacitacion> buscarNodosTema(MaterialCapacitacion mat, MaterialCapacitacionDaoDefault materiales) {
 		List<MaterialCapacitacion> encontrados = new ArrayList<>();
 		for(MaterialCapacitacion m: materiales.listaMateriales()) {
@@ -197,7 +235,4 @@ public class MuestraResultados extends JPanel{
 		}
 		return encontrados;
 	}
-
-
-
 }

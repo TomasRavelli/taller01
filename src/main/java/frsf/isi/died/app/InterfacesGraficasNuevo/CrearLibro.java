@@ -3,7 +3,6 @@ package frsf.isi.died.app.InterfacesGraficasNuevo;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-
 import java.awt.GridBagLayout;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
@@ -15,18 +14,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
-
-import  javax.swing.*;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
 import frsf.isi.died.app.InterfacesGraficasNuevo.Menu;
 import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
 import frsf.isi.died.tp.modelo.productos.Libro;
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 import frsf.isi.died.tp.modelo.productos.Relevancia;
-
-
-//import frsf.isi.died.app.vista.material.LibroTableModel;
 
 
 public class CrearLibro extends JPanel {
@@ -326,23 +320,23 @@ public class CrearLibro extends JPanel {
 					nuevoLibro.showConfirmDialog(ventana, "El libro se creo exitosamente.", "Agregar Libro", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
 					ventana.getMateriales().agregarLibro(libro);	
 					ventana.RecargarMateriales();
-					}else {
+					}
+					else {
 						//ID ocupado
 						JOptionPane noEligio = new JOptionPane();
 						noEligio.showConfirmDialog(ventana, "Ese ID no esta libre", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 					}
-				}else {
+				}
+				else {
 					//faltan campos de llenar
 					JOptionPane noEligio = new JOptionPane();
 					noEligio.showConfirmDialog(ventana, "Faltan campos por llenar", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 				}
-			
 			}
 		});		
 	}
 	
 	
-	//TODO cambiar estas 2 operaciones para trabajar directamente con el MaterialDao
 	public void agregarATabla(DefaultTableModel modelo, Libro libro) {
 		Object[] obj = {libro.getTitulo(),libro.getCosto(),libro.precio(),libro.getPaginas(),libro.getCalificacion(),libro.getRelevancia(),libro.getId(),libro.getFechaPublicacion()};
 		modelo.addRow(obj);

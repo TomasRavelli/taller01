@@ -99,7 +99,4 @@ public class AristaView {
     public String toString() {
         return "Arista{" + "origen=" + origen + ", destino=" + destino + ", linea=" + linea + ", formatoLinea=" + formatoLinea + ", gradiente=" + color + '}';
      }
-
-
-
 }

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import frsf.isi.died.tp.estructuras.ArbolNario;
+import frsf.isi.died.tp.estructuras.TipoNodo;
 import frsf.isi.died.tp.modelo.Biblioteca;
 import frsf.isi.died.tp.util.Ordenable;
 
@@ -39,16 +41,24 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 	
 	protected Double pageRank;
 	
+	protected ArbolNario arbol;
+	
 	
 	public MaterialCapacitacion() {
 		this(0,"en desarrollo",0.0);
 		this.pageRank = 1.0;
+		arbol = new ArbolNario();
+		this.arbol.setValor (this.titulo);
+		this.arbol.setTipoNodo(TipoNodo.TITULO);
 	}
 	
 
 	public MaterialCapacitacion(Integer id, String titulo) {
 		this(id,titulo,0.0);
 		this.pageRank = 1.0;
+		arbol = new ArbolNario();
+		this.arbol.setValor (this.titulo);
+		this.arbol.setTipoNodo(TipoNodo.TITULO);
 	}
 
 	
@@ -57,6 +67,10 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 		this.titulo = titulo;
 		this.costo = costo;
 		this.pageRank = 1.0;
+		arbol = new ArbolNario();
+		this.arbol.setValor (this.titulo);
+		this.arbol.setTipoNodo(TipoNodo.TITULO);
+
 	}
 	
 	public MaterialCapacitacion(Integer id,String titulo, Double costo, Relevancia r,String tema2) {
@@ -66,6 +80,9 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 		this.tema = tema2;
 		this.relevancia = r;
 		this.pageRank = 1.0;
+		arbol = new ArbolNario();
+		this.arbol.setValor (this.titulo);
+		this.arbol.setTipoNodo(TipoNodo.TITULO);
 	}
 
 	
@@ -145,6 +162,11 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 
 	
 	public abstract Boolean esVideo();
+	
+	
+	public ArbolNario getArbol () {
+		return arbol;
+	}
 
 
 	

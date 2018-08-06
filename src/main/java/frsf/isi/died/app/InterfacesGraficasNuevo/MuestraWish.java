@@ -23,44 +23,44 @@ public class MuestraWish extends JPanel {
 	public MuestraWish() {
 		
 	}
+	
 	public MuestraWish(Menu ventana){
 		
-	this.setPreferredSize(new Dimension(800,600));
-	this.setVisible(true);
-	this.setLayout(null);
-	
-	String[] columnasLibro = {"Titulo","Costo","Precio","Paginas","Calificacion","Relevancia","ID","Fecha Publicacion"};
-	DefaultTableModel modeloTablaLibro = new DefaultTableModel(null,columnasLibro);
-	JTable tablaLibro = new JTable(modeloTablaLibro);
-	JScrollPane scrollTablaLibro = new JScrollPane(tablaLibro);	
-	scrollTablaLibro.setBounds(20, 20, 750, 235);
-	this.add(scrollTablaLibro);
-			
-
-	String[] columnasVideo = {"Titulo","Duracion","Costo","Calificacion","Relevancia","ID","Fecha Publicacion"};		
-	DefaultTableModel modeloTablaVideo = new DefaultTableModel(null,columnasVideo);
-	JTable tablaVideo = new JTable(modeloTablaVideo);
-	JScrollPane scrollTablaVideo = new JScrollPane(tablaVideo);	
-	scrollTablaVideo.setBounds(20, 255, 750, 245);
-	this.add(scrollTablaVideo);
-	
-	JButton atras = new JButton("Atras");
-	atras.setBounds(650, 505, 120, 50);
-	this.add(atras);
-	
-	atras.addActionListener(e->volverAtras(ventana));
-	
-
-	
-	for(MaterialCapacitacion m: ventana.getWishlist()) {
+		this.setPreferredSize(new Dimension(800,600));
+		this.setVisible(true);
+		this.setLayout(null);
 		
-		if(m.esLibro()) {
-			agregarLibroATabla(modeloTablaLibro,(Libro) m);				
+		String[] columnasLibro = {"Titulo","Costo","Precio","Paginas","Calificacion","Relevancia","ID","Fecha Publicacion"};
+		DefaultTableModel modeloTablaLibro = new DefaultTableModel(null,columnasLibro);
+		JTable tablaLibro = new JTable(modeloTablaLibro);
+		JScrollPane scrollTablaLibro = new JScrollPane(tablaLibro);	
+		scrollTablaLibro.setBounds(20, 20, 750, 235);
+		this.add(scrollTablaLibro);
+				
+	
+		String[] columnasVideo = {"Titulo","Duracion","Costo","Calificacion","Relevancia","ID","Fecha Publicacion"};		
+		DefaultTableModel modeloTablaVideo = new DefaultTableModel(null,columnasVideo);
+		JTable tablaVideo = new JTable(modeloTablaVideo);
+		JScrollPane scrollTablaVideo = new JScrollPane(tablaVideo);	
+		scrollTablaVideo.setBounds(20, 255, 750, 245);
+		this.add(scrollTablaVideo);
+		
+		JButton atras = new JButton("Atras");
+		atras.setBounds(650, 505, 120, 50);
+		this.add(atras);
+		
+		atras.addActionListener(e->volverAtras(ventana));
+		
+		
+		for(MaterialCapacitacion m: ventana.getWishlist()) {
+			
+			if(m.esLibro()) {
+				agregarLibroATabla(modeloTablaLibro,(Libro) m);				
+			}
+			else {
+				agregarVideoATabla(modeloTablaVideo,(Video) m);	
+			}
 		}
-		else {
-			agregarVideoATabla(modeloTablaVideo,(Video) m);	
-		}
-	}
 
 
 	}
@@ -78,6 +78,5 @@ public class MuestraWish extends JPanel {
 	public void agregarVideoATabla(DefaultTableModel modelo, Video video) {
 		Object[] obj = {video.getTitulo(),video.getDuracion(),video.getCosto(),video.getCalificacion(),video.getRelevancia(),video.getId(),video.getFechaPublicacion()};
 		modelo.addRow(obj);
-	}
-	
+	}	
 }

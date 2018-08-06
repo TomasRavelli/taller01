@@ -14,19 +14,16 @@ import frsf.isi.died.tp.modelo.productos.*;
 
 public class ActualizarVideo extends JPanel {
 
-
 	public ActualizarVideo(Menu ventana) {
 
 		this.setPreferredSize(new Dimension(800,600));
 		this.setVisible(true);
 		this.setLayout(new GridBagLayout());
 		
-		
 		JLabel lblID;
 		JTextField txtID;
 		JButton btnIr;
 		JButton btnCancelar;
-		
 		GridBagConstraints gridConst= new GridBagConstraints();
 		
 			
@@ -73,13 +70,12 @@ public class ActualizarVideo extends JPanel {
 					}
 				}
 				if(!b || txtID.getText().isEmpty()) {
-					//TODO ventana de error: no hay video/libro con ese id
 					JOptionPane noEncontrado = new JOptionPane();
 					noEncontrado.showConfirmDialog(ventana, "No existe video con ese ID", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 					}
 				else {
-						ventana.setContentPane(new ActualizarVideo2(ventana,estevideo));
-						ventana.pack();									
+					ventana.setContentPane(new ActualizarVideo2(ventana,estevideo));
+					ventana.pack();									
 				}
 			}
 		});

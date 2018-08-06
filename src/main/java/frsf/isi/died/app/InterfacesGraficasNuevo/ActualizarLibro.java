@@ -13,9 +13,7 @@ import frsf.isi.died.tp.modelo.productos.*;
 
 public class ActualizarLibro extends JPanel {
 	
-	
 	public ActualizarLibro(Menu ventana) {
-		
 		this.setPreferredSize(new Dimension(800,600));
 		this.setVisible(true);
 		this.setLayout(new GridBagLayout());
@@ -59,13 +57,12 @@ public class ActualizarLibro extends JPanel {
 					}
 				}
 				if(!b || ID2.getText().isEmpty()) {
-					//TODO ventana de error: no hay video/libro con ese id
 					JOptionPane noEncontrado = new JOptionPane();
 					noEncontrado.showConfirmDialog(actualizarL, "No existe libro con ese ID", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
-					}
+				}
 				else {
-						actualizarL.setContentPane(new ActualizarLibro2(actualizarL,estelibro));
-						actualizarL.pack();
+					actualizarL.setContentPane(new ActualizarLibro2(actualizarL,estelibro));
+					actualizarL.pack();
 				}
 			}
 		});

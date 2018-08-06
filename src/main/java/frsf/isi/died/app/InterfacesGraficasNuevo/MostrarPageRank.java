@@ -38,6 +38,7 @@ public class MostrarPageRank extends JPanel{
 		agregarPRaTabla(modeloTablaPR, calcularPR(materiales, nodos));
 	}
 	
+	
 	public List<MaterialCapacitacion> calcularPR(MaterialCapacitacionDaoDefault materiales,List<MaterialCapacitacion> nodos){
 	
 		Boolean diferencia = true;
@@ -49,13 +50,11 @@ public class MostrarPageRank extends JPanel{
 			
 			for(MaterialCapacitacion m: nodos) {
 				Double sumatoria = 0.0;
-				for(MaterialCapacitacion nE: nodosEntrantes(materiales,m)) {
-										
+				for(MaterialCapacitacion nE: nodosEntrantes(materiales,m)) {					
 					sumatoria += nE.getPR()/materiales.gradoSalida(nE);
-					
 				}
-				sumatoria = (1-d)+d*sumatoria;
 				
+				sumatoria = (1-d)+d*sumatoria;
 				if((Math.abs(m.getPR()-sumatoria))<=0.000000001) {
 					resultado.remove(m);
 					m.setPR(sumatoria);
@@ -78,6 +77,7 @@ public class MostrarPageRank extends JPanel{
 		return resultado;
 	}
 	
+	
 	public void agregarPRaTabla( DefaultTableModel modelo, List<MaterialCapacitacion> nodos){
 	
 		for(MaterialCapacitacion m: nodos) {
@@ -86,6 +86,7 @@ public class MostrarPageRank extends JPanel{
 		}
 	}
 	
+	
 	private List<MaterialCapacitacion> nodosEntrantes(MaterialCapacitacionDaoDefault mat, MaterialCapacitacion nodoActual){
 		List<MaterialCapacitacion> resultado = new ArrayList<>();
 		for(Arista<MaterialCapacitacion> a: mat.getAristas()) {
@@ -93,9 +94,6 @@ public class MostrarPageRank extends JPanel{
 				resultado.add(a.getInicio().getValor());
 			}			
 		}
-		
 		return resultado;
 	}
-
 }
-	

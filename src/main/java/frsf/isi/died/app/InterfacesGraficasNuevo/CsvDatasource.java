@@ -26,12 +26,12 @@ public class CsvDatasource {
 			}
 			scanner.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		return filas;
 	}
+	
 
 	private List<String> parseLine(String cvsLine) {
 
@@ -40,6 +40,7 @@ public class CsvDatasource {
 		if (cvsLine == null && cvsLine.isEmpty()) {
 			return result;
 		}
+		
 		StringBuffer curVal = new StringBuffer();
 		boolean inQuotes = false;
 		boolean startCollectChar = false;
@@ -99,11 +100,9 @@ public class CsvDatasource {
 					curVal.append(ch);
 				}
 			}
-
 		}
 
 		result.add(curVal.toString());
-
 		return result;
 	}
 
@@ -122,7 +121,6 @@ public class CsvDatasource {
 		this.writeLine(writer, fila);
 		writer.flush();
 		writer.close();
-
 	}
 	
 	public void agregarFilaAlFinal(String archivoCsv, CsvRecord fila) throws IOException {
@@ -141,13 +139,11 @@ public class CsvDatasource {
 			result = result.replace("\"", "\"\"");
 		}
 		return result;
-
 	}
 
 	private void writeLine(Writer w, List<String> values) throws IOException {
 
 		boolean first = true;
-
 		// default customQuote is empty
 
 		StringBuilder sb = new StringBuilder();
@@ -165,6 +161,5 @@ public class CsvDatasource {
 		}
 		sb.append("\n");
 		w.append(sb.toString());
-
 	}
 }

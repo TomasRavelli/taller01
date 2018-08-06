@@ -14,15 +14,11 @@ import frsf.isi.died.tp.modelo.productos.Video;
 
 public class BorrarVideo extends JPanel {
 
-
-	
 	public BorrarVideo(Menu ventana) {
 		
 		this.setPreferredSize(new Dimension(800,600));
 		this.setVisible(true);
-		this.setLayout(new GridBagLayout());
-		
-		
+		this.setLayout(new GridBagLayout());		
 		
 		JLabel lblID;
 		JTextField txtID;
@@ -66,7 +62,6 @@ public class BorrarVideo extends JPanel {
 				}
 				
 				if(!b || txtID.getText().isEmpty()) {
-					//TODO ventana de error: no hay video/libro con ese id
 					JOptionPane noEncontrado = new JOptionPane();
 					noEncontrado.showConfirmDialog(ventana, "No existe video con ese ID", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 					}

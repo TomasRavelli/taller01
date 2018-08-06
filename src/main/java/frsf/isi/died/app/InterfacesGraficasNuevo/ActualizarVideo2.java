@@ -31,12 +31,11 @@ import frsf.isi.died.tp.modelo.productos.Video;
 
 public class ActualizarVideo2 extends JPanel{
 	
-	
 	public ActualizarVideo2(Menu ventana, Video paraActualizar){
+		
 		this.setPreferredSize(new Dimension(800,600));
 		this.setVisible(true);
 		this.setLayout(new GridBagLayout());
-		
 		
 		JLabel lblTitulo;
 		JTextField txtTitulo;
@@ -49,9 +48,7 @@ public class ActualizarVideo2 extends JPanel{
 		JLabel lblRelevancia;
 		JLabel lblID;
 		JTextField txtID;
-		
 		GridBagConstraints gridConst= new GridBagConstraints();
-		
 		
 		
 		lblTitulo = new JLabel("Titulo: ");
@@ -114,8 +111,6 @@ public class ActualizarVideo2 extends JPanel{
 		this.add(txtID, gridConst);
 		
 		
-		//TODO Agregar lo de la fecha
-		
 		btnGuardarCambios = new JButton("Guardar Cambios");
 		gridConst.gridx=0;
 		gridConst.gridy=6;
@@ -142,9 +137,7 @@ public class ActualizarVideo2 extends JPanel{
 				
 				Date fecha = new Date();
 				fecha = paraActualizar.getFechaPublicacion();
-				
 				String tema = paraActualizar.getTema();
-				
 				Integer idAnterior = paraActualizar.getId();
 				
 				
@@ -158,7 +151,8 @@ public class ActualizarVideo2 extends JPanel{
 					if(b) {
 						JOptionPane noEligio = new JOptionPane();
 						noEligio.showConfirmDialog(ventana, "Ese ID no esta libre", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
-					}else {
+					}
+					else {
 						Double costo = new Double(txtCosto.getText());
 						Integer duracion = new Integer(txtDuracion.getText());
 						Integer id = new Integer(txtID.getText());
@@ -166,10 +160,12 @@ public class ActualizarVideo2 extends JPanel{
 						Relevancia aux;
 						if(relevancia2.getSelectedIndex()==0){
 							aux=Relevancia.ALTA;
-						}else {
+						}
+						else {
 							if(relevancia2.getSelectedIndex()==1){
 								aux=Relevancia.MEDIA;
-							}else {
+							}
+							else {
 								 aux=Relevancia.BAJA;
 							}
 						}
@@ -180,7 +176,8 @@ public class ActualizarVideo2 extends JPanel{
 						ventana.setContentPane(new Inicio(ventana));
 						ventana.pack();
 					}		
-				}else {
+				}
+				else {
 					JOptionPane noEligio = new JOptionPane();
 					noEligio.showConfirmDialog(ventana, "Faltan campos por completar", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 				}

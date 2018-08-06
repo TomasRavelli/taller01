@@ -40,9 +40,8 @@ public class ActualizarLibro2 extends JPanel {
 		JTextField txtPaginas;
 		JButton btnGuardar;
 		JButton btnCancelar;
-		
-		
 		GridBagConstraints gridConst= new GridBagConstraints();
+		
 		
 		lblTitulo = new JLabel("Titulo: ");
 		gridConst.gridx=0;
@@ -114,8 +113,6 @@ public class ActualizarLibro2 extends JPanel {
 		ID2.setText(paraActualizar.getId().toString());
 		this.add(ID2,gridConst);
 		
-		//TODO Agregar lo de la fecha
-		
 		
 		btnGuardar = new JButton("Guardar Cambios");
 		gridConst.gridx=0;
@@ -143,11 +140,8 @@ public class ActualizarLibro2 extends JPanel {
 				
 				Date fecha = new Date();
 				fecha = paraActualizar.getFechaPublicacion();
-				
 				String tema = paraActualizar.getTema();
-				
 				Integer idAnterior = paraActualizar.getId();
-				
 				
 				if(!txtTitulo.getText().isEmpty() && !txtCosto.getText().isEmpty() && !txtPrecioCompra.getText().isEmpty() && !txtPaginas.getText().isEmpty() && !ID2.getText().isEmpty()) {
 					boolean b=false;
@@ -159,7 +153,8 @@ public class ActualizarLibro2 extends JPanel {
 					if(b) {
 						JOptionPane noEligio = new JOptionPane();
 						noEligio.showConfirmDialog(ventana, "Ese ID no esta libre", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
-					}else {
+					}
+					else {
 						Double costo = new Double(txtCosto.getText());
 						Double precioCompra = new Double(txtPrecioCompra.getText());
 						Integer id = new Integer(ID2.getText());
@@ -168,10 +163,12 @@ public class ActualizarLibro2 extends JPanel {
 						Relevancia aux;
 						if(relevancia2.getSelectedIndex()==0){
 							aux=Relevancia.ALTA;
-						}else {
+						}
+						else {
 							if(relevancia2.getSelectedIndex()==1){
 								aux=Relevancia.MEDIA;
-							}else {
+							}
+							else {
 								 aux=Relevancia.BAJA;
 							}
 						}
@@ -182,12 +179,12 @@ public class ActualizarLibro2 extends JPanel {
 						ventana.setContentPane(new Inicio(ventana));
 						ventana.pack();
 					}
-				}else {
+				}
+				else {
 					JOptionPane noEligio = new JOptionPane();
 					noEligio.showConfirmDialog(ventana, "Faltan campos por completar", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
-	}
-	
+	}	
 }

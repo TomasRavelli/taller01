@@ -14,7 +14,7 @@ import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 
 public class MuestraNodos extends JPanel{
 	
-public MuestraNodos(){
+	public MuestraNodos(){
 		
 	}
 	
@@ -29,5 +29,4 @@ public MuestraNodos(){
 		this.add(new MostrarPageRank(ventana.getMateriales(), verticesMismoTema), BorderLayout.EAST);
 	
 	}
-
 }
