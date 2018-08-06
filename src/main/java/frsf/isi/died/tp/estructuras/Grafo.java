@@ -263,28 +263,36 @@ public class Grafo<T> {
         return resultado;
     }
     
-   /* public List<T> buscarCamino(T n1,T n2){
+    public List<T> buscarCamino(T n1,T n2){
 		Vertice<T> origen = this.getNodo(n1);
 		Vertice<T> destino= this.getNodo(n2);
         return this.buscarCamino(origen, destino,new HashSet<Vertice>());
     }
     private List<T> buscarCamino(Vertice<T> n1,Vertice<T> n2, HashSet<Vertice> visitados){
-        ArrayList<T> resultado = new ArrayList<>();
-        ArrayList<T> auxiliar = new ArrayList<>();
-       
-        visitados.add(n1);
-        
-        	for(int i=0;i<this.getAdyacentes(n1.getValor()).size();i++) {
-            	auxiliar.addAll(buscarCamino(this.getNodo(this.getAdyacentes(n1.getValor()).get(i)), n2,  visitados));
-            	if(auxiliar.size()!=0) {
-            		auxiliar.add(0, n1.getValor());
-            		return auxiliar;
-            	}
-            }
-       
+      ArrayList<T> resultado = new ArrayList<>();
+      ArrayList<T> auxiliar = new ArrayList<>();
+      auxiliar.add(n1.getValor());
+      
+    System.out.println(this.vertices.size());
+      if(n1.equals(n2)) {
+    	 resultado.add(n1.getValor());
+     }
+     else {
+    	 if(this.getAdyacentes(n1).isEmpty()) {
+    		 return resultado;
+    		 }
+    		 else {
+    			 for(int i = 0; i<this.getAdyacentes(n1).size();i++) {
+    				 if(!visitados.contains(this.getAdyacentes(n1).get(i))) {
+    				buscarCamino(this.getAdyacentes(n1).get(i),n2,visitados); 
+    			 }
+    		}
+    	 }
+     }
+    
         return resultado;
-    }
-    */
+    }  
+   
 
     public void actualizarPR() {
     	for(Vertice<T> m: this.vertices) {

@@ -66,7 +66,7 @@ public class GrafoPanel extends JPanel {
                     Object[] mats = controller.listaVertices().toArray();
                     //String text = JOptionPane.showInputDialog(, "ID del nodo");
                     for(int i = 0; i<mats.length; i++) {
-                        Integer posX = new Integer((int) (x.nextDouble()*650+100));
+                        Integer posX = new Integer((int) (x.nextDouble()*300+100));
                         Integer posY = new Integer((int) (x.nextDouble()*300+20));
                     /*Object verticeMatSeleccionado= (MaterialCapacitacion) JOptionPane.showInputDialog(framePadre, 
                             "Que material corresponde con el vertice?",
