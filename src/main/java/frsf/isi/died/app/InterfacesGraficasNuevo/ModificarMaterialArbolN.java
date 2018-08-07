@@ -19,6 +19,8 @@ import frsf.isi.died.tp.estructuras.TipoNodo;
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 
 public class ModificarMaterialArbolN extends JPanel{
+	
+	MaterialCapacitacion mat;
 
 	public ModificarMaterialArbolN() {
 		
@@ -29,6 +31,8 @@ public class ModificarMaterialArbolN extends JPanel{
 		this.setPreferredSize(new Dimension(800,600));
 		this.setVisible(true);
 		this.setLayout(null);
+		
+		mat = material;
 		
 		
 		JLabel nodoPadre = new JLabel("Seleccionar Nodo Padre:");
@@ -85,13 +89,8 @@ public class ModificarMaterialArbolN extends JPanel{
 		
 		Nodo paraAgregar = new Nodo();
 		paraAgregar.setTipoNodo((TipoNodo)tipoNodo);
-		ArbolNario arbol;
-		
-		for (MaterialCapacitacion m : ventana.getMateriales().listaMateriales()) {
-			arbol = m.getArbol();
-			buscarEnArbol(arbol,nodoSeleccionado,paraAgregar);
-		}
-		
+		ArbolNario arbol = mat.getArbol();
+		buscarEnArbol(arbol,nodoSeleccionado,paraAgregar);
 	}
 	
 	

@@ -21,5 +21,4 @@ public class ArbolNario {
 	public void setTipoNodo (TipoNodo valor) {
 		this.raiz.setTipoNodo(valor);
 	}
-
 }
