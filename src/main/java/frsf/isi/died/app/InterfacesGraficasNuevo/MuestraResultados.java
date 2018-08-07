@@ -114,7 +114,7 @@ public class MuestraResultados extends JPanel{
 				
 				for (MaterialCapacitacion m : encontrados) {
 					if (m.getId() == id) {
-						ventana.setContentPane(new ModificarMaterialArbolN(ventana,m));
+						ventana.setContentPane(new AgregarNodoArbol(ventana,m));
 						ventana.pack();
 					}
 				}
@@ -125,7 +125,7 @@ public class MuestraResultados extends JPanel{
 				
 				for (MaterialCapacitacion m : encontrados) {
 					if (m.getId() == id) {
-						ventana.setContentPane(new ModificarMaterialArbolN(ventana,m));
+						ventana.setContentPane(new AgregarNodoArbol(ventana,m));
 						ventana.pack();
 					}
 				}

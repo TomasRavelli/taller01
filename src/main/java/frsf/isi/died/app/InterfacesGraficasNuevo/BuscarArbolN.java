@@ -22,9 +22,8 @@ public class BuscarArbolN extends JPanel{
 		this.setVisible(true);
 		this.setLayout(null);
 				
-		
 		JButton atras = new JButton("Atras");
-		JButton modificar = new JButton("Modificar material");
+		JButton modificar = new JButton("Agregar nodo");
 				
 		
 		atras.setBounds(620, 510, 150, 40);
@@ -47,7 +46,7 @@ public class BuscarArbolN extends JPanel{
 	}
 	
 	public void modificarMaterial(Menu ventana, MaterialCapacitacion material) {
-		ventana.setContentPane(new ModificarMaterialArbolN(ventana,material));
+		ventana.setContentPane(new AgregarNodoArbol(ventana,material));
 		ventana.pack();
 	}
 

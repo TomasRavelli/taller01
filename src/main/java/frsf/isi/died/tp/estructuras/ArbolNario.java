@@ -2,23 +2,16 @@ package frsf.isi.died.tp.estructuras;
 
 import java.util.List;
 
+
 public class ArbolNario {
-	
+		
 	Nodo raiz;
 	
-	public ArbolNario () {
-		raiz = new Nodo();
+	public ArbolNario (String titulo, TipoNodo valor) {
+		raiz = new Nodo(valor, titulo);
 	}
 	
-	public void setValor (String titulo) {
-		raiz.setValor (titulo);
-	}
-	
-	public Nodo getValor () {
+	public Nodo getRaiz () {
 		return raiz;
-	}
-	
-	public void setTipoNodo (TipoNodo valor) {
-		this.raiz.setTipoNodo(valor);
-	}
+	}	
 }

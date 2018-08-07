@@ -1,17 +1,25 @@
 package frsf.isi.died.tp.estructuras;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Nodo {
+import javax.swing.tree.DefaultMutableTreeNode;
+
+public class Nodo extends DefaultMutableTreeNode {
 	
-	private List <Nodo> nodosHijos;
 	private String valor;
 	public TipoNodo tipoNodo;
+	private List <Nodo> nodosHijos;
 	
 	
-	public Nodo () {
+	public Nodo (TipoNodo tn, String val) {
+		super(tn + ": " + val);
+		nodosHijos = new ArrayList<Nodo>();
+		tipoNodo = tn;
+		valor = val;
 		
 	}
+	
 	
 	public void setValor (String titulo) {
 		this.valor = titulo;
