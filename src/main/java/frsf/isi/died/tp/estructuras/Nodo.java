@@ -5,7 +5,6 @@ import java.util.List;
 public class Nodo {
 	
 	private List <Nodo> nodosHijos;
-	
 	private String valor;
 	public TipoNodo tipoNodo;
 	
@@ -34,6 +33,4 @@ public class Nodo {
 		nodosHijos.add(hijo);
 	}
 	
-	
-
 }

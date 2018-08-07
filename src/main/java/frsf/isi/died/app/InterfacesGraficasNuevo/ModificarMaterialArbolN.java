@@ -13,6 +13,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
+import frsf.isi.died.tp.estructuras.ArbolNario;
+import frsf.isi.died.tp.estructuras.Nodo;
 import frsf.isi.died.tp.estructuras.TipoNodo;
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 
@@ -36,16 +38,18 @@ public class ModificarMaterialArbolN extends JPanel{
 		JTree arbolNario;
 		JButton atras = new JButton("Atras");
 		JButton buscar = new JButton("Buscar");
-			
+		JButton agregar = new JButton("Agregar");
 		
 		nodoPadre.setBounds(10,40,200,20);
 		tipoNodo.setBounds(10,10,200,20);
 		enumeration.setBounds(200,10,200,20);
 		atras.setBounds(620, 510, 150, 40);
 		buscar.setBounds(450, 510, 150, 40);
+		agregar.setBounds(280,510,150,40);
+			
 		
+		//MOSTRAR ARBOL
 		DefaultMutableTreeNode node = new DefaultMutableTreeNode(material.getArbol().getValor().tipoNodo + ": " + material.getArbol().getValor().getValor()); 
-	
 		arbolNario = new JTree(node);
 		arbolNario.setBounds(10,70,500,300);
 		this.add(arbolNario);
@@ -56,11 +60,12 @@ public class ModificarMaterialArbolN extends JPanel{
 		this.add(enumeration);
 		this.add(atras);
 		this.add(buscar);
+		this.add(agregar);
 		
 
 		buscar.addActionListener(e->buscarArbolN(ventana,material));
 		atras.addActionListener(e->volverAtras(ventana));
-		arbolNario.addTreeSelectionListener(e->agregarHijo(ventana,(DefaultMutableTreeNode)arbolNario.getLastSelectedPathComponent()));
+		agregar.addActionListener(e->agregarHijo(ventana,(DefaultMutableTreeNode)arbolNario.getLastSelectedPathComponent(),enumeration.getSelectedItem()));
 		
 	}
 	
@@ -76,7 +81,29 @@ public class ModificarMaterialArbolN extends JPanel{
 		ventana.pack();
 	}
 	
-	private	void agregarHijo(Menu ventana, DefaultMutableTreeNode nodoSeleccionado)	{
+	private	void agregarHijo(Menu ventana, DefaultMutableTreeNode nodoSeleccionado, Object tipoNodo){
+		
+		Nodo paraAgregar = new Nodo();
+		paraAgregar.setTipoNodo((TipoNodo)tipoNodo);
+		ArbolNario arbol;
+		
+		for (MaterialCapacitacion m : ventana.getMateriales().listaMateriales()) {
+			arbol = m.getArbol();
+			buscarEnArbol(arbol,nodoSeleccionado,paraAgregar);
+		}
+		
+	}
+	
+	
+	private void buscarEnArbol (ArbolNario arbol, DefaultMutableTreeNode nodoSeleccionado, Nodo paraAgregar) {
+		
+		//VER ESTO
+		if (arbol.getValor().getValor().equals(nodoSeleccionado)) {
+			//TERMINA
+		}
+		else {
+			//BUSCA EN LAS LISTAS DE NODOS
+		}
 		
 	}
 	
