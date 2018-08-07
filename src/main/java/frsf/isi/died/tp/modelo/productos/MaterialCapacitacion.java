@@ -47,18 +47,14 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 	public MaterialCapacitacion() {
 		this(0,"en desarrollo",0.0);
 		this.pageRank = 1.0;
-		arbol = new ArbolNario();
-		this.arbol.setValor (this.titulo);
-		this.arbol.setTipoNodo(TipoNodo.TITULO);
+		arbol = new ArbolNario(this.getTitulo(), TipoNodo.TITULO);
 	}
 	
 
 	public MaterialCapacitacion(Integer id, String titulo) {
 		this(id,titulo,0.0);
 		this.pageRank = 1.0;
-		arbol = new ArbolNario();
-		this.arbol.setValor (this.titulo);
-		this.arbol.setTipoNodo(TipoNodo.TITULO);
+		arbol = new ArbolNario(this.getTitulo(), TipoNodo.TITULO);
 	}
 
 	
@@ -67,9 +63,7 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 		this.titulo = titulo;
 		this.costo = costo;
 		this.pageRank = 1.0;
-		arbol = new ArbolNario();
-		this.arbol.setValor (this.titulo);
-		this.arbol.setTipoNodo(TipoNodo.TITULO);
+		arbol = new ArbolNario(this.getTitulo(), TipoNodo.TITULO);
 
 	}
 	
@@ -80,9 +74,7 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 		this.tema = tema2;
 		this.relevancia = r;
 		this.pageRank = 1.0;
-		arbol = new ArbolNario();
-		this.arbol.setValor (this.titulo);
-		this.arbol.setTipoNodo(TipoNodo.TITULO);
+		arbol = new ArbolNario(this.getTitulo(), TipoNodo.TITULO);
 	}
 
 	
