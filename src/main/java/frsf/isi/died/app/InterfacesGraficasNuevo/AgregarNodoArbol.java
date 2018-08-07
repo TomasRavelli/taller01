@@ -43,7 +43,7 @@ public class AgregarNodoArbol extends JPanel{
 		JComboBox enumeration = new JComboBox(obj);
 		JTree arbolNario;
 		JButton atras = new JButton("Atras");
-		JButton buscar = new JButton("Buscar");
+		JButton buscar = new JButton("Ir a Buscar");
 		JButton agregar = new JButton("Agregar");
 		
 		nodoPadre.setBounds(10,40,200,20);
