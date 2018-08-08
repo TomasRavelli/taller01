@@ -78,7 +78,7 @@ public class AgregarNodoArbol extends JPanel{
 
 		buscar.addActionListener(e->buscarArbolN(ventana,material));
 		atras.addActionListener(e->volverAtras(ventana));
-		agregar.addActionListener(e->agregarHijo(ventana,(Nodo)arbolNario.getLastSelectedPathComponent(),enumeration.getSelectedItem(),arbolNario));
+		agregar.addActionListener(e->agregarHijo(ventana,(Nodo)arbolNario.getLastSelectedPathComponent(), enumeration.getSelectedItem(),arbolNario));
 		
 	}
 	
@@ -94,45 +94,273 @@ public class AgregarNodoArbol extends JPanel{
 	}
 	
 	private	void agregarHijo(Menu ventana, Nodo nodoSeleccionado, Object tipoNodo, JTree arbolNario){
-		JOptionPane escribirValor = new JOptionPane();
-		String valorTN = escribirValor.showInputDialog("Ingrese valor:");
-		Nodo paraAgregar = new Nodo((TipoNodo)tipoNodo,valorTN);
-		nodoSeleccionado.add(paraAgregar);
-		nodoSeleccionado.addHijo(paraAgregar);
-		arbolNario.updateUI();
+		Boolean tipoNValido;
+		TipoNodo tipoSeleccionado = (TipoNodo) tipoNodo;
+		JOptionPane msgVentana = new JOptionPane();
+		if(!tipoSeleccionado.name().equals("TITULO")) {
+	
+			switch(nodoSeleccionado.tipoNodo) {
+			
+			case TITULO:{
+				if(hacerValidacionesTitulo(tipoSeleccionado, nodoSeleccionado)){
+				tipoNValido = true;
+				}
+				else {
+				tipoNValido = false;
+				}
+				break;
+			}
+			case METADATO:{
+				if(hacerValidacionesMetadato(tipoSeleccionado, nodoSeleccionado)){
+					tipoNValido = true;
+				}
+				else {
+					tipoNValido = false;
+				}
+				break;
+			}
+			case AUTOR:{
+			
+				tipoNValido = false;
+			
+				break;
+			}
+			case SECCION:{
+				if(hacerValidacionesSeccion(tipoSeleccionado)) {
+					tipoNValido = true;
+				}
+				else {
+				tipoNValido = false;
+				}
+				break;
+			}
+			case PARRAFO:{
+				tipoNValido = false;			
+				break;
+			}
+			case CAPITULO:{
+				if(hacerValidacionesCapitulo(tipoSeleccionado, nodoSeleccionado)){
+					tipoNValido = true;
+				}
+				else {
+					tipoNValido = false;
+				}
+				break;
+			}
+			case EDITORIAL:{
+				tipoNValido = false;
+				break;
+			}
+			case RESUMEN:{
+				if(hacerValidacionesResumen(tipoSeleccionado)) {
+					tipoNValido=true;
+				}
+				else {
+					tipoNValido = false;
+				}
+				break;
+			}
+			case PALABRA_CLAVE:{
+				tipoNValido = false;
+				break;
+			}
+			default:{
+				tipoNValido = false;
+				break;
+			}
+		}	
+	}
+		else{
+			tipoNValido = false;
+		}
+		
+		if(tipoNValido) {
+			String valorTN = msgVentana.showInputDialog("Ingrese valor:");
+			Nodo paraAgregar = new Nodo((TipoNodo)tipoNodo,valorTN);
+			nodoSeleccionado.add(paraAgregar);
+			nodoSeleccionado.addHijo(paraAgregar);
+			arbolNario.updateUI();
 
-		//Fuente: https://code.i-harness.com/es/q/e819e3
-		for (int i = 0; i < arbolNario.getRowCount(); i++) {
-		    arbolNario.expandRow(i);
-		}
-	
-		
-		/*ArbolNario arbol;
-		arbol = mat.getArbol();
-		agregarAArbol(arbol,nodoSeleccionado,paraAgregar);*/
-		
-	}
-	
-	
-	private void agregarAArbol (ArbolNario arbol, Nodo nodoSeleccionado, Nodo paraAgregar) {
-		
-		//VER ESTO
-		if (arbol.getRaiz().getValor().equals(nodoSeleccionado)) {
-			//TERMINA
-		}
+			//Fuente: https://code.i-harness.com/es/q/e819e3
+			for (int i = 0; i < arbolNario.getRowCount(); i++) {
+			arbolNario.expandRow(i);
+			}			
+		}		
 		else {
-			//BUSCA EN LAS LISTAS DE NODOS
+			msgVentana.showMessageDialog(this,"TipoNodo no valido", "Error", msgVentana.ERROR_MESSAGE);	
 		}
 		
+	
+	}
+		
+	
+	private Boolean hacerValidacionesTitulo(TipoNodo tipoSeleccionado, Nodo nPadre) {
+		Boolean valido = true;
+		switch(tipoSeleccionado) {
+		case METADATO:{
+			for(Nodo n: nPadre.getHijos()) {
+				if(n.tipoNodo.name().equals("METADATO")) {
+					valido = false;
+			}
+			
+			}
+			break;
+		}
+		case RESUMEN:{
+			for(Nodo n: nPadre.getHijos()) {
+				if(n.tipoNodo.name().equals("RESUMEN")) {
+					valido = false;
+				}
+				else {
+					valido = true;
+				}
+			break;
+		}
+			}
+		case CAPITULO:{
+			for(Nodo n: nPadre.getHijos()) {
+				if(n.tipoNodo.name().equals("CAPITULO")) {
+					valido = false;
+				}
+				else {
+					valido = true;
+				}
+			}	
+			break;
+		}
+		
+		default:{
+			valido = false;
+			break;
+		}
 	}
 	
-/*	private Nodo dibujarArbol(Nodo padre) {
-		for(Nodo aux: padre.getHijos()) {
-			Nodo aux2 = new Nodo(padre.tipoNodo+": "+padre.getValor());
-			padre.add(aux2);
-			dibujarArbol(aux2);
+	return valido;
+	}
+	
+	private Boolean hacerValidacionesMetadato(TipoNodo tipoSeleccionado, Nodo nPadre){
+		Boolean valido = true;
+		System.out.println(valido);
+		//switch(nPadreMetadato.tipoNodo) {
+		//case TITULO:{
+			switch(tipoSeleccionado) {
+			case AUTOR:{
+				valido = true;
+				System.out.println(valido);
+				break;
+			}
+			case EDITORIAL:{
+				for(Nodo n: nPadre.getHijos()) {
+					if(n.tipoNodo.name().equals("EDITORIAL")) {
+						valido = false;
+					}
+				}
+				System.out.println(valido);
+				break;
+			}
+			case PALABRA_CLAVE:{
+				for(Nodo n: nPadre.getHijos()) {
+					if(n.tipoNodo.name().equals("PALABRA_CLAVE")) {
+						valido = false;
+					}
+				}
+				System.out.println(valido);
+				break;
+			}
+			default:{
+				valido = false;
+				System.out.println(valido);
+				break;
+			}
+		}
+	
+	
+		System.out.println(valido);
+		return valido;
+	}	
+	
+	/*private Boolean hacerValidacionesAutor(TipoNodo tipoSeleccionado, Nodo nPadre) {
+		Boolean valido = false;
+		return valido;
+	}*/
+	private Boolean hacerValidacionesSeccion(TipoNodo tipoSeleccionado){
+		Boolean valido = true;
+		
+		switch(tipoSeleccionado) {
+		case PARRAFO:{
+			valido = true;
+			break;
+		}
+		default:{
+			valido = false;
+			break;
+		}
+	}
+		return valido;
+}
+	/*private Boolean hacerValidacionesParrafo(TipoNodo tipoSeleccionado){
+		Boolean valido = false;
+		return valido;
+	}*/
+	private Boolean hacerValidacionesCapitulo(TipoNodo tipoSeleccionado, Nodo nPadre){
+		Boolean valido = true;
+		switch(tipoSeleccionado) {
+		case SECCION:{
+			valido = true;
+			break;
+		}
+		case METADATO:{
+			for(Nodo n: nPadre.getHijos()) {
+				if(n.tipoNodo.name().equals("METADATO")) {
+					valido = false;
+				}
+					
+			}
+		break;
+		}
+		/*	case SITIO_WEB_REALACIONADO:{
+		 * 	valido = true;	
+		 * 	break;
+		 * }
+		 * case SITIO_WEB_EJERCICIOS:{
+		 * 	valido = true;
+		 * 	break;
+		 * }
+		 */
+		default:{
+			valido = false;
+			System.out.println(valido);
+			break;
+		}
 		}
 		
-		return padre;
+		return valido;
+	}
+	
+	/*private Boolean hacerValidacionesEditorial(TipoNodo tipoSeleccionado){
+		Boolean valido = false;
+		return valido;
 	}*/
+	
+	private Boolean hacerValidacionesResumen(TipoNodo tipoSeleccionado){
+		Boolean valido = true;
+		switch(tipoSeleccionado) {
+		case PARRAFO:{
+			valido = true;
+			break;
+		}
+		default:{
+			valido = false;
+			break;
+		}
+		}
+		return valido;
+	}
+	
+	/*private Boolean hacerValidacionesPalabraClave(TipoNodo tipoSeleccionado){
+		Boolean valido = false;
+		return valido;
+	}
+	*/
 }
+
