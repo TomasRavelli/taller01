@@ -74,12 +74,12 @@ public class BuscarArbolN extends JPanel{
 		
 		atras.addActionListener(e->volverAtras(ventana));
 		modificar.addActionListener(e->modificarMaterial(ventana,material));
-		agregarMas.addActionListener(e->agregarALista(valor, tipoN, valor));
+		agregarMas.addActionListener(e->agregarALista(valor, tipoN));
 		borrarTodo.addActionListener(e->limpiarLista());
 		
 		buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				ventana.setContentPane(new ResultadoBusqueda(ventana));
+				ventana.setContentPane(new ResultadoBusqueda(ventana,condiciones,material));
 				ventana.pack();				
 			}
 		});
@@ -92,10 +92,10 @@ public class BuscarArbolN extends JPanel{
 	}
 	
 
-	private void agregarALista(JTextField valor, JComboBox tipoN, JTextField texto) {
-		if(!texto.getText().isEmpty()) {
-			condiciones.add(new Nodo((TipoNodo)tipoN.getSelectedItem(),texto.getText()));
-			Object[] obj = {tipoN.getSelectedItem(),texto.getText()};
+	private void agregarALista(JTextField valor, JComboBox tipoN) {
+		if(!valor.getText().isEmpty() && !valor.getText().equals("null")) {
+			condiciones.add(new Nodo((TipoNodo)tipoN.getSelectedItem(),valor.getText()));
+			Object[] obj = {tipoN.getSelectedItem(),valor.getText()};
 			modeloTabla.addRow(obj);
 			valor.setText(null);
 		}
@@ -105,10 +105,12 @@ public class BuscarArbolN extends JPanel{
 		}
 	}
 	
+	
 	public void volverAtras(Menu ventana) {
 		ventana.setContentPane(new BuscarMaterial(ventana));
 		ventana.pack();
 	}
+	
 	
 	public void modificarMaterial(Menu ventana, MaterialCapacitacion material) {
 		ventana.setContentPane(new AgregarNodoArbol(ventana,material));

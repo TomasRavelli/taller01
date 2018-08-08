@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+import frsf.isi.died.tp.estructuras.ArbolNario;
+import frsf.isi.died.tp.estructuras.TipoNodo;
+
 /**
  * Representa un libro en el sistema de biblioteca digital
  * @author mdominguez
@@ -135,6 +138,8 @@ public class Libro extends MaterialCapacitacion {
 		this.calificacion = Double.valueOf(datos.get(5));
 		this.relevancia = Relevancia.valueOf(datos.get(6));
 		this.tema = String.valueOf(datos.get(8));
+		
+		this.arbol=new ArbolNario(this.titulo, TipoNodo.TITULO);
 		
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 	       Date fechaDate = new Date();

@@ -47,7 +47,7 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 	public MaterialCapacitacion() {
 		this(0,"en desarrollo",0.0);
 		this.pageRank = 1.0;
-		arbol = new ArbolNario(this.getTitulo(), TipoNodo.TITULO);
+		
 	}
 	
 

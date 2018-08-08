@@ -46,14 +46,16 @@ public class AgregarNodoArbol extends JPanel{
 		JButton atras = new JButton("Atras");
 		JButton buscar = new JButton("Ir a Buscar");
 		JButton agregar = new JButton("Agregar");
-		
-		nodoPadre.setBounds(10,40,200,20);
+		JLabel lblValor = new JLabel("Ingrese valor del nodo: ");
+		JTextField txtValor = new JTextField();
+		nodoPadre.setBounds(10,70,200,20);
 		tipoNodo.setBounds(10,10,200,20);
 		enumeration.setBounds(200,10,200,20);
 		atras.setBounds(620, 510, 150, 40);
 		buscar.setBounds(450, 510, 150, 40);
 		agregar.setBounds(280,510,150,40);
-			
+		lblValor.setBounds(10, 40, 200, 20);
+		txtValor.setBounds(200,40,200,20);
 		
 		//MOSTRAR ARBOL
 		
@@ -65,10 +67,12 @@ public class AgregarNodoArbol extends JPanel{
 		for (int i = 0; i < arbolNario.getRowCount(); i++) {
 		    arbolNario.expandRow(i);
 		}
-		scroll = new JScrollPane(arbolNario);
-		scroll.setBounds(10,70,700,400);
-		this.add(scroll);
 		
+		scroll = new JScrollPane(arbolNario);
+		scroll.setBounds(10,100,700,400);
+		this.add(scroll);
+		this.add(lblValor);
+		this.add(txtValor);
 		this.add(nodoPadre);
 		this.add(tipoNodo);
 		this.add(enumeration);
@@ -79,7 +83,7 @@ public class AgregarNodoArbol extends JPanel{
 
 		buscar.addActionListener(e->buscarArbolN(ventana,material));
 		atras.addActionListener(e->volverAtras(ventana));
-		agregar.addActionListener(e->agregarHijo(ventana,(Nodo)arbolNario.getLastSelectedPathComponent(), enumeration.getSelectedItem(),arbolNario));
+		agregar.addActionListener(e->agregarHijo(ventana,txtValor.getText(),(Nodo)arbolNario.getLastSelectedPathComponent(), enumeration.getSelectedItem(),arbolNario));
 		
 	}
 	
@@ -95,7 +99,7 @@ public class AgregarNodoArbol extends JPanel{
 	}
 	
 
-	private	void agregarHijo(Menu ventana, Nodo nodoSeleccionado, Object tipoNodo, JTree arbolNario){
+	private	void agregarHijo(Menu ventana, String valor, Nodo nodoSeleccionado, Object tipoNodo, JTree arbolNario){
 		Boolean tipoNValido;
 		TipoNodo tipoSeleccionado = (TipoNodo) tipoNodo;
 		JOptionPane msgVentana = new JOptionPane();
@@ -177,23 +181,27 @@ public class AgregarNodoArbol extends JPanel{
 		}
 		
 		if(tipoNValido) {
-			String valorTN = msgVentana.showInputDialog("Ingrese valor:");
-			Nodo paraAgregar = new Nodo((TipoNodo)tipoNodo,valorTN);
-			nodoSeleccionado.add(paraAgregar);
-			nodoSeleccionado.addHijo(paraAgregar);
-			arbolNario.updateUI();
+				
+				if(valor.isEmpty()) {
+					valor = null;
+				}
+				Nodo paraAgregar = new Nodo((TipoNodo)tipoNodo,valor);
+				nodoSeleccionado.add(paraAgregar);
+				nodoSeleccionado.addHijo(paraAgregar);
+				arbolNario.updateUI();
 
-			//Fuente: https://code.i-harness.com/es/q/e819e3
-			for (int i = 0; i < arbolNario.getRowCount(); i++) {
-			arbolNario.expandRow(i);
-			}			
-		}		
+				//Fuente: https://code.i-harness.com/es/q/e819e3
+				for (int i = 0; i < arbolNario.getRowCount(); i++) {
+				arbolNario.expandRow(i);
+				}
+		}	
+						
+				
 		else {
-			msgVentana.showMessageDialog(this,"TipoNodo no valido", "Error", msgVentana.ERROR_MESSAGE);	
+			JOptionPane.showMessageDialog(this,"TipoNodo no valido", "Error", msgVentana.ERROR_MESSAGE);	
 		}
-		
 	
-	}
+}
 		
 	
 	private Boolean hacerValidacionesTitulo(TipoNodo tipoSeleccionado, Nodo nPadre) {
@@ -203,31 +211,31 @@ public class AgregarNodoArbol extends JPanel{
 			for(Nodo n: nPadre.getHijos()) {
 				if(n.tipoNodo.name().equals("METADATO")) {
 					valido = false;
-			}
-			
+				}
 			}
 			break;
-		}
+			}
 		case RESUMEN:{
 			for(Nodo n: nPadre.getHijos()) {
 				if(n.tipoNodo.name().equals("RESUMEN")) {
 					valido = false;
 				}
-				else {
-					valido = true;
-				}
+			
+			
+			}
 			break;
-		}
 			}
 		case CAPITULO:{
-			for(Nodo n: nPadre.getHijos()) {
+			/*for(Nodo n: nPadre.getHijos()) {
 				if(n.tipoNodo.name().equals("CAPITULO")) {
 					valido = false;
 				}
 				else {
 					valido = true;
 				}
-			}	
+				
+			}*/
+			valido = true;	
 			break;
 		}
 		
@@ -239,6 +247,7 @@ public class AgregarNodoArbol extends JPanel{
 	
 	return valido;
 	}
+	
 	
 	private Boolean hacerValidacionesMetadato(TipoNodo tipoSeleccionado, Nodo nPadre){
 		Boolean valido = true;
