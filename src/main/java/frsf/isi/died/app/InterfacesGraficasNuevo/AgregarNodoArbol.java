@@ -30,11 +30,12 @@ public class AgregarNodoArbol extends JPanel{
 	
 	public AgregarNodoArbol(Menu ventana, MaterialCapacitacion material) {
 		
+		mat = material;
+		
 		this.setPreferredSize(new Dimension(800,600));
 		this.setVisible(true);
 		this.setLayout(null);
-		
-		mat = material;
+
 		
 		JScrollPane scroll;
 		JLabel nodoPadre = new JLabel("Seleccionar Nodo Padre:");
@@ -93,6 +94,7 @@ public class AgregarNodoArbol extends JPanel{
 		ventana.pack();
 	}
 	
+
 	private	void agregarHijo(Menu ventana, Nodo nodoSeleccionado, Object tipoNodo, JTree arbolNario){
 		Boolean tipoNValido;
 		TipoNodo tipoSeleccionado = (TipoNodo) tipoNodo;

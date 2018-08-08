@@ -13,6 +13,5 @@ public class ArbolNario {
 	
 	public Nodo getRaiz () {
 		return raiz;
-	}
-	
+	}	
 }

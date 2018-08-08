@@ -1,6 +1,8 @@
 package frsf.isi.died.app.InterfacesGraficasNuevo;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +11,10 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
-
+import javax.swing.table.DefaultTableModel;
 import frsf.isi.died.tp.estructuras.Nodo;
 import frsf.isi.died.tp.estructuras.TipoNodo;
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
@@ -18,6 +22,11 @@ import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 public class BuscarArbolN extends JPanel{
 	
 	List<Nodo> condiciones = new ArrayList<>();
+	
+	String[] columnas = {"Tipo de nodo","Valor"};
+	DefaultTableModel modeloTabla = new DefaultTableModel(null,columnas);
+	JTable tabla = new JTable(modeloTabla);
+	JScrollPane scrollTabla = new JScrollPane(tabla);
 	
 	public BuscarArbolN() {
 		
@@ -28,8 +37,6 @@ public class BuscarArbolN extends JPanel{
 		this.setPreferredSize(new Dimension(800,600));
 		this.setVisible(true);
 		this.setLayout(null);
-		
-		
 		
 		JComboBox tipoN = new JComboBox(TipoNodo.values());
 		tipoN.setBounds(20, 30, 180, 22);
@@ -44,33 +51,52 @@ public class BuscarArbolN extends JPanel{
 		borrarTodo.setBounds(480, 30, 130, 22);
 		this.add(borrarTodo);
 		
+
 		JButton atras = new JButton("Atras");
-		
 		JButton modificar = new JButton("Ir a agregar nodo");		
 		atras.setBounds(620, 510, 150, 40);
 		modificar.setBounds(450, 510, 150, 40);
-
-		JButton buscar = new JButton("Buscar");		
-		buscar.setBounds(280, 510, 150, 40);
-		
-		this.add(buscar);
 		this.add(modificar);
 		this.add(atras);
 		
 		
+		JLabel filtros = new JLabel("Filtros de busqueda:");
+		filtros.setBounds(20,60,500,30);
+		this.add(filtros);
+		
+		scrollTabla.setBounds(20,90,600,350);
+		this.add(scrollTabla);
+		
+		JButton buscar = new JButton("Buscar");		
+		buscar.setBounds(630, 410, 120, 30);
+		this.add(buscar);
+		
+		
 		atras.addActionListener(e->volverAtras(ventana));
 		modificar.addActionListener(e->modificarMaterial(ventana,material));
-		agregarMas.addActionListener(e->agregarALista(valor, tipoN.getSelectedItem(), valor.getText()));
+		agregarMas.addActionListener(e->agregarALista(valor, tipoN, valor));
 		borrarTodo.addActionListener(e->limpiarLista());
+		
+		buscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				ventana.setContentPane(new ResultadoBusqueda(ventana));
+				ventana.pack();				
+			}
+		});
 	}
+	
 	
 	private void limpiarLista() {
 		condiciones.removeAll(condiciones);
+		modeloTabla.setRowCount(0);
 	}
+	
 
-	private void agregarALista(JTextField valor, Object tipoN, String texto) {
-		if(!texto.isEmpty()) {
-			condiciones.add(new Nodo((TipoNodo)tipoN,texto));
+	private void agregarALista(JTextField valor, JComboBox tipoN, JTextField texto) {
+		if(!texto.getText().isEmpty()) {
+			condiciones.add(new Nodo((TipoNodo)tipoN.getSelectedItem(),texto.getText()));
+			Object[] obj = {tipoN.getSelectedItem(),texto.getText()};
+			modeloTabla.addRow(obj);
 			valor.setText(null);
 		}
 		else{
@@ -88,5 +114,4 @@ public class BuscarArbolN extends JPanel{
 		ventana.setContentPane(new AgregarNodoArbol(ventana,material));
 		ventana.pack();
 	}
-
 }

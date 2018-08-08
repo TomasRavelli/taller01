@@ -234,7 +234,7 @@ public class CrearLibro extends JPanel {
 		JScrollPane scrollTabla = new JScrollPane(tablaLibro);
 		gridConst.gridx = 0;
 		gridConst.gridy = 3;
-		gridConst.gridheight = 5 ;
+		gridConst.gridheight = 5;
 		gridConst.gridwidth = 6;
 		gridConst.weightx = 1.0;
 		gridConst.weighty = 1.0;
@@ -322,13 +322,11 @@ public class CrearLibro extends JPanel {
 					ventana.RecargarMateriales();
 					}
 					else {
-						//ID ocupado
 						JOptionPane noEligio = new JOptionPane();
 						noEligio.showConfirmDialog(ventana, "Ese ID no esta libre", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 					}
 				}
 				else {
-					//faltan campos de llenar
 					JOptionPane noEligio = new JOptionPane();
 					noEligio.showConfirmDialog(ventana, "Faltan campos por llenar", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 				}
