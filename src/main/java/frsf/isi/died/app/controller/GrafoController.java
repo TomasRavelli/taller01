@@ -1,19 +1,14 @@
 package frsf.isi.died.app.controller;
 
 import java.awt.Color;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-
 import frsf.isi.died.app.InterfacesGraficasNuevo.Menu;
 import frsf.isi.died.app.dao.MaterialCapacitacionDao;
-import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
 import frsf.isi.died.app.grafo.AristaView;
 import frsf.isi.died.app.grafo.ControlPanel;
 import frsf.isi.died.app.grafo.GrafoPanel;
 import frsf.isi.died.app.grafo.VerticeView;
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
-
 
 public class GrafoController {
 
@@ -30,7 +25,6 @@ public class GrafoController {
 		this.materialDao = ventana.getMateriales();
 		this.vertices = vert;
 		this.vistaControl.armarPanel(vertices, ventana, encontrados);
-		
 	}
 
 
@@ -60,7 +54,6 @@ public class GrafoController {
 		this.vistaGrafo.repaint();
 		
 	}
-
 
 	public List<MaterialCapacitacion> listaVertices() {
 		return this.vertices;

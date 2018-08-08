@@ -5,21 +5,16 @@
  */
 package frsf.isi.died.app.grafo;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import frsf.isi.died.app.InterfacesGraficasNuevo.Menu;
 import frsf.isi.died.app.InterfacesGraficasNuevo.MuestraResultados;
 import frsf.isi.died.app.controller.GrafoController;
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
-
 /**
  *
  * @author mdominguez

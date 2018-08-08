@@ -5,18 +5,10 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.WindowConstants;
-
-import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
 import frsf.isi.died.tp.modelo.productos.*;
 
 public class BorrarLibro2 extends JPanel{
@@ -131,10 +123,8 @@ public class BorrarLibro2 extends JPanel{
 		
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				ventana.getMateriales().borrarMaterial(paraBorrar);
 				ventana.getMateriales().modificarArchivoLibro(ventana);
-				//ventana.RecargarMateriales();
 				ventana.setContentPane(new BorrarLibro(ventana));
 				ventana.pack();
 			}

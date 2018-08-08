@@ -11,9 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
-
 import frsf.isi.died.tp.estructuras.ArbolNario;
 import frsf.isi.died.tp.estructuras.TipoNodo;
 
@@ -22,13 +19,9 @@ import frsf.isi.died.tp.estructuras.TipoNodo;
  * @author mdominguez
  */
 public class Libro extends MaterialCapacitacion {
-	/**
-	 * Precio al que el libro se compro a la editorial que lo vende
-	 */
-	private Double precioCompra;
 	
+	private Double precioCompra;
 	private Integer paginas;
-
 	
 	public Libro() {
 	}
@@ -57,7 +50,6 @@ public class Libro extends MaterialCapacitacion {
 	}
 
 	
-	
 	public Double getPrecioCompra() {
 		return precioCompra;
 	}
@@ -80,7 +72,6 @@ public class Libro extends MaterialCapacitacion {
 	
 	@Override
 	public Boolean esLibro() {
-		//TODO 03: implementar metodo abstracto
 		return true;
 	}
 
@@ -107,7 +98,6 @@ public class Libro extends MaterialCapacitacion {
 	
 	public static void main (String [] args) {
 		Libro L1=new Libro();
-		Object L2=new Object();
 		System.out.println("L1: "+L1.esLibro());
 	}
 
@@ -141,17 +131,14 @@ public class Libro extends MaterialCapacitacion {
 		
 		this.arbol=new ArbolNario(this.titulo, TipoNodo.TITULO);
 		
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-	       Date fechaDate = new Date();
-	      
-	       try {
-	            fechaDate = (new SimpleDateFormat("dd/MM/yyy")).parse(datos.get(7));
-	       } 
-	       catch (ParseException ex) 
-	       {
-	           System.out.println(ex);
-	       }
-	       fecha_publicacion = fechaDate;
-			
+	    Date fechaDate = new Date();
+	    try {
+	         fechaDate = (new SimpleDateFormat("dd/MM/yyy")).parse(datos.get(7));
+	    } 
+	    catch (ParseException ex) 
+	    {
+	       System.out.println(ex);
+	    }
+	    fecha_publicacion = fechaDate;
 	}
 }

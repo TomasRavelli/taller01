@@ -1,31 +1,18 @@
 package frsf.isi.died.app.InterfacesGraficasNuevo;
 
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-
-import java.awt.GridBagLayout;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.PriorityQueue;
 import java.util.Vector;
-
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
-
 import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
 import frsf.isi.died.tp.modelo.productos.Libro;
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 import frsf.isi.died.tp.modelo.productos.Video;
-import frsf.isi.died.app.controller.GrafoController;
-import frsf.isi.died.app.dao.*;
 
 public class MuestraResultados extends JPanel{
 
@@ -44,7 +31,6 @@ public class MuestraResultados extends JPanel{
 		this.setVisible(true);
 		this.setLayout(null);
 		
-	
 		String[] columnasLibro = {"Titulo","Costo","Precio","Paginas","Calificacion","Relevancia","ID","Fecha Publicacion"};
 		modeloTablaLibro = new DefaultTableModel(null,columnasLibro);
 	    tablaLibro = new JTable(modeloTablaLibro);
@@ -61,7 +47,6 @@ public class MuestraResultados extends JPanel{
 		this.add(scrollTablaVideo);
 		
 		
-		//BOTONES
 		JButton arbol = new JButton("Arbol");
 		arbol.setBounds(30, 505, 180, 50);
 		arbol.setVisible(true);
@@ -80,10 +65,10 @@ public class MuestraResultados extends JPanel{
 		agregarWish.setBounds(450, 505, 150, 50);
 		this.add(agregarWish);
 		
+		
 		atras.addActionListener(e->volverAtras(ventana));
 		
 		for(MaterialCapacitacion m: encontrados) {
-			
 			if(m.esLibro()) {
 				agregarLibroATabla(modeloTablaLibro,(Libro) m);				
 			}
@@ -93,11 +78,8 @@ public class MuestraResultados extends JPanel{
 		}		
 				
 		agregarWish.addActionListener(e->agregarAWish(ventana,(Vector)modeloTablaLibro.getDataVector(), (Vector)modeloTablaVideo.getDataVector(), tablaLibro.getSelectedRow(), tablaVideo.getSelectedRow()));
-	
 		asignarRelaciones.addActionListener(e->mostrarNodosxTema(tablaVideo.getSelectedRow(),tablaLibro.getSelectedRow(), ventana, encontrados));
-		
 		arbol.addActionListener(e->modificarMaterial(tablaVideo.getSelectedRow(),tablaLibro.getSelectedRow(),ventana,encontrados));
-		
 	}
 	
 	
@@ -111,7 +93,6 @@ public class MuestraResultados extends JPanel{
 		else {
 			if (l!=-1) {
 				Integer id = Integer.valueOf(modeloTablaLibro.getValueAt(l, 6).toString());
-				
 				for (MaterialCapacitacion m : encontrados) {
 					if (m.getId() == id) {
 						ventana.setContentPane(new AgregarNodoArbol(ventana,m));
@@ -122,7 +103,6 @@ public class MuestraResultados extends JPanel{
 			
 			else {
 				Integer id = Integer.valueOf(modeloTablaVideo.getValueAt(v, 5).toString());
-				
 				for (MaterialCapacitacion m : encontrados) {
 					if (m.getId() == id) {
 						ventana.setContentPane(new AgregarNodoArbol(ventana,m));
@@ -144,7 +124,6 @@ public class MuestraResultados extends JPanel{
 			if (l!=-1) {
 				Integer idSeleccionado = Integer.valueOf(modeloTablaLibro.getValueAt(l, 6).toString());
 				Libro libroSeleccionado = new Libro();
-				
 				for (Libro libro : ventana.getMateriales().listaLibros()) {
 					if (libro.getId().equals(idSeleccionado)) {
 						libroSeleccionado = libro;
@@ -157,7 +136,6 @@ public class MuestraResultados extends JPanel{
 				if(v!=-1) {
 				Integer idSeleccionado = Integer.valueOf(modeloTablaVideo.getValueAt(v, 5).toString());
 				Video videoSeleccionado = new Video();
-				
 				for (Video video : ventana.getMateriales().listaVideos()) {
 					if (video.getId().equals(idSeleccionado)) {
 						videoSeleccionado = video;
@@ -165,8 +143,8 @@ public class MuestraResultados extends JPanel{
 				}
 				ventana.setContentPane(new MuestraNodos(ventana,buscarNodosTema(videoSeleccionado,ventana.getMateriales()),encontrados));
 				ventana.pack();
+				}
 			}
-		}
 		}
 	}
 		

@@ -1,19 +1,13 @@
 package frsf.isi.died.app.InterfacesGraficasNuevo;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import frsf.isi.died.app.InterfacesGraficasNuevo.Menu;
@@ -30,7 +24,6 @@ public class CrearLibro extends JPanel {
 		this.setPreferredSize(new Dimension(800,600));
 		this.setVisible(true);
 		this.setLayout(new GridBagLayout());
-		
 		
 		JLabel lblTitulo;
 		JTextField txtTitulo;
@@ -315,20 +308,17 @@ public class CrearLibro extends JPanel {
 					}
 					
 					Libro libro=new Libro(id,(String) txtTitulo.getText(), costo,precioCompra,paginas,aux,fecha_publicacion,txtTema.getText().toString());
-					JOptionPane nuevoLibro = new JOptionPane();
 					agregarATabla(modeloTabla,libro);
-					nuevoLibro.showConfirmDialog(ventana, "El libro se creo exitosamente.", "Agregar Libro", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showConfirmDialog(ventana, "El libro se creo exitosamente.", "Agregar Libro", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
 					ventana.getMateriales().agregarLibro(libro);	
 					ventana.RecargarMateriales();
 					}
 					else {
-						JOptionPane noEligio = new JOptionPane();
-						noEligio.showConfirmDialog(ventana, "Ese ID no esta libre", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showConfirmDialog(ventana, "Ese ID no esta libre", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 					}
 				}
 				else {
-					JOptionPane noEligio = new JOptionPane();
-					noEligio.showConfirmDialog(ventana, "Faltan campos por llenar", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showConfirmDialog(ventana, "Faltan campos por llenar", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});		

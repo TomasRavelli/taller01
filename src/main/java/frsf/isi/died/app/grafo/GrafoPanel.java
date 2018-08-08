@@ -14,19 +14,11 @@ import java.awt.Polygon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.Random;
-import java.util.function.BiPredicate;
-import java.util.function.Predicate;
-
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 import frsf.isi.died.app.controller.GrafoController;
-import frsf.isi.died.tp.estructuras.Arista;
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 
 /**
@@ -56,47 +48,34 @@ public class GrafoPanel extends JPanel {
               	event.consume();
                    Random x = new Random();
                                          
-                    Object[] mats = controller.listaVertices().toArray();
-                    //String text = JOptionPane.showInputDialog(, "ID del nodo");
-                    for(int i = 0; i<mats.length; i++) {
-                        Integer posX = new Integer((int) (x.nextDouble()*300+100));
-                        Integer posY = new Integer((int) (x.nextDouble()*300+20));
-                    /*Object verticeMatSeleccionado= (MaterialCapacitacion) JOptionPane.showInputDialog(framePadre, 
-                            "Que material corresponde con el vertice?",
-                            "Agregar Vertice",
-                            JOptionPane.QUESTION_MESSAGE, 
-                            null, 
-                            mats, 
-                            mats[0]);
-                    */
-
-                   // if (verticeMatSeleccionado != null) {
-                    	if(((MaterialCapacitacion)mats[i]).esLibro()) {
-                    		 Color aux = coloresVertices[0];  
-                             controller.crearVertice(posX, posY, aux,(MaterialCapacitacion) mats[i]);
-                    	}
-                    	else {
-                    		 Color aux = coloresVertices[1];
-                             controller.crearVertice(posX, posY, aux,(MaterialCapacitacion) mats[i]);
-                    	}
-                    
-                 }
-                    for(int i = 0; i<mats.length; i++) {
-                    
-                    }
-                    flag = false;
-               //     }
-             } 
-        }
-            public void mouseReleased(MouseEvent event) {
-                VerticeView vDestino = clicEnUnNodo(event.getPoint());
-                if (auxiliar!=null && vDestino != null) {
-                    auxiliar.setDestino(vDestino);
-                    controller.crearArista(auxiliar);
-                    auxiliar = null;
-                }
-            }
+                   Object[] mats = controller.listaVertices().toArray();
+                   for(int i = 0; i<mats.length; i++) {
+                       Integer posX = new Integer((int) (x.nextDouble()*300+100));
+                       Integer posY = new Integer((int) (x.nextDouble()*300+20));
+                       if(((MaterialCapacitacion)mats[i]).esLibro()) {
+                    	   Color aux = coloresVertices[0];  
+                    	   controller.crearVertice(posX, posY, aux,(MaterialCapacitacion) mats[i]);
+                       }
+                       else {
+                    	   Color aux = coloresVertices[1];
+                           controller.crearVertice(posX, posY, aux,(MaterialCapacitacion) mats[i]);
+                       }
+                   }
+                   flag = false;
+               } 
+    	  }
+          
+    	
+    	  public void mouseReleased(MouseEvent event) {
+    		  VerticeView vDestino = clicEnUnNodo(event.getPoint());
+              if (auxiliar!=null && vDestino != null) {
+                  auxiliar.setDestino(vDestino);
+                  controller.crearArista(auxiliar);
+                  auxiliar = null;
+              }
+          }
         });
+      
 
         addMouseMotionListener(new MouseAdapter() {
             public void mouseDragged(MouseEvent event) {
@@ -112,7 +91,7 @@ public class GrafoPanel extends JPanel {
     
     public void agregar(AristaView arista){
     	if(!this.aristas.contains(arista)) {
-        this.aristas.add(arista);
+    		this.aristas.add(arista);
     	}
     }    
     
@@ -121,14 +100,14 @@ public class GrafoPanel extends JPanel {
     }
 
     public void caminoPintar(List<MaterialCapacitacion> camino){
-        //this.vertices.add(vert);
     	if(camino.size()>1 || camino.size()>0) {
     	Integer idOrigen =-1;
     	Integer idDestino =-1;
     	for(MaterialCapacitacion mat : camino) {
     		if(idOrigen<0) {
     			idOrigen=mat.getId();
-    		}else {
+    		}
+    		else {
     			idDestino = mat.getId();
     			for(AristaView av : this.aristas) {
     				if(av.getOrigen().getId().equals(idOrigen) && av.getDestino().getId().equals(idDestino) ) {
@@ -140,8 +119,9 @@ public class GrafoPanel extends JPanel {
     			idOrigen = idDestino;
     		}
     	}
+    	}
     }
-    }
+    
     
     private void dibujarVertices(Graphics2D g2d) {
         for (VerticeView v : this.vertices) {
@@ -153,13 +133,11 @@ public class GrafoPanel extends JPanel {
     }
 
     private void dibujarAristas(Graphics2D g2d) {
-        //System.out.println(this.aristas);
+
         for (AristaView a : this.aristas) {
             g2d.setPaint(a.getColor());
             g2d.setStroke ( a.getFormatoLinea());
             g2d.draw(a.getLinea());
-            //dibujo una flecha al final
-            // con el color del origen para que se note
             g2d.setPaint(Color.BLACK);
             Polygon flecha = new Polygon();  
             flecha.addPoint(a.getDestino().getCoordenadaX(), a.getDestino().getCoordenadaY()+7);

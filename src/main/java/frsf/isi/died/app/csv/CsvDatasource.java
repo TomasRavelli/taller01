@@ -1,4 +1,4 @@
-package frsf.isi.died.app.InterfacesGraficasNuevo;
+package frsf.isi.died.app.csv;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,10 +25,10 @@ public class CsvDatasource {
 				filas.add(line);
 			}
 			scanner.close();
-		} catch (FileNotFoundException e) {
+		} 
+		catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
 		return filas;
 	}
 	
@@ -66,13 +66,11 @@ public class CsvDatasource {
 					} else {
 						curVal.append(ch);
 					}
-
 				}
-			} else {
+			} 
+			else {
 				if (ch == delimitadorString) {
-
 					inQuotes = true;
-
 					// Fixed : allow "" in empty quote enclosed
 					if (chars[0] != '"' && delimitadorString == '\"') {
 						curVal.append('"');
@@ -86,7 +84,6 @@ public class CsvDatasource {
 				} else if (ch == separador) {
 
 					result.add(curVal.toString());
-
 					curVal = new StringBuffer();
 					startCollectChar = false;
 
@@ -101,10 +98,10 @@ public class CsvDatasource {
 				}
 			}
 		}
-
 		result.add(curVal.toString());
 		return result;
 	}
+	
 
 	public void guardarColeccion(String archivoCsv, List<CsvRecord> datos) throws IOException {
 		FileWriter writer;
@@ -128,18 +125,17 @@ public class CsvDatasource {
 		this.writeLine(writer, fila.asCsvRow());
 		writer.flush();
 		writer.close();
-
 	}
 
 	// https://tools.ietf.org/html/rfc4180
 	private static String followCVSformat(String value) {
-
 		String result = value;
 		if (result.contains("\"")) {
 			result = result.replace("\"", "\"\"");
 		}
 		return result;
 	}
+	
 
 	private void writeLine(Writer w, List<String> values) throws IOException {
 
@@ -156,7 +152,6 @@ public class CsvDatasource {
 			} else {
 				sb.append(this.delimitadorString).append(followCVSformat(value)).append(this.delimitadorString);
 			}
-
 			first = false;
 		}
 		sb.append("\n");

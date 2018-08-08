@@ -5,11 +5,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import  javax.swing.*;
-
+import javax.swing.*;
 import frsf.isi.died.app.InterfacesGraficasNuevo.Menu;
-import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
-import frsf.isi.died.tp.modelo.productos.Libro;
 import frsf.isi.died.tp.modelo.productos.*;
 
 public class ActualizarVideo extends JPanel {
@@ -51,16 +48,6 @@ public class ActualizarVideo extends JPanel {
 		
 		btnIr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				if(txtID.getText().isEmpty()) {
-					//TODO Poner esto para que salga en una ventanita,ver que vengan solo enteros y que coincida con algun ID existente
-					System.out.println("Campo ID vacio");
-				}
-			}
-		});
-		
-		
-		btnIr.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
 				boolean b=false;
 				Video estevideo = new Video();
 				for(Video elvideo : ventana.getMateriales().listaVideos()) {
@@ -70,8 +57,7 @@ public class ActualizarVideo extends JPanel {
 					}
 				}
 				if(!b || txtID.getText().isEmpty()) {
-					JOptionPane noEncontrado = new JOptionPane();
-					noEncontrado.showConfirmDialog(ventana, "No existe video con ese ID", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showConfirmDialog(ventana, "No existe video con ese ID", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 					}
 				else {
 					ventana.setContentPane(new ActualizarVideo2(ventana,estevideo));

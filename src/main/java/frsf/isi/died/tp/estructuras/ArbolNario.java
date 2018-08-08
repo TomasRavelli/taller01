@@ -1,8 +1,5 @@
 package frsf.isi.died.tp.estructuras;
 
-import java.util.List;
-
-
 public class ArbolNario {
 		
 	Nodo raiz;

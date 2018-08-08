@@ -1,8 +1,6 @@
 package frsf.isi.died.app.InterfacesGraficasNuevo;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -11,11 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeNode;
-
-import frsf.isi.died.tp.estructuras.ArbolNario;
 import frsf.isi.died.tp.estructuras.Nodo;
 import frsf.isi.died.tp.estructuras.TipoNodo;
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
@@ -31,11 +24,9 @@ public class AgregarNodoArbol extends JPanel{
 	public AgregarNodoArbol(Menu ventana, MaterialCapacitacion material) {
 		
 		mat = material;
-		
 		this.setPreferredSize(new Dimension(800,600));
 		this.setVisible(true);
 		this.setLayout(null);
-
 		
 		JScrollPane scroll;
 		JLabel nodoPadre = new JLabel("Seleccionar Nodo Padre:");
@@ -48,6 +39,7 @@ public class AgregarNodoArbol extends JPanel{
 		JButton agregar = new JButton("Agregar");
 		JLabel lblValor = new JLabel("Ingrese valor del nodo: ");
 		JTextField txtValor = new JTextField();
+		
 		nodoPadre.setBounds(10,70,200,20);
 		tipoNodo.setBounds(10,10,200,20);
 		enumeration.setBounds(200,10,200,20);
@@ -57,12 +49,8 @@ public class AgregarNodoArbol extends JPanel{
 		lblValor.setBounds(10, 40, 200, 20);
 		txtValor.setBounds(200,40,200,20);
 		
-		//MOSTRAR ARBOL
-		
-		 
-		//arbolNario = new JTree(dibujarArbol(mat.getArbol().getRaiz(), mat.getArbol().getRaiz()));
 		arbolNario = new JTree(mat.getArbol().getRaiz());
-		//arbolNario.setBounds(10,70,700,400);
+
 		//Fuente: https://code.i-harness.com/es/q/e819e3
 		for (int i = 0; i < arbolNario.getRowCount(); i++) {
 		    arbolNario.expandRow(i);
@@ -84,8 +72,8 @@ public class AgregarNodoArbol extends JPanel{
 		buscar.addActionListener(e->buscarArbolN(ventana,material));
 		atras.addActionListener(e->volverAtras(ventana));
 		agregar.addActionListener(e->agregarHijo(ventana,txtValor.getText(),(Nodo)arbolNario.getLastSelectedPathComponent(), enumeration.getSelectedItem(),arbolNario));
-		
 	}
+	
 	
 	public void volverAtras(Menu ventana) {
 		ventana.setContentPane(new BuscarMaterial(ventana));
@@ -103,16 +91,15 @@ public class AgregarNodoArbol extends JPanel{
 		Boolean tipoNValido;
 		TipoNodo tipoSeleccionado = (TipoNodo) tipoNodo;
 		JOptionPane msgVentana = new JOptionPane();
+		
 		if(!tipoSeleccionado.name().equals("TITULO")) {
-	
 			switch(nodoSeleccionado.tipoNodo) {
-			
 			case TITULO:{
 				if(hacerValidacionesTitulo(tipoSeleccionado, nodoSeleccionado)){
-				tipoNValido = true;
+					tipoNValido = true;
 				}
 				else {
-				tipoNValido = false;
+					tipoNValido = false;
 				}
 				break;
 			}
@@ -126,9 +113,7 @@ public class AgregarNodoArbol extends JPanel{
 				break;
 			}
 			case AUTOR:{
-			
 				tipoNValido = false;
-			
 				break;
 			}
 			case SECCION:{
@@ -136,7 +121,7 @@ public class AgregarNodoArbol extends JPanel{
 					tipoNValido = true;
 				}
 				else {
-				tipoNValido = false;
+					tipoNValido = false;
 				}
 				break;
 			}
@@ -185,6 +170,7 @@ public class AgregarNodoArbol extends JPanel{
 				if(valor.isEmpty()) {
 					valor = null;
 				}
+				
 				Nodo paraAgregar = new Nodo((TipoNodo)tipoNodo,valor);
 				nodoSeleccionado.add(paraAgregar);
 				nodoSeleccionado.addHijo(paraAgregar);
@@ -192,16 +178,13 @@ public class AgregarNodoArbol extends JPanel{
 
 				//Fuente: https://code.i-harness.com/es/q/e819e3
 				for (int i = 0; i < arbolNario.getRowCount(); i++) {
-				arbolNario.expandRow(i);
+					arbolNario.expandRow(i);
 				}
 		}	
-						
-				
 		else {
 			JOptionPane.showMessageDialog(this,"TipoNodo no valido", "Error", msgVentana.ERROR_MESSAGE);	
 		}
-	
-}
+	}
 		
 	
 	private Boolean hacerValidacionesTitulo(TipoNodo tipoSeleccionado, Nodo nPadre) {
@@ -220,8 +203,6 @@ public class AgregarNodoArbol extends JPanel{
 				if(n.tipoNodo.name().equals("RESUMEN")) {
 					valido = false;
 				}
-			
-			
 			}
 			break;
 			}
@@ -244,20 +225,15 @@ public class AgregarNodoArbol extends JPanel{
 			break;
 		}
 	}
-	
 	return valido;
 	}
 	
 	
 	private Boolean hacerValidacionesMetadato(TipoNodo tipoSeleccionado, Nodo nPadre){
 		Boolean valido = true;
-		System.out.println(valido);
-		//switch(nPadreMetadato.tipoNodo) {
-		//case TITULO:{
 			switch(tipoSeleccionado) {
 			case AUTOR:{
 				valido = true;
-				System.out.println(valido);
 				break;
 			}
 			case EDITORIAL:{
@@ -266,7 +242,6 @@ public class AgregarNodoArbol extends JPanel{
 						valido = false;
 					}
 				}
-				System.out.println(valido);
 				break;
 			}
 			case PALABRA_CLAVE:{
@@ -275,25 +250,17 @@ public class AgregarNodoArbol extends JPanel{
 						valido = false;
 					}
 				}
-				System.out.println(valido);
 				break;
 			}
 			default:{
 				valido = false;
-				System.out.println(valido);
 				break;
 			}
 		}
-	
-	
-		System.out.println(valido);
 		return valido;
 	}	
 	
-	/*private Boolean hacerValidacionesAutor(TipoNodo tipoSeleccionado, Nodo nPadre) {
-		Boolean valido = false;
-		return valido;
-	}*/
+	
 	private Boolean hacerValidacionesSeccion(TipoNodo tipoSeleccionado){
 		Boolean valido = true;
 		
@@ -306,13 +273,11 @@ public class AgregarNodoArbol extends JPanel{
 			valido = false;
 			break;
 		}
+		}
+		return valido;
 	}
-		return valido;
-}
-	/*private Boolean hacerValidacionesParrafo(TipoNodo tipoSeleccionado){
-		Boolean valido = false;
-		return valido;
-	}*/
+	
+	
 	private Boolean hacerValidacionesCapitulo(TipoNodo tipoSeleccionado, Nodo nPadre){
 		Boolean valido = true;
 		switch(tipoSeleccionado) {
@@ -329,29 +294,14 @@ public class AgregarNodoArbol extends JPanel{
 			}
 		break;
 		}
-		/*	case SITIO_WEB_REALACIONADO:{
-		 * 	valido = true;	
-		 * 	break;
-		 * }
-		 * case SITIO_WEB_EJERCICIOS:{
-		 * 	valido = true;
-		 * 	break;
-		 * }
-		 */
 		default:{
 			valido = false;
-			System.out.println(valido);
 			break;
 		}
 		}
-		
 		return valido;
 	}
 	
-	/*private Boolean hacerValidacionesEditorial(TipoNodo tipoSeleccionado){
-		Boolean valido = false;
-		return valido;
-	}*/
 	
 	private Boolean hacerValidacionesResumen(TipoNodo tipoSeleccionado){
 		Boolean valido = true;
@@ -367,11 +317,4 @@ public class AgregarNodoArbol extends JPanel{
 		}
 		return valido;
 	}
-	
-	/*private Boolean hacerValidacionesPalabraClave(TipoNodo tipoSeleccionado){
-		Boolean valido = false;
-		return valido;
-	}
-	*/
 }
-

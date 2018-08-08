@@ -5,12 +5,10 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import  javax.swing.*;
-
+import javax.swing.*;
 import frsf.isi.died.app.InterfacesGraficasNuevo.Menu;
-import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
-import frsf.isi.died.tp.modelo.*;
 import frsf.isi.died.tp.modelo.productos.Video;
+
 
 public class BorrarVideo extends JPanel {
 
@@ -24,7 +22,6 @@ public class BorrarVideo extends JPanel {
 		JTextField txtID;
 		JButton btnIr;
 		JButton btnCancelar;
-		
 		GridBagConstraints gridConst= new GridBagConstraints();
 		
 			
@@ -62,8 +59,7 @@ public class BorrarVideo extends JPanel {
 				}
 				
 				if(!b || txtID.getText().isEmpty()) {
-					JOptionPane noEncontrado = new JOptionPane();
-					noEncontrado.showConfirmDialog(ventana, "No existe video con ese ID", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showConfirmDialog(ventana, "No existe video con ese ID", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 					}
 				else {
 					ventana.setContentPane(new BorrarVideo2(ventana,estevideo));

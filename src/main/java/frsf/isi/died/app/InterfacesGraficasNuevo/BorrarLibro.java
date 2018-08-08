@@ -6,10 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import  javax.swing.*;
-
 import frsf.isi.died.app.InterfacesGraficasNuevo.Menu;
-import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
-import frsf.isi.died.tp.modelo.*;
 import frsf.isi.died.tp.modelo.productos.*;
 
 public class BorrarLibro extends JPanel {
@@ -57,8 +54,7 @@ public class BorrarLibro extends JPanel {
 					}
 				}
 				if(!b || ID2.getText().isEmpty()) {
-					JOptionPane noEncontrado = new JOptionPane();
-					noEncontrado.showConfirmDialog(ventana, "No existe libro con ese ID", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showConfirmDialog(ventana, "No existe libro con ese ID", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 					}
 				else {
 					ventana.setContentPane(new BorrarLibro2(ventana,estelibro));

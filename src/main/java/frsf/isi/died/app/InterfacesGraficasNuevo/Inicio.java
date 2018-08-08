@@ -5,10 +5,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import frsf.isi.died.app.dao.*;
 
 public class Inicio extends JPanel {
 	
@@ -48,14 +46,14 @@ public class Inicio extends JPanel {
 		
 		salir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-			System.exit(0);
+				System.exit(0);
 			}
 		});
 		
 		crearLibro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-			menu.setContentPane(new CrearLibro(menu));
-			menu.pack();
+				menu.setContentPane(new CrearLibro(menu));
+				menu.pack();
 			}
 		});
 		

@@ -2,7 +2,6 @@ package frsf.isi.died.tp.estructuras;
 
 import java.util.List;
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
-import java.util.Comparator;
 
 public abstract class Arbol {
 
@@ -29,7 +28,6 @@ public abstract class Arbol {
 	public abstract Integer tamanio();
 	public abstract Integer tamanioLibros();
 	public abstract Integer tamanioVideos();
-
 
 	public abstract MaterialCapacitacion buscar(Integer precio1);
 	public abstract List<MaterialCapacitacion> rango(Double precio1, Double precio2);

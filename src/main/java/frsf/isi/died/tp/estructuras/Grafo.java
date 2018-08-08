@@ -11,10 +11,7 @@ package frsf.isi.died.tp.estructuras;
  */
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
-
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 
 public class Grafo<T> {
@@ -22,9 +19,6 @@ public class Grafo<T> {
 	protected List<Arista<T>> aristas;
 	protected List<Vertice<T>> vertices;
 
-	/**
-	 * 
-	 */
 	public Grafo(){
 		this.aristas = new ArrayList<Arista<T>>();
 		this.vertices = new ArrayList<Vertice<T>>();
@@ -79,6 +73,7 @@ public class Grafo<T> {
             this.aristas.add(arista);
             return arista;
 	}
+	
     public List<Arista<T>> getAristas(){
     	return this.aristas;
     }    
@@ -144,9 +139,7 @@ public class Grafo<T> {
 	public void imprimirAristas(){
 		System.out.println(this.aristas.toString());
 	}
-
-
-        
+	
 	/**
 	 * @param v1
 	 * @param v2
@@ -178,7 +171,6 @@ public class Grafo<T> {
 	public Integer gradoEntrada(T v){
 		Vertice<T> vertice = this.getNodo(v);
 		Integer res =0;
-		//TODO
 		for(int i=0;i<this.aristas.size();i++) {
 			if(this.aristas.get(i).getFin().equals(vertice)) {
 				res++;
@@ -192,9 +184,7 @@ public class Grafo<T> {
 	 * @return
 	 */
 	public Integer gradoSalida(T v){
-		Vertice<T> vertice = this.getNodo(v);
 		Integer res =0;
-		//TODO
 		res=this.getAdyacentes(v).size();
 		return res;
 	}
@@ -206,8 +196,7 @@ public class Grafo<T> {
     	Vertice<T> vertice = this.getNodo(v);
     	enTratamiento.addAll(this.getAdyacentes(vertice));
     	visitados.add(vertice);
-    	return primerVerticeGradoK(gradoK, visitados,enTratamiento);
-    			
+    	return primerVerticeGradoK(gradoK, visitados,enTratamiento);	
     }
     
     private T primerVerticeGradoK(Integer gradoK, HashSet<Vertice> visitados, HashSet<Vertice> enTratamiento) {
@@ -219,7 +208,6 @@ public class Grafo<T> {
     		visitados.add(vertice);
     		aux.addAll(this.getAdyacentes(vertice));
     	}
-    	
     	return primerVerticeGradoK(gradoK, visitados, aux);
     }
 
@@ -238,14 +226,12 @@ public class Grafo<T> {
     public List<T> buscarCaminoNSaltos(T n1,T n2,Integer saltos){
 		Vertice<T> origen = this.getNodo(n1);
 		Vertice<T> destino= this.getNodo(n2);
-        return this.buscarCaminoNSaltos(origen, destino, saltos, new HashSet<Vertice>());
-         
+        return this.buscarCaminoNSaltos(origen, destino, saltos, new HashSet<Vertice>());   
     }
     
     private List<T> buscarCaminoNSaltos(Vertice<T> n1,Vertice<T> n2,Integer saltos,HashSet<Vertice> visitados){
         ArrayList<T> resultado = new ArrayList<>();
         ArrayList<T> auxiliar = new ArrayList<>();
-       //TODO
         visitados.add(n1);
         if(saltos!=0) {
         	for(int i=0;i<this.getAdyacentes(n1.getValor()).size();i++) {
@@ -255,7 +241,8 @@ public class Grafo<T> {
             		return auxiliar;
             	}
             }
-        }else {
+        }
+        else {
         	if(n1.getValor()==n2.getValor()) {
         		resultado.add(n2.getValor());
         	}
@@ -263,17 +250,20 @@ public class Grafo<T> {
         return resultado;
     }
     
+    
     public List<T> buscarCamino(T n1,T n2){
 		Vertice<T> origen = this.getNodo(n1);
 		Vertice<T> destino= this.getNodo(n2);
         return this.buscarCamino(origen, destino,new HashSet<Vertice>());
     }
+    
+    
     private List<T> buscarCamino(Vertice<T> n1,Vertice<T> n2, HashSet<Vertice> visitados){
       ArrayList<T> resultado = new ArrayList<>();
       ArrayList<T> auxiliar = new ArrayList<>();
       auxiliar.add(n1.getValor());
       
-    System.out.println(this.vertices.size());
+      System.out.println(this.vertices.size());
       if(n1.equals(n2)) {
     	 resultado.add(n1.getValor());
      }
@@ -285,11 +275,10 @@ public class Grafo<T> {
     			 for(int i = 0; i<this.getAdyacentes(n1).size();i++) {
     				 if(!visitados.contains(this.getAdyacentes(n1).get(i))) {
     				buscarCamino(this.getAdyacentes(n1).get(i),n2,visitados); 
+    				 }
     			 }
-    		}
-    	 }
+    		 }
      }
-    
         return resultado;
     }  
    

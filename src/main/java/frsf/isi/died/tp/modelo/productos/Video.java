@@ -8,8 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-
 import frsf.isi.died.tp.estructuras.ArbolNario;
 import frsf.isi.died.tp.estructuras.TipoNodo;
 
@@ -22,8 +20,8 @@ public class Video extends MaterialCapacitacion{
 	static Double COSTOSEG=0.15;
 	private Integer duracion;
 	
-	
 	public Video() {
+		
 	}
 	
 	
@@ -49,7 +47,6 @@ public class Video extends MaterialCapacitacion{
 		this.fecha_publicacion = date;
 		this.tema = tema2;
 	}
-	
 	
 	
 	public Integer getDuracion(){
@@ -102,7 +99,6 @@ public class Video extends MaterialCapacitacion{
 		this.arbol=new ArbolNario(this.titulo, TipoNodo.TITULO);
 		
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		
         Date fechaDate = new Date();
         try {
             fechaDate = formato.parse(datos.get(7));
@@ -113,6 +109,5 @@ public class Video extends MaterialCapacitacion{
             System.out.println(ex);
         }
 		this.fecha_publicacion = fechaDate;
-		
 	}
 }

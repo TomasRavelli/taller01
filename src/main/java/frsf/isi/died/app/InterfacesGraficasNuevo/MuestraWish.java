@@ -1,24 +1,16 @@
 package frsf.isi.died.app.InterfacesGraficasNuevo;
 
 import java.awt.Dimension;
-import java.util.List;
-import java.util.PriorityQueue;
-
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
-
-import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
 import frsf.isi.died.tp.modelo.productos.Libro;
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 import frsf.isi.died.tp.modelo.productos.Video;
 
 public class MuestraWish extends JPanel {
-	
 	
 	public MuestraWish() {
 		
@@ -49,11 +41,10 @@ public class MuestraWish extends JPanel {
 		atras.setBounds(650, 505, 120, 50);
 		this.add(atras);
 		
+		
 		atras.addActionListener(e->volverAtras(ventana));
 		
-		
 		for(MaterialCapacitacion m: ventana.getWishlist()) {
-			
 			if(m.esLibro()) {
 				agregarLibroATabla(modeloTablaLibro,(Libro) m);				
 			}
@@ -61,9 +52,8 @@ public class MuestraWish extends JPanel {
 				agregarVideoATabla(modeloTablaVideo,(Video) m);	
 			}
 		}
-
-
 	}
+	
 	
 	public void volverAtras(Menu ventana) {
 		ventana.setContentPane(new BuscarMaterial(ventana));

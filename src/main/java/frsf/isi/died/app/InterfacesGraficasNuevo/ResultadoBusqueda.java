@@ -3,14 +3,12 @@ package frsf.isi.died.app.InterfacesGraficasNuevo;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
 import frsf.isi.died.tp.estructuras.Nodo;
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 
@@ -50,7 +48,6 @@ public class ResultadoBusqueda extends JPanel{
 		}
 		
 		atras.addActionListener(e->volverAtras(ventana,material));
-		
 	}
 	
 	

@@ -13,9 +13,6 @@ import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 
-import frsf.isi.died.tp.estructuras.Arista;
-import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
-
 /**
  * 
  *

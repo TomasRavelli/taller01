@@ -5,13 +5,10 @@
  */
 package frsf.isi.died.tp.modelo.productos;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import frsf.isi.died.tp.estructuras.ArbolNario;
 import frsf.isi.died.tp.estructuras.TipoNodo;
-import frsf.isi.died.tp.modelo.Biblioteca;
 import frsf.isi.died.tp.util.Ordenable;
 
 /**
@@ -23,6 +20,7 @@ import frsf.isi.died.tp.util.Ordenable;
  * https://github.com/TomasRavelli/taller01.git
  */
 public abstract class MaterialCapacitacion implements Ordenable, Comparable<MaterialCapacitacion>{
+	
 	protected Integer id;
 	
 	protected String titulo;
@@ -47,7 +45,6 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 	public MaterialCapacitacion() {
 		this(0,"en desarrollo",0.0);
 		this.pageRank = 1.0;
-		
 	}
 	
 
@@ -64,8 +61,8 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 		this.costo = costo;
 		this.pageRank = 1.0;
 		arbol = new ArbolNario(this.getTitulo(), TipoNodo.TITULO);
-
 	}
+	
 	
 	public MaterialCapacitacion(Integer id,String titulo, Double costo, Relevancia r,String tema2) {
 		this.id =id;
@@ -113,7 +110,6 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 	public void setRelevancia (Relevancia r) {
 		this.relevancia = r;
 	}
-	
 
 	public Relevancia getRelevancia () {
 		return relevancia;
@@ -131,72 +127,42 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 		this.calificacion = c;
 	}
 	
-
 	public	Double getCalificacion () {
 		return calificacion;
 	}
-	
 	
 	public void setFechaPublicacion (Date date) {
 		this.fecha_publicacion = date;
 	}
 	
-	
 	public Date getFechaPublicacion () {
 		return fecha_publicacion;
 	}
 	
-	
 	public abstract Double precio();
 	
-	
 	public abstract Boolean esLibro();
-
 	
 	public abstract Boolean esVideo();
-	
 	
 	public ArbolNario getArbol () {
 		return arbol;
 	}
 
 
-	
-	//TODO 02: sobrescribir el metodo toString de la clase "Object"
-	//	el método toString retorna un string que representa el material actual
-	//  retornando el titulo, y el precio 	 * usando el formato : 
-	// [Titulo: <titulo> ; Precio: <precio> ]
 	public String toString() {
 		String s=new String();
 		s="[Titulo: "+this.getTitulo()+"; Precio: "+this.precio()+"]";
 		return s;
 	}
 	
-	// TODO 10: implementar Ordenable
+	
 	public final int valor() {
 		return this.precio().intValue();
 		//funciona porque el metodo es abstracto en esta clase, la cual es abstracta,
 		//pero esta implementado en las clases hijas
 	}
 	
-	
-
-	/*@Override
-	public boolean equals(Object obj) {
-		//if (this == obj)
-			//return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		MaterialCapacitacion other = (MaterialCapacitacion) obj;
-		if (titulo == null) {
-			if (other.titulo != null)
-				return false;
-		} else if (!(titulo.toLowerCase()).equals(other.titulo.toLowerCase()))
-			return false;
-		return true;
-	}*/
 	
 	@Override
 	public int compareTo(MaterialCapacitacion mat) {
@@ -206,6 +172,7 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 			return titulo.compareTo(mat.titulo);
 		}
 	}
+	
 
 	@Override
 	public int hashCode() {
@@ -214,6 +181,7 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		return result;
 	}
+	
 
 	@Override
 	public boolean equals(Object obj) {

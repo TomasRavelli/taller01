@@ -3,25 +3,12 @@ package frsf.isi.died.app.InterfacesGraficasNuevo;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.WindowConstants;
-
-import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
 import frsf.isi.died.tp.modelo.productos.*;
 
 public class BorrarVideo2 extends JPanel {
@@ -123,10 +110,8 @@ public class BorrarVideo2 extends JPanel {
 		
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				ventana.getMateriales().borrarMaterial(paraBorrar);
 				ventana.getMateriales().modificarArchivoVideo(ventana);
-				//ventana.RecargarMateriales();
 				ventana.setContentPane(new BorrarVideo(ventana));
 				ventana.pack();
 			}

@@ -2,13 +2,13 @@ package frsf.isi.died.tp.estructuras;
 
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-
 
 public class ArbolVacio extends Arbol {
 
-    public ArbolVacio() {    }
+    public ArbolVacio() {
+    	
+    }
 
     @Override
     public boolean esVacio() {
@@ -89,7 +89,4 @@ public class ArbolVacio extends Arbol {
     public List<MaterialCapacitacion> rango(Double precio1, Double precio2) {
         return new ArrayList<MaterialCapacitacion>();
     }
-    
-
-
 }

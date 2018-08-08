@@ -2,7 +2,6 @@ package frsf.isi.died.tp.modelo;
 
 import java.util.Collection;
 import java.util.Comparator;
-
 import frsf.isi.died.tp.estructuras.Arbol;
 import frsf.isi.died.tp.estructuras.ArbolBinarioBusqueda;
 import frsf.isi.died.tp.estructuras.ArbolVacio;
@@ -45,8 +44,6 @@ public class BibliotecaABB implements Biblioteca {
 
 	@Override
 	public Collection<MaterialCapacitacion> materiales() {
-		// TODO RETORNAR LA LISTA DEL ARBOL ORDENADA ASCENDENTEMENTE		
-		//TODO Completar
 		return this.materiales.inOrden();		
 	}
 
@@ -58,8 +55,6 @@ public class BibliotecaABB implements Biblioteca {
 	@Override
 	public void ordenarPorPrecio(Boolean b) {
 		if((flagOrdenarPorPrecio && b) || (!flagOrdenarPorPrecio && !b ) ) {
-			// no hago nada porque ya estaba ordenando por precio
-			// y me pide que ordene por precio por lo tanto retorno
 			return;
 		}
 
@@ -75,7 +70,6 @@ public class BibliotecaABB implements Biblioteca {
 
 	@Override
 	public MaterialCapacitacion buscar(Integer precio) {
-		// TODO Auto-generated method stub
 		if(!flagOrdenarPorPrecio) this.ordenarPorPrecio(true);
 		return this.materiales.buscar(precio);		
 	}
@@ -93,7 +87,6 @@ public class BibliotecaABB implements Biblioteca {
 		// datos ordenados por PRECIO la pr�xima vez que se invoque en 
 		// BibliotecaABB el m�todo imprimir() o materiales()
 		
-		//TODO Completar
 		ArbolBinarioBusqueda nuevo = new ArbolBinarioBusqueda(this.comparaPrecio);
 		for(int i=0;i<this.materiales.inOrden().size();i++) {
 			nuevo.add(materiales.inOrden().get(i));
@@ -109,12 +102,10 @@ public class BibliotecaABB implements Biblioteca {
 		// datos ordenados por titulo la pr�xima vez que se invoque en 
 		// BibliotecaABB el m�todo imprimir() o materiales()
 
-		//TODO Completar
 		ArbolBinarioBusqueda nuevo = new ArbolBinarioBusqueda(this.comparaTitulo);
 		for(int i=0;i<this.materiales.inOrden().size();i++) {
 			nuevo.add(materiales.inOrden().get(i));
 		}
 		this.materiales = nuevo;
 	}
-
 }

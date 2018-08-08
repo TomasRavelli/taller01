@@ -6,18 +6,12 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
-
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.WindowConstants;
-
-import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
 import frsf.isi.died.tp.modelo.productos.Libro;
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 import frsf.isi.died.tp.modelo.productos.Relevancia;
@@ -113,7 +107,6 @@ public class ActualizarLibro2 extends JPanel {
 		ID2.setText(paraActualizar.getId().toString());
 		this.add(ID2,gridConst);
 		
-		
 		btnGuardar = new JButton("Guardar Cambios");
 		gridConst.gridx=0;
 		gridConst.gridy=7;
@@ -151,8 +144,7 @@ public class ActualizarLibro2 extends JPanel {
 						}
 					}
 					if(b) {
-						JOptionPane noEligio = new JOptionPane();
-						noEligio.showConfirmDialog(ventana, "Ese ID no esta libre", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showConfirmDialog(ventana, "Ese ID no esta libre", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 					}
 					else {
 						Double costo = new Double(txtCosto.getText());
@@ -181,8 +173,7 @@ public class ActualizarLibro2 extends JPanel {
 					}
 				}
 				else {
-					JOptionPane noEligio = new JOptionPane();
-					noEligio.showConfirmDialog(ventana, "Faltan campos por completar", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showConfirmDialog(ventana, "Faltan campos por completar", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
