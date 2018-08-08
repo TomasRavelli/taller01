@@ -30,11 +30,11 @@ public class AgregarNodoArbol extends JPanel{
 	
 	public AgregarNodoArbol(Menu ventana, MaterialCapacitacion material) {
 		
+		mat = material;
+		
 		this.setPreferredSize(new Dimension(800,600));
 		this.setVisible(true);
 		this.setLayout(null);
-		
-		mat = material;
 
 		
 		JScrollPane scroll;
@@ -44,7 +44,7 @@ public class AgregarNodoArbol extends JPanel{
 		JComboBox enumeration = new JComboBox(obj);
 		JTree arbolNario;
 		JButton atras = new JButton("Atras");
-		JButton buscar = new JButton("Buscar");
+		JButton buscar = new JButton("Ir a Buscar");
 		JButton agregar = new JButton("Agregar");
 		
 		nodoPadre.setBounds(10,40,200,20);
