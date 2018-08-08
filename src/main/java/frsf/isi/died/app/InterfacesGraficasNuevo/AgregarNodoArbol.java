@@ -71,7 +71,7 @@ public class AgregarNodoArbol extends JPanel{
 
 		buscar.addActionListener(e->buscarArbolN(ventana,material));
 		atras.addActionListener(e->volverAtras(ventana));
-		agregar.addActionListener(e->agregarHijo(ventana,txtValor.getText(),(Nodo)arbolNario.getLastSelectedPathComponent(), enumeration.getSelectedItem(),arbolNario));
+		agregar.addActionListener(e->agregarHijo(txtValor.getText(),(Nodo)arbolNario.getLastSelectedPathComponent(), enumeration.getSelectedItem(),arbolNario));
 	}
 	
 	
@@ -87,7 +87,7 @@ public class AgregarNodoArbol extends JPanel{
 	}
 	
 
-	private	void agregarHijo(Menu ventana, String valor, Nodo nodoSeleccionado, Object tipoNodo, JTree arbolNario){
+	private	void agregarHijo(String valor, Nodo nodoSeleccionado, Object tipoNodo, JTree arbolNario){
 		Boolean tipoNValido;
 		TipoNodo tipoSeleccionado = (TipoNodo) tipoNodo;
 		JOptionPane msgVentana = new JOptionPane();
@@ -182,7 +182,7 @@ public class AgregarNodoArbol extends JPanel{
 				}
 		}	
 		else {
-			JOptionPane.showMessageDialog(this,"TipoNodo no valido", "Error", msgVentana.ERROR_MESSAGE);	
+			JOptionPane.showMessageDialog(this,"TipoNodo no valido", "Error", JOptionPane.ERROR_MESSAGE);	
 		}
 	}
 		

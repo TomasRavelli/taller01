@@ -1,7 +1,6 @@
 package frsf.isi.died.app.InterfacesGraficasNuevo;
 
 import java.awt.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -9,18 +8,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.PriorityQueue;
-
-import  javax.swing.*;
-
-import frsf.isi.died.app.dao.MaterialCapacitacionDao;
+import javax.swing.*;
 import frsf.isi.died.app.dao.MaterialCapacitacionDaoDefault;
-import frsf.isi.died.tp.modelo.BibliotecaABB;
-import frsf.isi.died.tp.modelo.productos.Libro;
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
-import frsf.isi.died.tp.modelo.productos.Video;
 import frsf.isi.died.app.InterfacesGraficasNuevo.Menu;
-import frsf.isi.died.app.dao.*;
 
 public class BuscarMaterial extends JPanel{
 	
@@ -247,8 +238,7 @@ public class BuscarMaterial extends JPanel{
 					break;
 				}
 				default:{
-					JOptionPane noEligio = new JOptionPane();
-					noEligio.showConfirmDialog(buscarM, "Debe elegir un criterio de ordenamiento.", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showConfirmDialog(buscarM, "Debe elegir un criterio de ordenamiento.", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 					break;
 				}
 				}
@@ -291,8 +281,7 @@ public class BuscarMaterial extends JPanel{
 					break;
 				}
 				default:{
-					JOptionPane noEligio = new JOptionPane();
-					noEligio.showConfirmDialog(buscarM, "Debe elegir un criterio de ordenamiento.", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showConfirmDialog(buscarM, "Debe elegir un criterio de ordenamiento.", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 					break;
 				}
 				}
@@ -336,8 +325,7 @@ public class BuscarMaterial extends JPanel{
 					break;
 				}
 				default:{
-					JOptionPane noEligio = new JOptionPane();
-					noEligio.showConfirmDialog(buscarM, "Debe elegir un criterio de ordenamiento.", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showConfirmDialog(buscarM, "Debe elegir un criterio de ordenamiento.", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 					break;
 				}
 				}
@@ -380,8 +368,7 @@ public class BuscarMaterial extends JPanel{
 					break;
 				}
 				default:{
-					JOptionPane noEligio = new JOptionPane();
-					noEligio.showConfirmDialog(buscarM, "Debe elegir un criterio de ordenamiento.", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showConfirmDialog(buscarM, "Debe elegir un criterio de ordenamiento.", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 					break;
 				}
 				}
@@ -433,8 +420,7 @@ public class BuscarMaterial extends JPanel{
 			fecha2 = (new SimpleDateFormat("dd/MM/yyy")).parse(f2);
 			
 		} catch (ParseException e) {
-			JOptionPane fechaInvalida = new JOptionPane();
-			fechaInvalida.showConfirmDialog(this, "Fecha Invalida", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showConfirmDialog(this, "Fecha Invalida", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
 		}
 		
 		for(MaterialCapacitacion m: materiales.listaMateriales()) {
@@ -449,8 +435,7 @@ public class BuscarMaterial extends JPanel{
 	public void ordenarPorTitulo(List<MaterialCapacitacion> encontrados, Menu buscarM) {
 		encontrados.sort((e1,e2) -> e1.getTitulo().compareTo(e2.getTitulo()));
 		if(encontrados.isEmpty()){
-			JOptionPane noEncontrado = new JOptionPane();
-			noEncontrado.showConfirmDialog(buscarM, "Material no encontrado", "Aviso", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showConfirmDialog(buscarM, "Material no encontrado", "Aviso", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
 		}
 		else {
 			buscarM.setContentPane(new MuestraResultados(buscarM, encontrados));
@@ -462,8 +447,7 @@ public class BuscarMaterial extends JPanel{
 	public void ordenarPorCalificacion(List<MaterialCapacitacion> encontrados, Menu buscarM) {
 		encontrados.sort((e1,e2) -> e1.getCalificacion().compareTo(e2.getCalificacion()));
 		if(encontrados.isEmpty()){
-			JOptionPane noEncontrado = new JOptionPane();
-			noEncontrado.showConfirmDialog(buscarM, "Material no encontrado", "Aviso", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showConfirmDialog(buscarM, "Material no encontrado", "Aviso", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
 		}
 		else {
 			buscarM.setContentPane(new MuestraResultados(buscarM, encontrados));
@@ -475,8 +459,7 @@ public class BuscarMaterial extends JPanel{
 	public void ordenarPorPrecio(List<MaterialCapacitacion> encontrados, Menu buscarM) {
 		encontrados.sort((e1,e2) -> e1.precio().compareTo(e2.precio()));
 		if(encontrados.isEmpty()){
-			JOptionPane noEncontrado = new JOptionPane();
-			noEncontrado.showConfirmDialog(buscarM, "Material no encontrado", "Aviso", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showConfirmDialog(buscarM, "Material no encontrado", "Aviso", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
 		}
 		else {
 			buscarM.setContentPane(new MuestraResultados(buscarM, encontrados));
@@ -488,8 +471,7 @@ public class BuscarMaterial extends JPanel{
 	public void ordenarPorFecha(List<MaterialCapacitacion> encontrados, Menu buscarM) {
 		encontrados.sort((e1,e2) -> e1.getFechaPublicacion().compareTo(e2.getFechaPublicacion()));
 		if(encontrados.isEmpty()){
-			JOptionPane noEncontrado = new JOptionPane();
-			noEncontrado.showConfirmDialog(buscarM, "Material no encontrado", "Aviso", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showConfirmDialog(buscarM, "Material no encontrado", "Aviso", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
 		}
 		else {
 			buscarM.setContentPane(new MuestraResultados(buscarM, encontrados));
@@ -501,8 +483,7 @@ public class BuscarMaterial extends JPanel{
 	public void ordenarPorRelevancia(List<MaterialCapacitacion> encontrados, Menu buscarM) {
 		encontrados.sort((e1,e2) -> e1.getRelevancia().compareTo(e2.getRelevancia()));
 		if(encontrados.isEmpty()){
-			JOptionPane noEncontrado = new JOptionPane();
-			noEncontrado.showConfirmDialog(buscarM, "Material no encontrado", "Aviso", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showConfirmDialog(buscarM, "Material no encontrado", "Aviso", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
 		}
 		else {
 			buscarM.setContentPane(new MuestraResultados(buscarM, encontrados));

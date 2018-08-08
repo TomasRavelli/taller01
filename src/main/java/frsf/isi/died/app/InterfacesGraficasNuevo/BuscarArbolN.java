@@ -102,8 +102,7 @@ public class BuscarArbolN extends JPanel{
 			valor.setText(null);
 		}
 		else{
-			JOptionPane vacio = new JOptionPane();
-			vacio.showMessageDialog(this, "Debe ingresar un valor", "Campo vacio", vacio.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Debe ingresar un valor", "Campo vacio", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	

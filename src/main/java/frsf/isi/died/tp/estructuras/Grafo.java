@@ -226,8 +226,10 @@ public class Grafo<T> {
     public List<T> buscarCaminoNSaltos(T n1,T n2,Integer saltos){
 		Vertice<T> origen = this.getNodo(n1);
 		Vertice<T> destino= this.getNodo(n2);
-        return this.buscarCaminoNSaltos(origen, destino, saltos, new HashSet<Vertice>());   
+		System.out.println(this.buscarCaminoNSaltos(origen, destino, saltos, new HashSet<Vertice>()).toString());
+        return this.buscarCaminoNSaltos(origen, destino, saltos, new HashSet<Vertice>());
     }
+    
     
     private List<T> buscarCaminoNSaltos(Vertice<T> n1,Vertice<T> n2,Integer saltos,HashSet<Vertice> visitados){
         ArrayList<T> resultado = new ArrayList<>();
@@ -235,10 +237,12 @@ public class Grafo<T> {
         visitados.add(n1);
         if(saltos!=0) {
         	for(int i=0;i<this.getAdyacentes(n1.getValor()).size();i++) {
-            	auxiliar.addAll(buscarCaminoNSaltos(this.getNodo(this.getAdyacentes(n1.getValor()).get(i)), n2, saltos-1, visitados));
-            	if(auxiliar.size()!=0) {
-            		auxiliar.add(0, n1.getValor());
-            		return auxiliar;
+            	if(!visitados.contains(this.getAdyacentes(n1.getValor()).get(i))) {
+	        		auxiliar.addAll(buscarCaminoNSaltos(this.getNodo(this.getAdyacentes(n1.getValor()).get(i)), n2, saltos-1, visitados));
+	            	if(auxiliar.size()!=0) {
+	            		auxiliar.add(0, n1.getValor());
+	            		return auxiliar;
+	            	}
             	}
             }
         }
@@ -254,33 +258,21 @@ public class Grafo<T> {
     public List<T> buscarCamino(T n1,T n2){
 		Vertice<T> origen = this.getNodo(n1);
 		Vertice<T> destino= this.getNodo(n2);
-        return this.buscarCamino(origen, destino,new HashSet<Vertice>());
+        return this.buscarCamino(origen, destino);
     }
+
     
-    
-    private List<T> buscarCamino(Vertice<T> n1,Vertice<T> n2, HashSet<Vertice> visitados){
-      ArrayList<T> resultado = new ArrayList<>();
-      ArrayList<T> auxiliar = new ArrayList<>();
-      auxiliar.add(n1.getValor());
-      
-      System.out.println(this.vertices.size());
-      if(n1.equals(n2)) {
-    	 resultado.add(n1.getValor());
-     }
-     else {
-    	 if(this.getAdyacentes(n1).isEmpty()) {
+    private List<T> buscarCamino(Vertice<T> n1,Vertice<T> n2){
+      List<T> resultado = new ArrayList<>();
+      for(int i=1;i<this.vertices.size();i++) {
+    	 resultado = buscarCaminoNSaltos(n1, n2, i, new HashSet<Vertice>());
+    	 if(!resultado.isEmpty()) {
+    		 System.out.println(resultado.toString());
     		 return resultado;
-    		 }
-    		 else {
-    			 for(int i = 0; i<this.getAdyacentes(n1).size();i++) {
-    				 if(!visitados.contains(this.getAdyacentes(n1).get(i))) {
-    				buscarCamino(this.getAdyacentes(n1).get(i),n2,visitados); 
-    				 }
-    			 }
-    		 }
-     }
-        return resultado;
-    }  
+    	 }
+      }
+      return new ArrayList<T>();
+    }
    
 
     public void actualizarPR() {
