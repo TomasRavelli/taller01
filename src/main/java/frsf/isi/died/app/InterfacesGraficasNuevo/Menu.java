@@ -44,6 +44,15 @@ public class Menu extends JFrame{
 	}
 	
 	
+	public void borrarDeWishlist (MaterialCapacitacion material) {
+		for (MaterialCapacitacion m : wishlist) {
+			if (m.getId().equals(material.getId())) {
+				wishlist.remove(material);
+			}
+		}
+	}
+	
+	
 	private int comparar(MaterialCapacitacion m1, MaterialCapacitacion m2) {
 		if(m1.getRelevancia().compareTo(m2.getRelevancia()) != 0) {
 			return m1.getRelevancia().compareTo(m2.getRelevancia());}

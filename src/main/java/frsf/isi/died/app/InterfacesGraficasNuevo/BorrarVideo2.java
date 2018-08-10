@@ -110,6 +110,7 @@ public class BorrarVideo2 extends JPanel {
 		
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ventana.borrarDeWishlist(paraBorrar);
 				ventana.getMateriales().borrarMaterial(paraBorrar);
 				ventana.getMateriales().modificarArchivoVideo(ventana);
 				ventana.setContentPane(new BorrarVideo(ventana));

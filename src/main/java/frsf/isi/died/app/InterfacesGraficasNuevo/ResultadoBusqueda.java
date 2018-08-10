@@ -93,7 +93,9 @@ public class ResultadoBusqueda extends JPanel{
 		}
 		
 		for (Nodo n : aux) {
-			return encontrar3(nodo,n.getHijos());
+			if(encontrar3(nodo,n.getHijos())) {
+				return true;
+			}
 		}
 		return false;
 	}

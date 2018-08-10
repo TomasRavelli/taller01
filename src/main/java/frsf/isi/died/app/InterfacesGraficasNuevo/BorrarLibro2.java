@@ -123,6 +123,7 @@ public class BorrarLibro2 extends JPanel{
 		
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ventana.borrarDeWishlist(paraBorrar);
 				ventana.getMateriales().borrarMaterial(paraBorrar);
 				ventana.getMateriales().modificarArchivoLibro(ventana);
 				ventana.setContentPane(new BorrarLibro(ventana));
